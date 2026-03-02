@@ -8,6 +8,7 @@ const links = [
   { label: 'Competition',     to: '/competition'     },
   { label: 'E-Talks',         to: '/etalks'          },
   { label: 'Summit Showdown', to: '/summit-showdown' },
+  { label: 'Startup Showcase', to: '/startup-showcase' },
 ]
 
 export default function Navbar() {

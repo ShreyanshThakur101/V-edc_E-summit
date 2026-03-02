@@ -12,6 +12,7 @@ import Home from './pages/Home';
 import Competition from './pages/Competition';
 import ETalks from './pages/ETalks';
 import SummitShowdown from './pages/SummitShowdown';
+import StartupShowcase from './pages/StartupShowcase';
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
             <Route path="/competition" element={<Competition />} />
             <Route path="/etalks" element={<ETalks />} />
             <Route path="/summit-showdown" element={<SummitShowdown />} />
+            <Route path="/startup-showcase" element={<StartupShowcase />} />
           </Routes>
           
         </div>
