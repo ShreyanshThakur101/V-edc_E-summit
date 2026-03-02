@@ -190,8 +190,9 @@ export default function ETalks() {
 
       {/* ══════ ABOUT ══════ */}
       <div id="about" style={{ background:'#10101a', borderBottom:'1px solid rgba(201,168,76,0.08)' }}>
+        {/* ADDED TAILWIND CONTAINER CLASSES HERE */}
         <motion.div ref={aboutRef}
-          className="page-content"
+          className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16"
           style={{ paddingTop:'clamp(3rem,6vw,5rem)', paddingBottom:'clamp(3rem,6vw,5rem)' }}
           initial={{ opacity:0 }} animate={aboutInView?{opacity:1}:{}} transition={{ duration:0.5 }}>
 
@@ -227,7 +228,8 @@ export default function ETalks() {
       </div>
 
       {/* ══ STATS ══ */}
-      <div className="page-content" style={{ paddingTop:'clamp(2.5rem,5vw,3.5rem)', paddingBottom:'clamp(2.5rem,5vw,3.5rem)' }}>
+      {/* ADDED TAILWIND CONTAINER CLASSES HERE */}
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16" style={{ paddingTop:'clamp(2.5rem,5vw,3.5rem)', paddingBottom:'clamp(2.5rem,5vw,3.5rem)' }}>
         <div style={{ display:'grid', gap:'clamp(0.75rem,2vw,1.25rem)', gridTemplateColumns:'repeat(auto-fit, minmax(min(220px, 100%), 1fr))' }}>
           <StatCounter icon="🎤" display="12+" target={12} suffix="+" label="Speakers Across Domains" delay={0}/>
           <StatCounter icon="🏛️" display="2"   target={2}           label="Days on the Grand Stage"  delay={150}/>
@@ -241,7 +243,8 @@ export default function ETalks() {
       </div>
 
       {/* ══════ KEYNOTE ══════ */}
-      <div id="speakers" className="page-content" style={{ paddingTop:'clamp(3rem,6vw,5rem)', paddingBottom:0 }}>
+      {/* ADDED TAILWIND CONTAINER CLASSES HERE */}
+      <div id="speakers" className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16" style={{ paddingTop:'clamp(3rem,6vw,5rem)', paddingBottom:0 }}>
         <SecHead tag="∙ Opening Keynote ∙" title="The Sovereign Voice"
           body="Our keynote speaker opens E-Summit '26 with a session that sets the tone — raw, real, and unforgettable."/>
 
@@ -303,7 +306,8 @@ export default function ETalks() {
 
       {/* ══════ WHY ATTEND ══════ */}
       <div id="why" style={{ background:'#0f0f1a', borderTop:'1px solid rgba(201,168,76,0.07)', borderBottom:'1px solid rgba(201,168,76,0.07)', padding:'clamp(3rem,6vw,5rem) 0' }}>
-        <div className="page-content">
+        {/* ADDED TAILWIND CONTAINER CLASSES HERE */}
+        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
           <SecHead tag="∙ Why E-Talks ∙" title="What You'll Take Away"/>
           <motion.div ref={whyRef}
             style={{ display:'grid', gap:'1.5px', background:'rgba(201,168,76,0.08)', border:'1px solid rgba(201,168,76,0.08)',

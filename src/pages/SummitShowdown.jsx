@@ -190,7 +190,7 @@ export default function SummitShowdown() {
       {/* ══════ ABOUT ══════ */}
       <div id="about" style={{ background:'#0f0f1a', borderBottom:'1px solid rgba(201,168,76,0.08)', position:'relative', overflow:'hidden' }}>
         <div style={{ position:'absolute', inset:0, pointerEvents:'none', background:'radial-gradient(ellipse 80% 60% at 50% 50%, rgba(139,26,26,0.06) 0%, transparent 70%)' }}/>
-        <motion.div ref={aboutRef} className="page-content"
+        <motion.div ref={aboutRef} className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16"
           style={{ paddingTop:'clamp(3rem,6vw,5rem)', paddingBottom:'clamp(3rem,6vw,5rem)', position:'relative', zIndex:1 }}
           initial={{ opacity:0 }} animate={aboutInView?{opacity:1}:{}} transition={{ duration:0.5 }}>
           <div style={{ display:'grid', gap:'clamp(2rem,5vw,3.5rem)', gridTemplateColumns:'repeat(auto-fit, minmax(min(280px,100%),1fr))', alignItems:'center' }}>
@@ -221,16 +221,16 @@ export default function SummitShowdown() {
       </div>
 
       {/* ══ STATS ══ */}
-      <div className="page-content" style={{ paddingTop:'clamp(2.5rem,5vw,3.5rem)', paddingBottom:'clamp(2.5rem,5vw,3.5rem)' }}>
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16" style={{ paddingTop:'clamp(2.5rem,5vw,3.5rem)', paddingBottom:'clamp(2.5rem,5vw,3.5rem)' }}>
         <div style={{ display:'grid', gap:'clamp(0.75rem,2vw,1.25rem)', gridTemplateColumns:'repeat(auto-fit,minmax(min(200px,100%),1fr))' }}>
-          <StatCounter icon="🎤" display="Stand-up"  label="Top Comedians on Stage"     delay={0}/>
+          <StatCounter icon="🎤" display="Stand-up"  label="Top Comedians on Stage"      delay={0}/>
           <StatCounter icon="🎸" display="Live Bands" label="Setting the Stage on Fire"  delay={150}/>
           <StatCounter icon="🌟" display="One Night"  label="Memories That Last Forever" delay={300}/>
         </div>
       </div>
 
       {/* ══ ENERGY QUOTE ══ */}
-      <div className="page-content" style={{ paddingBottom:'clamp(1.5rem,3vw,2rem)' }}>
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16" style={{ paddingBottom:'clamp(1.5rem,3vw,2rem)' }}>
         <ClipReveal delay={0.1}>
           <motion.div style={{ position:'relative', textAlign:'center', padding:'clamp(1.5rem,4vw,3rem)', overflow:'hidden',
                                background:'linear-gradient(135deg,rgba(139,26,26,0.18),rgba(212,105,10,0.08),rgba(201,168,76,0.1))',
@@ -254,7 +254,7 @@ export default function SummitShowdown() {
       </div>
 
       {/* ══════ PERFORMERS ══════ */}
-      <div id="performers" className="page-content" style={{ paddingTop:'clamp(3rem,6vw,5rem)', paddingBottom:'clamp(3rem,6vw,5rem)' }}>
+      <div id="performers" className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16" style={{ paddingTop:'clamp(3rem,6vw,5rem)', paddingBottom:'clamp(3rem,6vw,5rem)' }}>
         <SecHead tag="∙ The Lineup ∙" title="Tonight's Stars" amber
           body="Headlining comedians and bands who will make the final night of E-Summit '26 one for the ages."/>
 
@@ -276,7 +276,7 @@ export default function SummitShowdown() {
 
       {/* ══════ SCHEDULE ══════ */}
       <div id="schedule" style={{ background:'#0f0f1a', borderTop:'1px solid rgba(201,168,76,0.07)', padding:'clamp(3rem,6vw,5rem) 0' }}>
-        <div className="page-content" style={{ maxWidth:'min(680px, 94vw)', marginLeft:'auto', marginRight:'auto' }}>
+        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16" style={{ maxWidth:'min(680px, 94vw)' }}>
           <SecHead tag="∙ The Evening ∙" title="How the Night Unfolds" amber/>
           <motion.div ref={schedRef} style={{ display:'flex', flexDirection:'column', gap:'1.5px' }}
             initial="hidden" animate={schedInView?'show':'hidden'}
@@ -311,7 +311,7 @@ export default function SummitShowdown() {
       </div>
 
       {/* ══════ VIBE ══════ */}
-      <div className="page-content" style={{ paddingTop:'clamp(3rem,6vw,5rem)', paddingBottom:'clamp(3rem,6vw,5rem)' }}>
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16" style={{ paddingTop:'clamp(3rem,6vw,5rem)', paddingBottom:'clamp(3rem,6vw,5rem)' }}>
         <SecHead tag="∙ What to Expect ∙" title="An Unforgettable Night" amber/>
         <motion.div ref={vibeRef}
           style={{ display:'grid', gap:'1.5px', background:'rgba(201,168,76,0.08)', border:'1px solid rgba(201,168,76,0.08)',

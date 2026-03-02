@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion'
+import logo from '../assets/logo.png' // <-- Added Logo Import
 
 const links = [
   { label: 'Home',            to: '/'                },
+  { label: 'Competition',     to: '/competition'     },
   { label: 'E-Talks',         to: '/etalks'          },
   { label: 'Summit Showdown', to: '/summit-showdown' },
 ]
@@ -55,16 +57,19 @@ export default function Navbar() {
           borderBottom: scrolled ? '1px solid rgba(201,168,76,0.12)' : '1px solid transparent',
         }}
       >
-        {/* Logo */}
+        {/* Custom Logo Section */}
         <Link to="/" style={{ textDecoration: 'none', flexShrink: 0 }}>
-          <motion.span
-            className="font-display font-bold"
-            style={{ color: '#c9a84c', letterSpacing: '0.05em', fontSize: 'clamp(0.7rem, 2vw, 0.875rem)' }}
+          <motion.div 
+            className="flex items-center space-x-2 shrink-0"
             whileHover={{ scale: 1.03 }}
             transition={{ type: 'spring', stiffness: 300 }}
           >
-            E-Summit Pune '26
-          </motion.span>
+            <img src={logo} alt="V-EDC Logo" className="h-8 md:h-12 w-auto" />
+            <div className="hidden sm:flex flex-col border-l border-[#c5a059]/30 pl-3">
+              <span className="text-[11px] md:text-[14px] font-bold tracking-[0.1em] text-[#c5a059] whitespace-nowrap uppercase">V-EDC | VIT PUNE</span>
+              <span className="text-[7px] md:text-[9px] uppercase tracking-[0.2em] text-gray-400">Ascension to Reign</span>
+            </div>
+          </motion.div>
         </Link>
 
         {/* Desktop nav — hidden below lg */}
@@ -98,8 +103,11 @@ export default function Navbar() {
             )
           })}
           <li>
+            {/* Desktop Register Button -> Links to ERP */}
             <motion.a
-              href="#register"
+              href="https://learner.vierp.in/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="font-cinzel uppercase"
               style={{
                 fontSize: 'clamp(0.6rem, 1vw, 0.68rem)', letterSpacing: '0.18em',
@@ -171,7 +179,7 @@ export default function Navbar() {
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: i * 0.07, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <Link to={to} style={{ textDecoration: 'none' }}>
+                  <Link to={to} style={{ textDecoration: 'none' }} onClick={() => setMenuOpen(false)}>
                     <motion.span
                       className="font-cinzel uppercase"
                       style={{
@@ -188,14 +196,21 @@ export default function Navbar() {
                   </Link>
                 </motion.div>
               ))}
+              
+              {/* Mobile Register Button -> Links to ERP */}
               <motion.a
-                href="#register"
+                href="https://learner.vierp.in/"
+                target="_blank"
+                rel="noopener noreferrer"
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.28 }}
                 className="btn-gold"
                 style={{
                   marginTop: 'clamp(1rem, 4vw, 2rem)',
                   justifyContent: 'center', textAlign: 'center',
                   fontSize: 'clamp(0.65rem, 2.5vw, 0.75rem)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  textDecoration: 'none'
                 }}
               >
                 Register
