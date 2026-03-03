@@ -1,14 +1,91 @@
 @import "tailwindcss";
 
+/* 1. Define your Theme FIRST (Tailwind v4 style) */
 @theme {
-  --color-brand-navy: #0d0f14;
-  --color-brand-card: #141720;
-  --color-brand-blue: #2563eb;
+  --font-display: "Cinzel Decorative", serif;
+  --font-cinzel: "Cinzel", serif;
+  --font-body: "Raleway", sans-serif;
+  
+  --color-gold-light: #f0d080;
+  --color-gold-main: #c9a84c;
+  --color-gold-dark: #8b6914;
+  --color-fire-orange: #d4690a;
 }
 
-/* Ensure the background is applied to the whole page */
-body {
-  background-color: #0d0f14;
-  margin: 0;
-  color: white;
+/* 2. Global Base Styles */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body {
+    background-color: #050507;
+    color: #e8e0d0;
+    font-family: var(--font-body);
+    overflow-x: hidden;
+  }
+
+  /* Grain Texture Effect */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 9999;
+  }
+}
+
+/* 3. Re-usable Component Classes */
+@layer components {
+  /* Fix: Using the theme variables directly to avoid @apply errors */
+  .font-display { font-family: var(--font-display); }
+  .font-cinzel  { font-family: var(--font-cinzel); }
+  .font-body    { font-family: var(--font-body); }
+
+  /* Standard Page Container - Essential for all pages */
+  .page-content {
+    max-width: min(1280px, 94vw);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: clamp(1rem, 4vw, 2rem);
+    padding-right: clamp(1rem, 4vw, 2rem);
+  }
+
+  /* The Button System - Updated to fix the red error screens */
+  .btn-gold {
+    @apply inline-flex items-center justify-center font-cinzel uppercase cursor-pointer relative overflow-hidden transition-all duration-300;
+    background: linear-gradient(135deg, var(--color-gold-light), var(--color-gold-main));
+    padding: 0.85rem 2rem;
+    color: #050507;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+  }
+
+  .btn-fire {
+    @apply inline-flex items-center justify-center font-cinzel uppercase cursor-pointer relative overflow-hidden transition-all duration-300;
+    background: linear-gradient(135deg, var(--color-gold-light), var(--color-fire-orange));
+    padding: 0.85rem 2rem;
+    color: #050507;
+    font-weight: 700;
+    box-shadow: 0 0 25px rgba(212, 105, 10, 0.2);
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center font-cinzel uppercase bg-transparent cursor-pointer transition-all duration-300;
+    border: 1px solid rgba(201, 168, 76, 0.35);
+    color: var(--color-gold-main);
+    padding: 0.85rem 2rem;
+  }
+}
+
+/* 4. Animation Keyframes */
+@keyframes shaftPulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+@keyframes emberRise { 0% { transform: translateY(100vh); opacity: 0; } 100% { transform: translateY(-5vh); opacity: 0; } }
+
+/* 5. Custom Utilities */
+.shaft {
+  @apply absolute top-0 bottom-0;
+  width: 1px;
+  background: linear-gradient(180deg, transparent 0%, rgba(201,168,76,0.14) 40%, rgba(201,168,76,0.22) 55%, transparent 100%);
+  animation: shaftPulse 6s ease-in-out infinite;
 }
