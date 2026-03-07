@@ -13,35 +13,32 @@ import SectionNav    from '../components/SectionNav'
 import { DrawBorder, ClipReveal, GlowBorder } from '../components/AnimatedBorder'
 
 const COMEDIANS = [
-  { type:'Stand-up',   emoji:'😂', name:'[Comedian Name]',      sub:'[Known for · Platform]',   desc:'Sharp wit, relatable chaos, and an audience that can\'t stop laughing. The perfect opener.' },
-  { type:'Stand-up',   emoji:'🎙️',name:'[Comedian Name]',      sub:'[Known for · Platform]',   desc:'A headliner who needs no introduction. Expect the unexpected — and a very sore jaw from laughing.' },
   { type:'Coming Soon',emoji:'🎭', name:'More to be Announced', sub:'Stay tuned',               desc:'The full comedy lineup is being locked in. Follow @v_edc for the reveal.' },
 ]
 const BANDS = [
-  { type:'Live Band',  emoji:'🎸', name:'[Band / Artist Name]', sub:'[Genre · From]',           desc:'Their live energy shakes the room and refuses to let you stand still.' },
   { type:'Live Band',  emoji:'🎵', name:'[Band / Artist Name]', sub:'[Genre · From]',           desc:'The headlining act. Genres collide, the crowd ignites — this is what the night builds toward.' },
   { type:'Coming Soon',emoji:'🎶', name:'More to be Announced', sub:'Stay tuned',               desc:'Something that will absolutely set the stage on fire. Dropping soon on @v_edc.' },
 ]
 const SCHEDULE = [
-  { time:'[Time]', emoji:'🚪', act:'Doors Open',           desc:'Arrive early, find your spot, soak it all in.' },
-  { time:'[Time]', emoji:'🎤', act:'Opening Comedy Set',   desc:'The night kicks off. The first comedian takes the stage.' },
-  { time:'[Time]', emoji:'😂', act:'Headline Comedy',      desc:'The main act. No holds barred. The house comes down.' },
-  { time:'[Time]', emoji:'🎸', act:'Live Music — Opening', desc:'The first band takes the stage. Feel it in your chest.' },
-  { time:'[Time]', emoji:'🔥', act:'Headline Live Band',   desc:'The headliner closes Summit Showdown. This is what it\'s been building to.' },
-  { time:'[Time]', emoji:'✨', act:'Grand Finale',         desc:'E-Summit \'26 takes its bow. The ascension is complete. The reign begins.' },
+  {emoji:'🚪', act:'Doors Open',           desc:'Arrive early, find your spot, soak it all in.' },
+  {emoji:'🎤', act:'Opening Comedy Set',   desc:'The night kicks off. The first comedian takes the stage.' },
+  {emoji:'😂', act:'Headline Comedy',      desc:'The main act. No holds barred. The house comes down.' },
+  {emoji:'🎸', act:'Live Music — Opening', desc:'The first band takes the stage. Feel it in your chest.' },
+  {emoji:'🔥', act:'Headline Live Band',   desc:'The headliner closes Summit Showdown. This is what it\'s been building to.' },
+  {emoji:'✨', act:'Grand Finale',         desc:'E-Summit Pune \'26 takes its bow. The ascension is complete. The reign begins.' },
 ]
 const VIBE_ITEMS = [
   { num:'01', head:'World-Class Comedy',       body:'Sharp wit, relatable chaos, an audience that can\'t stop laughing.' },
   { num:'02', head:'Live Music That Moves You', body:'Bands that turn a venue into a memory. You\'ll be talking about it for years.' },
   { num:'03', head:'A True Celebration',       body:'The perfect sendoff for two days of pitches, connections, and ideas.' },
-  { num:'04', head:'The Perfect Curtain Call', body:'E-Summit \'26 closes on the highest note possible. Every emotion — crystallised.' },
+  { num:'04', head:'The Perfect Curtain Call', body:'E-Summit Pune \'26 closes on the highest note possible. Every emotion — crystallised.' },
 ]
-const MARQUEE_A = ['Summit Showdown','Stand-up Comedy','Live Music','E-Summit Pune 26','25 March','Grand Finale']
-const MARQUEE_B = ['Ascension to Reign','VIT Pune','VEDC','@v_edc','The Night You Won\'t Forget']
+const MARQUEE_A = ['Summit Showdown','Stand-up Comedy','Live Music','E-Summit Pune Pune 26','25 March','Grand Finale']
+const MARQUEE_B = ['Ascension to Reign','VIT Pune','@v_edc','The Night You Won\'t Forget']
 const SECTIONS = [
   { id:'hero',       label:'Intro'      },
   { id:'about',      label:'About'      },
-  { id:'performers', label:'Lineup'     },
+  { id:'performers', label:'Lineup'      },
   { id:'schedule',   label:'Schedule'   },
   { id:'register',   label:'Register'   },
 ]
@@ -126,7 +123,7 @@ export default function SummitShowdown() {
               initial={{ scaleX:0 }} animate={{ scaleX:1 }} transition={{ delay:0.3 }}/>
             <span className="font-cinzel uppercase text-center"
               style={{ fontSize:'clamp(0.55rem,1.5vw,0.65rem)', letterSpacing:'clamp(0.2em,1vw,0.45em)', color:'rgba(212,105,10,0.75)' }}>
-              🎭 · E-Cell VIT Pune · VEDC · 17–25 March 2026
+               E-Cell VIT Pune · 17–25 March 2026
             </span>
             <motion.div style={{ height:1, width:'clamp(24px,5vw,40px)', background:'linear-gradient(90deg,rgba(212,105,10,0.5),transparent)' }}
               initial={{ scaleX:0 }} animate={{ scaleX:1 }} transition={{ delay:0.3 }}/>
@@ -158,7 +155,7 @@ export default function SummitShowdown() {
 
           <div className="mb-8 mt-2">
             <WordReveal
-              text="The curtain falls on two extraordinary days — and it goes out with a bang. Live comedy. Live music. An electric crowd. One unforgettable night."
+              text="The curtain falls on two extraordinary days and it goes out with a bang. Live comedy. Live music. An electric crowd. One unforgettable night."
               className="font-light text-center"
               style={{ color:'#a0988a', fontSize:'clamp(0.82rem,2.2vw,1rem)', lineHeight:1.85, maxWidth:'min(640px,90vw)', margin:'0 auto' }}
               delay={0.04}/>
@@ -208,7 +205,7 @@ export default function SummitShowdown() {
             </div>
             <div style={{ display:'flex', flexDirection:'column', gap:'clamp(0.8rem,2vw,1.25rem)', color:'#a0988a', lineHeight:1.9, fontWeight:300, fontSize:'clamp(0.82rem,2vw,0.95rem)' }}>
               {[
-                "Summit Showdown is the grand finale of E-Summit, and we've made sure it goes out with a bang. After days of pitches, talks, and ideas, it's time to let loose and celebrate the spirit of entrepreneurship.",
+                "Summit Showdown is the grand finale of E-Summit Pune, and we've made sure it goes out with a bang. After days of pitches, talks, and ideas, it's time to let loose and celebrate the spirit of entrepreneurship.",
                 "We bring in some of the most talented comedians to get the crowd laughing and live bands to set the stage on fire. Every connection made, every idea sparked — celebrated in style.",
                 "Summit Showdown is where the energy of the entire event comes together one last time, leaving everyone with memories that last long after the curtain falls.",
               ].map((p,i)=>(
@@ -229,25 +226,6 @@ export default function SummitShowdown() {
         </div>
       </div>
 
-      {/* ══ ENERGY QUOTE ══ */}
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16" style={{ paddingBottom:'clamp(1.5rem,3vw,2rem)' }}>
-        <ClipReveal delay={0.1}>
-          <motion.div style={{ position:'relative', textAlign:'center', padding:'clamp(1.5rem,4vw,3rem)', overflow:'hidden',
-                               background:'linear-gradient(135deg,rgba(139,26,26,0.18),rgba(212,105,10,0.08),rgba(201,168,76,0.1))',
-                               border:'1px solid rgba(201,168,76,0.15)' }}>
-            <div style={{ position:'absolute', inset:0, pointerEvents:'none', background:'radial-gradient(ellipse 70% 80% at 50% 50%, rgba(212,105,10,0.07), transparent)' }}/>
-            <motion.p className="font-display relative" style={{ color:'#e8e0d0', lineHeight:1.6, fontSize:'clamp(0.95rem,2.8vw,1.5rem)', zIndex:1 }}
-              initial={{ opacity:0, scale:0.94 }} whileInView={{ opacity:1, scale:1 }} viewport={{ once:true }} transition={{ duration:0.8 }}>
-              "Two days of ambition. One night of celebration.<br/>
-              This is where E-Summit earns its legend."
-            </motion.p>
-            <p className="font-cinzel uppercase relative" style={{ marginTop:'1rem', fontSize:'0.6rem', letterSpacing:'0.3em', color:'#d4690a', zIndex:1 }}>
-              ∙ Summit Showdown · E-Summit Pune '26 ∙
-            </p>
-          </motion.div>
-        </ClipReveal>
-      </div>
-
       {/* ══ SECOND MARQUEE ══ */}
       <div style={{ padding:'10px 0' }}>
         <Marquee items={MARQUEE_B} speed={24} reverse separator="⬥"/>
@@ -256,7 +234,7 @@ export default function SummitShowdown() {
       {/* ══════ PERFORMERS ══════ */}
       <div id="performers" className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16" style={{ paddingTop:'clamp(3rem,6vw,5rem)', paddingBottom:'clamp(3rem,6vw,5rem)' }}>
         <SecHead tag="∙ The Lineup ∙" title="Tonight's Stars" amber
-          body="Headlining comedians and bands who will make the final night of E-Summit '26 one for the ages."/>
+          body="Headlining comedians and bands who will make the final night of E-Summit Pune '26 one for the ages."/>
 
         {[{ label:'🎭 Stand-Up Comedy', items:COMEDIANS }, { label:'🎸 Live Music', items:BANDS }].map(({ label, items }) => (
           <div key={label} style={{ marginBottom:'clamp(2rem,5vw,3rem)' }}>
@@ -281,16 +259,12 @@ export default function SummitShowdown() {
           <motion.div ref={schedRef} style={{ display:'flex', flexDirection:'column', gap:'1.5px' }}
             initial="hidden" animate={schedInView?'show':'hidden'}
             variants={{ hidden:{}, show:{ transition:{ staggerChildren:0.1 } } }}>
-            {SCHEDULE.map(({ time, emoji, act, desc }, i) => (
+            {SCHEDULE.map(({ emoji, act, desc }, i) => (
               <motion.div key={i}
                 variants={{ hidden:{ opacity:0, x:-40 }, show:{ opacity:1, x:0, transition:{ duration:0.6, ease:[0.22,1,0.36,1] } } }}
-                style={{ display:'grid', gridTemplateColumns:'clamp(80px,18vw,110px) 1fr' }}>
-                <div style={{ display:'flex', alignItems:'center', justifyContent:'center', padding:'clamp(8px,2vw,12px)',
-                              background:'rgba(201,168,76,0.06)', border:'1px solid rgba(201,168,76,0.1)' }}>
-                  <span className="font-cinzel uppercase" style={{ fontSize:'clamp(0.55rem,1.3vw,0.66rem)', letterSpacing:'0.2em', color:'#c9a84c', textAlign:'center' }}>{time}</span>
-                </div>
+                style={{ display:'block' }}> {/* Changed to block to remove the left column grid */}
                 <motion.div
-                  whileHover={{ borderColor:'rgba(201,168,76,0.35)', background:'#1e1e2e', x:4 }}
+                  whileHover={{ borderColor:'rgba(212,105,10,0.35)', background:'#1e1e2e', x:4 }}
                   transition={{ duration:0.2 }}
                   style={{ display:'flex', alignItems:'center', gap:'clamp(0.7rem,2vw,1rem)', padding:'clamp(0.7rem,2vw,1rem) clamp(0.8rem,2.5vw,1.25rem)',
                            background:'#16161f', border:'1px solid rgba(201,168,76,0.08)' }}>
@@ -310,14 +284,21 @@ export default function SummitShowdown() {
         </div>
       </div>
 
-      {/* ══════ VIBE ══════ */}
+          {/* ══════ VIBE ══════ */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16" style={{ paddingTop:'clamp(3rem,6vw,5rem)', paddingBottom:'clamp(3rem,6vw,5rem)' }}>
         <SecHead tag="∙ What to Expect ∙" title="An Unforgettable Night" amber/>
         <motion.div ref={vibeRef}
-          style={{ display:'grid', gap:'1.5px', background:'rgba(201,168,76,0.08)', border:'1px solid rgba(201,168,76,0.08)',
-                   gridTemplateColumns:'repeat(auto-fill,minmax(min(220px,100%),1fr))' }}
+          style={{ 
+            display:'grid', 
+            gap:'1.5px', 
+            background:'rgba(201,168,76,0.08)', 
+            border:'1px solid rgba(201,168,76,0.08)',
+            /* FIXED: Changed auto-fill to auto-fit to remove the 5th empty box */
+            gridTemplateColumns:'repeat(auto-fit, minmax(min(220px,100%),1fr))' 
+          }}
           initial="hidden" animate={vibeInView?'show':'hidden'}
           variants={{ hidden:{}, show:{ transition:{ staggerChildren:0.12 } } }}>
+          
           {VIBE_ITEMS.map(({ num, head, body }) => (
             <motion.div key={num}
               variants={{ hidden:{ opacity:0, y:40, clipPath:'inset(0 0 100% 0)' }, show:{ opacity:1, y:0, clipPath:'inset(0 0 0% 0)', transition:{ duration:0.7 } } }}
@@ -349,18 +330,18 @@ export default function SummitShowdown() {
           transition={{ duration:0.7, ease:[0.22,1,0.36,1] }}>
           <DrawBorder color="rgba(139,26,26,0.5)" style={{ padding:'clamp(1.5rem,4vw,3rem)', background:'rgba(139,26,26,0.03)' }}>
             <span className="font-cinzel uppercase block mb-3" style={{ fontSize:'clamp(0.58rem,1.5vw,0.65rem)', letterSpacing:'0.38em', color:'#d4690a' }}>
-              ∙ Don't Miss the Finale ∙
+              
             </span>
-            <h2 className="section-title font-display mb-4">Be There for the Sendoff</h2>
+            <h2 className="section-title font-display mb-4"> - Don't Miss the Finale - </h2>
             <p className="section-body" style={{ marginBottom:'clamp(1.5rem,4vw,2.5rem)' }}>
-              Summit Showdown is included with your E-Summit pass. Register now and secure your spot.
+              Summit Showdown is included with your E-Summit Pune pass. Register now and secure your spot.
             </p>
             <div style={{ display:'flex', gap:'clamp(8px,2vw,16px)', justifyContent:'center', flexWrap:'wrap' }}>
               <MagneticButton href="#" className="btn-fire">Get Your Pass</MagneticButton>
               <MagneticButton href="/etalks" className="btn-outline">← Explore E-Talks</MagneticButton>
             </div>
             <p className="font-cinzel uppercase" style={{ marginTop:'clamp(1.2rem,3vw,2rem)', fontSize:'0.58rem', letterSpacing:'0.3em', color:'rgba(201,168,76,0.35)' }}>
-              25 MARCH 2026 · VIT PUNE · @v_edc
+              25 MARCH 2026 · @v_edc · VIT PUNE 
             </p>
           </DrawBorder>
         </motion.div>

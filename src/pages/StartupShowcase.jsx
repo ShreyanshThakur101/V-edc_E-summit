@@ -93,7 +93,7 @@ export default function StartupShowcase() {
 
           <div className="mb-10">
             <WordReveal 
-              text="Brightest young minds. Boldest ideas. The ultimate platform for the future of industry."
+              text="VEDC's Inaugural Event . Brightest young minds. Boldest ideas. The ultimate platform for the future of industry."
               className="font-light text-center"
               style={{ color: '#a0988a', fontSize: 'clamp(1rem, 2.5vw, 1.3rem)', letterSpacing: '0.1em', lineHeight: 1.6 }}
               delay={0.05}
@@ -132,7 +132,7 @@ export default function StartupShowcase() {
               </h2>
             </div>
             <div className="space-y-6 text-[#a0988a] font-light leading-relaxed text-lg">
-              <p>E-Summit's Startup Showcase brings together the brightest young minds and boldest ideas under one roof. It is a platform where innovative startups get the opportunity to present their vision, demonstrate their products, and share the problems they are solving.</p>
+              <p>E-Summit Pune's Startup Showcase brings together the brightest young minds and boldest ideas under one roof. It is a platform where innovative startups get the opportunity to present their vision, demonstrate their products, and share the problems they are solving.</p>
               <p>Whether you're a first-time founder or a seasoned builder, the Startup Showcase is your stage to make an impact. It's more than just a presentation, it's a chance to spark conversations, attract potential collaborators, and take your startup one step closer to the next big milestone.</p>
             </div>
           </div>

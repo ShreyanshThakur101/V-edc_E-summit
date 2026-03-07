@@ -12,23 +12,53 @@ import Marquee       from '../components/Marquee'
 import SectionNav    from '../components/SectionNav'
 import { DrawBorder, ClipReveal, GlowBorder } from '../components/AnimatedBorder'
 
+
+// IMPORT SPEAKER PHOTOS
+import speaker1 from '../assets/summit_speaker1_image.png'; 
+import speaker2 from '../assets/summit_speaker2_image.png'; 
+import speaker3 from '../assets/showdown_speaker_1_image.png'; 
+
 const SPEAKERS = [
-  { number:1, domain:'Business',         name:'[Speaker Name]', title:'[Title · Organisation]', bio:'2–3 sentence bio about this speaker\'s journey and what they bring to the E-Talks stage.' },
-  { number:2, domain:'Politics',         name:'[Speaker Name]', title:'[Title · Organisation]', bio:'2–3 sentence bio about this speaker\'s journey and what they bring to the E-Talks stage.' },
-  { number:3, domain:'Content Creation', name:'[Speaker Name]', title:'[Title · Organisation]', bio:'2–3 sentence bio about this speaker\'s journey and what they bring to the E-Talks stage.' },
-  { number:4, domain:'Acting',           name:'[Speaker Name]', title:'[Title · Organisation]', bio:'2–3 sentence bio about this speaker\'s journey and what they bring to the E-Talks stage.' },
-  { number:5, domain:'Technical',        name:'[Speaker Name]', title:'[Title · Organisation]', bio:'2–3 sentence bio about this speaker\'s journey and what they bring to the E-Talks stage.' },
-  { number:6, domain:'Social Impact',    name:'[Speaker Name]', title:'[Title · Organisation]', bio:'2–3 sentence bio about this speaker\'s journey and what they bring to the E-Talks stage.' },
+  { 
+    number: 1, 
+    domain: 'Business & Tech', 
+    name: 'Dr. Sanjay Katkar', 
+    title: 'Co-Founder & Jt. MD of Quick Heal Technologies', 
+    image: speaker1, 
+    bio: 'A visionary leader in cybersecurity, he has been instrumental in scaling Quick Heal into a global name through relentless technical innovation.' 
+  },
+  { 
+    number: 2, 
+    domain: 'Gaming & Business', 
+    name: '(GHATAK) Abhijeet Andhare', 
+    title: 'Founder & CEO of Trident Gaming', 
+    image: speaker2, 
+    bio: 'A pioneer in Indian E-sports, GHATAK transitioned from a professional player to a top-tier mentor and successful entrepreneur in the gaming industry.' 
+  },
+  { 
+    number: 3, 
+    domain: 'Acting & Content', 
+    name: 'Deesha Katkar', 
+    title: 'Actor & Content Creator', 
+    image: speaker3, 
+    bio: 'Bridging the worlds of digital storytelling and performance, she brings a unique perspective on building a modern personal brand.' 
+  },
+  { number: 4, domain: 'Content Creation', name: '[Speaker Name]', title: '[Title · Organisation]', bio: '2–3 sentence bio about this speaker\'s journey and what they bring to the E-Talks stage.' },
+  { number: 5, domain: 'Technical', name: '[Speaker Name]', title: '[Title · Organisation]', bio: '2–3 sentence bio about this speaker\'s journey and what they bring to the E-Talks stage.' },
+  { number: 6, domain: 'Social Impact', name: '[Speaker Name]', title: '[Title · Organisation]', bio: '2–3 sentence bio about this speaker\'s journey and what they bring to the E-Talks stage.' },
 ]
 
-const MARQUEE_A = ['E-Talks','E-Summit Pune 26','Ascension to Reign','17–25 March','VIT Pune','VEDC']
+const MARQUEE_A = ['E-Talks','E-Summit Pune 26','Ascension to Reign','17–25 March','VIT Pune']
 const MARQUEE_B = ['Business','Politics','Acting','Content Creation','Technical Founding','Social Impact']
+
 const WHY_ITEMS = [
   { num:'01', head:'Unfiltered Stories',  body:'No PR polish — just the raw truth of building from those who have lived it.' },
   { num:'02', head:'Cross-Domain Voices', body:'From politics to film to deep tech. Grit and vision transcend every field.' },
   { num:'03', head:'Ignited Ambition',    body:'Every talk shifts your perspective and fires up your own path.' },
   { num:'04', head:'Real-World Lessons',  body:'Wisdom earned through navigating industries, failures, and pivots firsthand.' },
+  { num:'05', head:'Event Experiences',   body:'Immersive networking sessions and curated vibes that turn high-level inspiration into real-world action.' },
 ]
+
 const SECTIONS = [
   { id:'hero',     label:'Intro'    },
   { id:'about',    label:'About'    },
@@ -69,7 +99,7 @@ export default function ETalks() {
       <SectionNav sections={SECTIONS} />
 
       {/* ══════ HERO ══════ */}
-      <section id="hero" ref={heroRef}
+       <section id="hero" ref={heroRef}
         className="relative min-h-screen grid place-items-center text-center overflow-hidden"
         style={{ padding: 'clamp(6rem, 12vw, 8rem) clamp(1rem, 5vw, 2rem) clamp(3rem, 6vw, 4rem)' }}>
 
@@ -104,7 +134,7 @@ export default function ETalks() {
               initial={{ scaleX:0 }} animate={{ scaleX:1 }} transition={{ delay:0.3 }}/>
             <span className="font-cinzel uppercase text-center"
               style={{ fontSize:'clamp(0.55rem,1.5vw,0.65rem)', letterSpacing:'clamp(0.2em,1vw,0.5em)', color:'rgba(201,168,76,0.7)' }}>
-              E-Cell VIT Pune · VEDC · 17–25 March 2026
+              E-Cell VIT Pune · 17–25 March 2026
             </span>
             <motion.div style={{ height:1, width:'clamp(24px,5vw,40px)', background:'linear-gradient(90deg,rgba(201,168,76,0.5),transparent)' }}
               initial={{ scaleX:0 }} animate={{ scaleX:1 }} transition={{ delay:0.3 }}/>
@@ -163,139 +193,81 @@ export default function ETalks() {
         </motion.div>
       </section>
 
-      {/* ══ MARQUEE ══ */}
       <div style={{ borderTop:'1px solid rgba(201,168,76,0.07)', borderBottom:'1px solid rgba(201,168,76,0.07)', padding:'10px 0', background:'rgba(201,168,76,0.015)' }}>
         <Marquee items={MARQUEE_A} speed={30}/>
       </div>
 
-      {/* ══════ ABOUT ══════ */}
-      <div id="about" style={{ background:'#10101a', borderBottom:'1px solid rgba(201,168,76,0.08)' }}>
-        <motion.div ref={aboutRef}
-          className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16"
-          style={{ paddingTop:'clamp(3rem,6vw,5rem)', paddingBottom:'clamp(3rem,6vw,5rem)' }}
-          initial={{ opacity:0 }} animate={aboutInView?{opacity:1}:{}} transition={{ duration:0.5 }}>
-
-          <div style={{ display:'grid', gap:'clamp(2rem,5vw,3.5rem)', gridTemplateColumns:'repeat(auto-fit, minmax(min(280px, 100%), 1fr))', alignItems:'center' }}>
+      {/* ══ ABOUT ══ */}
+      <div id="about" style={{ background:'#10101a', padding:'5rem 0', borderBottom:'1px solid rgba(201,168,76,0.08)' }}>
+        <motion.div ref={aboutRef} className="max-w-7xl mx-auto px-6" initial={{ opacity:0 }} animate={aboutInView?{opacity:1}:{}}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
-              <motion.span className="font-cinzel uppercase block mb-3" style={{ fontSize:'clamp(0.58rem,1.5vw,0.65rem)', letterSpacing:'0.35em', color:'#c9a84c' }}
-                initial={{ opacity:0, x:-20 }} animate={aboutInView?{opacity:1,x:0}:{}} transition={{ duration:0.5 }}>
-                ∙ About E-Talks ∙
-              </motion.span>
-              <div style={{ overflow:'hidden' }}>
-                <motion.h2 className="font-display text-gold-gradient-sm leading-tight"
-                  style={{ fontSize:'clamp(1.5rem,3.5vw,2.4rem)' }}
-                  initial={{ y:'100%' }} animate={aboutInView?{y:0}:{}}
-                  transition={{ duration:0.7, ease:[0.22,1,0.36,1] }}>
-                  More Than<br/>Just a Talk
-                </motion.h2>
-              </div>
+              <span className="section-tag">∙ About E-Talks ∙</span>
+              <h2 className="section-title font-display">More Than<br/>Just a Talk</h2>
             </div>
-            <div style={{ display:'flex', flexDirection:'column', gap:'clamp(0.8rem,2vw,1.25rem)', color:'#a0988a', lineHeight:1.9, fontWeight:300, fontSize:'clamp(0.82rem,2vw,0.95rem)' }}>
-              {[
-                "E-Talks is one of the most anticipated segments of E-Summit, where we bring together extraordinary individuals from a diverse range of domains — business, politics, content creation, acting, technical founding, or beyond.",
-                "Each speaker takes the stage to share their unique journey, the challenges they've overcome, and the lessons that have shaped them. It's a window into the real, unfiltered world of building something from scratch.",
-                "E-Talks is designed to spark curiosity, ignite ambition, and leave every member of the audience with a fresh perspective and the motivation to carve out their own path.",
-              ].map((p,i) => (
-                <motion.p key={i}
-                  initial={{ opacity:0, x:40 }} animate={aboutInView?{opacity:1,x:0}:{}}
-                  transition={{ delay:0.08*i, duration:0.65, ease:[0.22,1,0.36,1] }}>{p}</motion.p>
-              ))}
+            <div className="space-y-6 text-[#a0988a] font-light leading-relaxed">
+              <p>E-Talks brings together extraordinary individuals from diverse domains to share their unfiltered journeys.</p>
+              <p>Each story serves as a window into the real world of building something from scratch.</p>
             </div>
           </div>
         </motion.div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16" style={{ paddingTop:'clamp(2.5rem,5vw,3.5rem)', paddingBottom:'clamp(2.5rem,5vw,3.5rem)' }}>
-        <div style={{ display:'grid', gap:'clamp(0.75rem,2vw,1.25rem)', gridTemplateColumns:'repeat(auto-fit, minmax(min(220px, 100%), 1fr))' }}>
-          <StatCounter icon="🎤" display="12+" target={12} suffix="+" label="Speakers Across Domains" delay={0}/>
-          <StatCounter icon="🏛️" display="2"   target={2}           label="Days on the Grand Stage"  delay={150}/>
-          <StatCounter icon="⚡" display="5K+" target={5000} suffix="+" label="Inspired Attendees"  delay={300}/>
+      {/* ══ STATS ══ */}
+      <div className="relative z-10 bg-black/50 backdrop-blur-xl border-y border-white/5 py-16">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
+          <div style={{ display:'grid', gap:'clamp(0.75rem,2vw,1.25rem)', gridTemplateColumns:'repeat(auto-fit, minmax(min(220px, 100%), 1fr))' }}>
+            <StatCounter icon="🎤" display="12+" target={12} suffix="+" label="Speakers Across Domains" delay={0}/>
+            <StatCounter icon="🏛️" display="2"   target={2}           label="Days on the Grand Stage"  delay={150}/>
+            <StatCounter icon="⚡" display="5K+" target={5000} suffix="+" label="Inspired Attendees"  delay={300}/>
+          </div>
         </div>
       </div>
 
-      <div style={{ padding:'10px 0', background:'rgba(201,168,76,0.01)' }}>
-        <Marquee items={MARQUEE_B} speed={22} reverse/>
-      </div>
-
-      <div id="speakers" className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16" style={{ paddingTop:'clamp(3rem,6vw,5rem)', paddingBottom:0 }}>
-        <SecHead tag="∙ Opening Keynote ∙" title="The Sovereign Voice"
-          body="Our keynote speaker opens E-Summit '26 with a session that sets the tone — raw, real, and unforgettable."/>
-
+      {/* ══════ KEYNOTE ══════ */}
+      <div id="speakers" className="max-w-7xl mx-auto px-6 py-20">
+        <SecHead tag="∙ Opening Keynote ∙" title="The Sovereign Voice" body="Our keynote speaker sets the tone — raw, real, and unforgettable."/>
         <ClipReveal delay={0.1}>
-          <GlowBorder className="relative overflow-hidden mb-12 md:mb-16"
-            style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(min(300px,100%),1fr))' }}>
-            <span className="font-cinzel uppercase"
-              style={{ position:'absolute', top:14, right:-36, transform:'rotate(45deg)', zIndex:10,
-                       fontSize:'0.55rem', letterSpacing:'0.3em', padding:'3px 52px',
-                       background:'#c9a84c', color:'#050507' }}>Keynote</span>
-
-            <div style={{ position:'relative', minHeight:'clamp(240px,40vw,480px)', background:'linear-gradient(135deg,#0a0a14,#181028)', display:'flex', alignItems:'center', justifyContent:'center', overflow:'hidden' }}>
-              <motion.span className="font-display" style={{ fontSize:'clamp(2rem,6vw,4rem)', color:'rgba(201,168,76,0.12)', zIndex:1, position:'relative' }}
-                animate={{ scale:[1,1.05,1], opacity:[0.12,0.22,0.12] }} transition={{ duration:3, repeat:Infinity }}>✦</motion.span>
-              <p className="font-cinzel uppercase" style={{ position:'absolute', bottom:'clamp(40px,8vw,70px)', fontSize:'0.52rem', letterSpacing:'0.35em', color:'rgba(201,168,76,0.2)', zIndex:1 }}>Keynote Speaker Photo</p>
-              <div style={{ position:'absolute', inset:0, background:'linear-gradient(90deg,transparent 50%,rgba(22,22,31,1) 100%)' }} className="hidden md:block"/>
-              <div style={{ position:'absolute', inset:0, background:'linear-gradient(180deg,transparent 50%,rgba(22,22,31,1) 100%)' }} className="md:hidden"/>
+          <GlowBorder className="relative overflow-hidden grid md:grid-cols-2">
+            <span className="font-cinzel uppercase" style={{ position:'absolute', top:14, right:-36, transform:'rotate(45deg)', zIndex:10, fontSize:'0.55rem', padding:'3px 52px', background:'#c9a84c', color:'#050507' }}>Keynote</span>
+            <div style={{ position:'relative', minHeight:'400px', background:'linear-gradient(135deg,#0a0a14,#181028)', overflow:'hidden' }}>
+              <motion.img src={speaker1} alt="Dr. Sanjay Katkar" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center' }} />
+              <div style={{ position:'absolute', inset:0, background:'linear-gradient(90deg,transparent 60%,rgba(22,22,31,1) 100%)' }} />
             </div>
-
-            <div style={{ padding:'clamp(1.5rem,4vw,3rem)', display:'flex', flexDirection:'column', justifyContent:'center', borderLeft:'1px solid rgba(201,168,76,0.12)' }}>
-              <p className="font-cinzel" style={{ fontSize:'0.58rem', letterSpacing:'0.4em', marginBottom:'clamp(0.8rem,2vw,1.25rem)', color:'#c9a84c' }}>⬥ Day 1 · Opening Keynote</p>
-              <h3 className="font-display text-white leading-tight" style={{ fontSize:'clamp(1.3rem,3vw,2.2rem)', marginBottom:8 }}>[Speaker Name]</h3>
-              <p className="font-cinzel" style={{ fontSize:'0.72rem', fontWeight:500, marginBottom:'clamp(0.8rem,2vw,1.25rem)', color:'#c9a84c' }}>[Title] · [Domain / Organisation]</p>
-              <blockquote style={{ fontStyle:'italic', lineHeight:1.85, marginBottom:'clamp(1rem,2.5vw,1.5rem)', color:'#a0988a',
-                                   borderLeft:'2px solid rgba(201,168,76,0.35)', paddingLeft:'clamp(0.8rem,2vw,1.2rem)',
-                                   fontSize:'clamp(0.82rem,1.8vw,0.95rem)' }}>
-                "[A powerful quote from the speaker — add once confirmed.]"
-              </blockquote>
-              <p style={{ fontSize:'clamp(0.78rem,1.7vw,0.88rem)', lineHeight:1.78, fontWeight:300, marginBottom:'clamp(1.2rem,3vw,2rem)', color:'#6e6e88' }}>
-                [Speaker bio — 2–3 sentences on their journey and the perspective they'll bring.]
-              </p>
-              <MagneticButton href="#register" className="btn-gold" style={{ alignSelf:'flex-start' }}>Register to Attend</MagneticButton>
+            <div className="p-8 flex flex-col justify-center space-y-4 border-l border-white/10">
+              <p className="font-cinzel text-[#c9a84c] text-xs">⬥ Day 1 · Opening Keynote</p>
+              <h3 className="font-display text-white text-3xl">Dr. Sanjay Katkar</h3>
+              <p className="font-cinzel text-[#c9a84c] text-sm">Co-Founder & Jt. MD · Quick Heal Technologies</p>
+              <blockquote className="italic border-l-2 border-[#c9a84c]/40 pl-4 text-[#a0988a]">"Innovation is not just about technology..."</blockquote>
+              <p className="text-[#6e6e88] text-sm">A visionary leader scaling Quick Heal into a global name.</p>
+              <MagneticButton href="#register" className="btn-gold">Register to Attend</MagneticButton>
             </div>
           </GlowBorder>
         </ClipReveal>
-
-        <SecHead tag="∙ This Year's Voices ∙" title="The Speakers"
-          body="From boardrooms to film sets, government offices to viral screens — every story on this stage is worth hearing."/>
-
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(min(280px,100%),1fr))', gap:'1.5px', background:'rgba(201,168,76,0.1)', border:'1px solid rgba(201,168,76,0.1)' }}>
+        
+        {/* SPEAKERS GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5 border border-white/5 mt-20">
           {SPEAKERS.map((s,i) => <SpeakerCard key={i} {...s} delay={i*0.07}/>)}
         </div>
-
-        <motion.div style={{ textAlign:'center', marginTop:'clamp(1rem,3vw,2rem)' }}
-          initial={{ opacity:0 }} whileInView={{ opacity:1 }} viewport={{ once:true }}>
-          <motion.span className="font-cinzel uppercase inline-block"
-            style={{ fontSize:'0.6rem', letterSpacing:'0.35em', padding:'6px clamp(12px,3vw,24px)',
-                     color:'rgba(201,168,76,0.4)', border:'1px solid rgba(201,168,76,0.15)', background:'rgba(201,168,76,0.03)' }}
-            animate={{ opacity:[0.4,0.9,0.4] }} transition={{ duration:3, repeat:Infinity }}>
-            ✦ &nbsp; More Speakers to be Announced &nbsp; ✦
-          </motion.span>
-        </motion.div>
       </div>
 
-      <div id="why" style={{ background:'#0f0f1a', borderTop:'1px solid rgba(201,168,76,0.07)', borderBottom:'1px solid rgba(201,168,76,0.07)', padding:'clamp(3rem,6vw,5rem) 0' }}>
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
+      {/* ══════ WHY SECTION ══════ */}
+      <div id="why" className="bg-[#0f0f1a] py-20 border-y border-white/5">
+        <div className="max-w-7xl mx-auto px-6">
           <SecHead tag="∙ Why E-Talks ∙" title="What You'll Take Away"/>
-          <motion.div ref={whyRef}
-            style={{ display:'grid', gap:'1.5px', background:'rgba(201,168,76,0.08)', border:'1px solid rgba(201,168,76,0.08)',
-                     gridTemplateColumns:'repeat(auto-fill, minmax(min(220px,100%),1fr))' }}
-            initial="hidden" animate={whyInView?'show':'hidden'}
-            variants={{ hidden:{}, show:{ transition:{ staggerChildren:0.12 } } }}>
-            {WHY_ITEMS.map(({ num, head, body }) => (
-              <motion.div key={num}
-                variants={{ hidden:{ opacity:0, y:40, clipPath:'inset(0 0 100% 0)' }, show:{ opacity:1, y:0, clipPath:'inset(0 0 0% 0)', transition:{ duration:0.7 } } }}
-                whileHover={{ background:'#1e1e2e', y:-4 }}
-                style={{ background:'#16161f', padding:'clamp(1.2rem,3vw,2rem)', cursor:'default', transition:'background 0.3s, transform 0.3s' }}>
-                <motion.div className="font-display leading-none mb-4"
-                  style={{ fontSize:'clamp(1.8rem,4vw,2.5rem)', color:'rgba(201,168,76,0.1)' }}
-                  whileHover={{ color:'rgba(201,168,76,0.3)' }} transition={{ duration:0.3 }}>{num}</motion.div>
-                <h4 className="font-cinzel" style={{ fontSize:'clamp(0.78rem,1.8vw,0.88rem)', marginBottom:8, color:'#e8e0d0' }}>{head}</h4>
-                <p style={{ fontSize:'clamp(0.75rem,1.6vw,0.82rem)', lineHeight:1.75, fontWeight:300, color:'#6e6e88' }}>{body}</p>
-              </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-px bg-white/5 border border-white/5">
+            {WHY_ITEMS.map((item) => (
+              <div key={item.num} className="bg-[#16161f] p-8 hover:bg-[#1e1e2e] transition-colors">
+                <div className="text-4xl text-[#c9a84c]/20 font-display mb-4">{item.num}</div>
+                <h4 className="font-cinzel text-[#e8e0d0] mb-2">{item.head}</h4>
+                <p className="text-[#6e6e88] text-xs leading-relaxed">{item.body}</p>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
 
+      {/* ══════ REGISTER SECTION (Claim Your Seat) ══════ */}
       <section id="register" style={{ position:'relative', textAlign:'center', overflow:'hidden', padding:'clamp(4rem,8vw,7rem) clamp(1rem,4vw,2rem)', background:'#0f0f1a', borderTop:'1px solid rgba(201,168,76,0.08)' }}>
         <motion.span className="font-display pointer-events-none select-none"
           style={{ position:'absolute', left:'50%', top:'50%', transform:'translate(-50%,-50%)', fontSize:'clamp(4rem,16vw,12rem)', color:'rgba(201,168,76,0.025)', whiteSpace:'nowrap', letterSpacing:'0.1em' }}
@@ -307,7 +279,7 @@ export default function ETalks() {
           initial={{ opacity:0, y:40 }} animate={ctaInView?{opacity:1,y:0}:{}}
           transition={{ duration:0.7, ease:[0.22,1,0.36,1] }}>
           <DrawBorder style={{ padding:'clamp(1.5rem,4vw,3rem)', background:'rgba(201,168,76,0.02)' }}>
-            <span className="section-tag">∙ Be in the Room ∙</span>
+            
             <h2 className="section-title font-display mb-4">Claim Your Seat</h2>
             <p className="section-body mb-8 md:mb-10">
               E-Talks seats fill fast. Register now to be in the audience when these stories are told live.
@@ -317,12 +289,13 @@ export default function ETalks() {
               <MagneticButton href="/summit-showdown" className="btn-outline">Explore Summit Showdown →</MagneticButton>
             </div>
             <p className="font-cinzel uppercase" style={{ marginTop:'clamp(1.2rem,3vw,2rem)', fontSize:'0.58rem', letterSpacing:'0.3em', color:'rgba(201,168,76,0.35)' }}>
-              17–25 MARCH 2026 · VIT PUNE · @v_edc
+              17–25 MARCH 2026 · @v_edc · VIT PUNE 
             </p>
           </DrawBorder>
         </motion.div>
       </section>
 
+      {/* ══ FINAL MARQUEE ══ */}
       <div style={{ borderTop:'1px solid rgba(201,168,76,0.06)', padding:'10px 0' }}>
         <Marquee items={[...MARQUEE_A,...MARQUEE_B]} speed={40}/>
       </div>

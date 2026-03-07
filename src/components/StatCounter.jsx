@@ -41,7 +41,20 @@ export default function StatCounter({ icon, display, target = null, suffix = '',
       <div className="font-display" style={{ color: '#c9a84c', lineHeight: 1, marginBottom: 'clamp(4px, 1vw, 8px)', fontSize: 'clamp(1.3rem, 3.5vw, 2.2rem)' }}>
         {shown}
       </div>
-      <p className="font-cinzel uppercase" style={{ fontSize: 'clamp(0.52rem, 1.2vw, 0.6rem)', letterSpacing: '0.25em', color: '#6e6e88' }}>{label}</p>
+      <p 
+        className="font-cinzel uppercase" 
+        style={{ 
+          fontSize: 'clamp(0.6rem, 1.5vw, 0.72rem)', 
+          letterSpacing: '0.25em', 
+          /* BRIGHTENED: Changed from #6e6e88 to #a0988a for visibility */
+          color: '#a0988a', 
+          /* BOLDED: Ensuring the small caps stand out */
+          fontWeight: 600, 
+          marginTop: '0.5rem' 
+        }}
+      >
+        {label}
+      </p>
     </motion.div>
   )
 }

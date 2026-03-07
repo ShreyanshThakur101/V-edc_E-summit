@@ -1,26 +1,37 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 import bgImage from '../assets/throne-home-bg.png'; 
 import SectionNav from '../components/SectionNav';
+import { Embers } from '../components/Particles';
+import { ScrambleText, WordReveal } from '../components/TextReveal';
+import { MagneticButton } from '../components/ScrollProgress';
 
-// 1. We added the specific competitions to the navigation list
 const SECTIONS = [
   { id: 'hero',          label: 'Intro' },
   { id: 'competitions',  label: 'Competitions' },
-  { id: 'pitch-perfect', label: 'Pitch Perfect' }, // New dot!
-  { id: 'boardroom',     label: 'Boardroom' },     // New dot!
+  { id: 'pitch-perfect', label: 'Pitch Perfect' },
+  { id: 'boardroom',     label: 'Boardroom' },
 ];
 
 const Competition = () => {
+  const heroRef = useRef(null);
+  const { scrollY } = useScroll();
+  const bgY        = useTransform(scrollY, [0, 700], [0, 140]);
+  const shaftY     = useTransform(scrollY, [0, 700], [0, 70]);
+  const titleY     = useTransform(scrollY, [0, 500], [0, -50]);
+  const titleOp    = useTransform(scrollY, [0, 380], [1, 0]);
+  const titleScale = useTransform(scrollY, [0, 400], [1, 0.92]);
+
   const competitions = [
     { 
-      id: 'pitch-perfect', // Changed this to match the SECTIONS id above
+      id: 'pitch-perfect', 
       title: "Pitch Perfect", 
-      description: "You're handed five keywords and tasked with building and pitching an entire startup around them. It's spontaneous, it's fast-paced, and it's the ultimate test of creativity and confidence under pressure.",
+      description: "Pitch Perfect is an exciting pitching competition that tests participants’ creativity, business thinking, and persuasive communication skills. The event takes place in multiple rounds where participants pitch product ideas, engage in brand pitch battles, and defend their arguments using real data and strong reasoning. Through rapid preparation, strategic thinking, and confident presentation, participants compete to showcase their entrepreneurial mindset and convince the jury of their ideas and arguments.",
       tagline: "Spontaneous Innovation"
     },
     { 
-      id: 'boardroom', // Changed this to match the SECTIONS id above
+      id: 'boardroom', 
       title: "Boardroom", 
       description: "Step into the shoes of real corporate leaders, taking on high-stakes roles and tackling real-world business scenarios that demand sharp thinking, teamwork, and decisive action.",
       tagline: "Corporate Strategy"
@@ -28,44 +39,121 @@ const Competition = () => {
   ];
 
   return (
-    <>
+    <div style={{ background:'#050507', minHeight:'100vh', fontFamily:'Raleway, sans-serif' }}>
       <SectionNav sections={SECTIONS} />
 
-      {/* Cinematic Background Layer */}
-      <div 
-        className="fixed inset-0 z-0 bg-black flex items-start justify-center"
-        style={{ 
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)), url(${bgImage})`,
-          backgroundSize: 'contain', 
-          backgroundPosition: 'top center',
-          backgroundRepeat: 'no-repeat',
-          height: '100vh',
-          width: '100vw',
-          backgroundColor: '#000000'
-        }}
-      />
+      {/* ══════ HERO SECTION (MATCHES E-TALKS STYLE) ══════ */}
+      <section id="hero" ref={heroRef}
+        className="relative min-h-screen grid place-items-center text-center overflow-hidden"
+        style={{ padding: 'clamp(6rem, 12vw, 8rem) clamp(1rem, 5vw, 2rem) clamp(3rem, 6vw, 4rem)' }}>
 
-      <main className="relative z-10 pt-32 md:pt-48 pb-20 px-4 md:px-6">
-        <section className="max-w-7xl mx-auto text-center">
+        {/* BG layers */}
+        <motion.div className="absolute inset-0 z-0" style={{ y: bgY }}>
+          <div style={{ 
+            position: 'absolute', 
+            inset: 0, 
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.85)), url(${bgImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'top center',
+            backgroundRepeat: 'no-repeat'
+          }} />
+          <div style={{ position:'absolute', inset:0, background:`
+            radial-gradient(ellipse 70% 55% at 50% 65%, rgba(139,105,20,0.16) 0%, transparent 65%),
+            radial-gradient(ellipse 35% 55% at 50% 100%, rgba(201,168,76,0.09) 0%, transparent 55%)` }} />
+        </motion.div>
+
+        {/* Shafts of Light */}
+        <motion.div className="absolute inset-0 z-0 pointer-events-none" style={{ y: shaftY }}>
+          {[{left:'20%',d:'0s'},{left:'40%',d:'1.5s'},{left:'60%',d:'3s',wide:true},{left:'80%',d:'4.5s'}].map((s,i)=>(
+            <div key={i} className="shaft" style={{
+              left:s.left, animationDelay:s.d, width:s.wide?'2px':'1px',
+              background:s.wide
+                ?'linear-gradient(180deg,transparent,rgba(201,168,76,0.28) 42%,rgba(201,168,76,0.38) 55%,transparent)'
+                :'linear-gradient(180deg,transparent,rgba(201,168,76,0.12) 40%,rgba(201,168,76,0.18) 55%,transparent)',
+            }}/>
+          ))}
+        </motion.div>
+        
+        <Embers count={28}/>
+
+        {/* Hero Content */}
+        <motion.div className="relative z-10 w-full" style={{ y: titleY, opacity: titleOp, scale: titleScale, maxWidth: 'min(820px, 92vw)', margin: '0 auto' }}>
           
-          <div id="hero" className="mb-16 md:mb-24 pt-10">
-            <p className="text-[#c5a059] tracking-[0.5em] md:tracking-[1em] text-[9px] md:text-[12px] uppercase mb-6">Vishwakarma Institute of Technology Presents</p>
-            <h1 className="text-5xl md:text-[11rem] font-bold tracking-tighter mb-4 italic uppercase leading-none text-white">
-              E-Summit
-            </h1>
-            <h2 className="text-3xl md:text-8xl font-light tracking-[0.3em] md:tracking-[0.4em] text-[#c5a059] mb-8 uppercase">
-              PUNE '26
-            </h2>
-            <div className="w-12 md:w-24 h-px bg-[#c5a059] mx-auto mb-8" />
-            <p className="text-sm md:text-2xl tracking-[0.3em] md:tracking-[0.5em] uppercase text-gray-400 font-light italic">"Ascension To Reign"</p>
+          {/* Eyebrow */}
+          <motion.div className="flex items-center justify-center mb-6 md:mb-8" style={{ gap: 'clamp(8px,2vw,16px)', flexWrap: 'wrap' }}
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }}>
+            <motion.div style={{ height: 1, width: 'clamp(24px,5vw,40px)', background: 'linear-gradient(90deg,transparent,rgba(201,168,76,0.5))' }}
+              initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ delay: 0.3 }}/>
+            <span className="font-cinzel uppercase text-center"
+              style={{ fontSize: 'clamp(0.55rem,1.5vw,0.65rem)', letterSpacing: 'clamp(0.2em,1vw,0.5em)', color: 'rgba(201,168,76,0.7)' }}>
+              E-Cell VIT Pune
+            </span>
+            <motion.div style={{ height: 1, width: 'clamp(24px,5vw,40px)', background: 'linear-gradient(90deg,rgba(201,168,76,0.5),transparent)' }}
+              initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ delay: 0.3 }}/>
+          </motion.div>
+
+          {/* Main Title */}
+          <div style={{ overflow: 'hidden' }}>
+            <motion.h1 className="font-display font-bold leading-none mb-0 uppercase"
+              style={{
+                fontSize: 'clamp(3rem, 12vw, 7.5rem)',
+                background: 'linear-gradient(150deg,#fff 0%,#f0d080 40%,#c9a84c 70%,#a07828 100%)',
+                WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+                filter: 'drop-shadow(0 0 60px rgba(201,168,76,0.3))',
+              }}
+              initial={{ y: '100%', opacity: 0 }} animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}>
+              <ScrambleText text="COMPETITIONS" trigger delay={350}/>
+            </motion.h1>
           </div>
 
-          {/* This wrapper is just for the intro text now */}
+          {/* Ornament */}
+          <motion.div className="ornament" initial={{ opacity: 0, scaleX: 0.3 }} animate={{ opacity: 1, scaleX: 1 }}
+            transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}>
+            <div className="ornament-line-l"/>
+            <motion.div style={{ width: 7, height: 7, background: '#c9a84c', transform: 'rotate(45deg)' }}
+              animate={{ boxShadow: ['0 0 6px rgba(201,168,76,0.4)', '0 0 24px rgba(201,168,76,1)', '0 0 6px rgba(201,168,76,0.4)'] }}
+              transition={{ duration: 2.5, repeat: Infinity }}/>
+            <div className="ornament-line-r"/>
+          </motion.div>
+
+          {/* Tagline */}
+          <div className="mb-10 md:mb-12 mt-2">
+            <WordReveal
+              text="Push your limits. Test your instincts. Enter the arena where ideas are forged into empires."
+              className="font-light text-center"
+              style={{ color: '#a0988a', fontSize: 'clamp(0.82rem,2.2vw,1rem)', lineHeight: 1.85, maxWidth: 'min(640px,90vw)', margin: '0 auto' }}
+              delay={0.04}/>
+          </div>
+
+          {/* CTAs */}
+          <motion.div style={{ display: 'flex', gap: 'clamp(8px,2vw,16px)', justifyContent: 'center', flexWrap: 'wrap' }}
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.0 }}>
+            <MagneticButton href="#competitions" className="btn-gold">Explore</MagneticButton>
+            <MagneticButton href="https://learner.vierp.in/" className="btn-outline">Register Now →</MagneticButton>
+          </motion.div>
+        </motion.div>
+
+        {/* Scroll cue */}
+        <motion.div style={{ position: 'absolute', bottom: 'clamp(1.5rem,4vw,2rem)', left: '50%', translateX: '-50%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }}>
+          <span className="font-cinzel uppercase" style={{ fontSize: '0.5rem', letterSpacing: '0.5em', color: 'rgba(201,168,76,0.3)' }}>Scroll</span>
+          <motion.div style={{ width: 1, height: 'clamp(28px,5vw,44px)', background: 'linear-gradient(180deg,rgba(201,168,76,0.5),transparent)', originY: 0 }}
+            animate={{ scaleY: [0, 1, 1, 0], opacity: [0, 1, 1, 0] }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut', times: [0, 0.3, 0.7, 1] }}/>
+        </motion.div>
+      </section>
+
+      {/* ══════ REST OF CONTENT (NO CHANGES) ══════ */}
+      <main className="relative z-10 pt-10 pb-20 px-4 md:px-6">
+        <section className="max-w-7xl mx-auto text-center">
+          
           <div id="competitions" className="pt-20">
             <div className="max-w-4xl mx-auto mb-16 md:mb-20 bg-black/40 backdrop-blur-md p-6 md:p-10 border border-[#c5a059]/10">
               <h2 className="text-2xl md:text-5xl font-bold mb-6 italic uppercase tracking-wider text-[#c5a059]">Competitions</h2>
               <p className="text-sm md:text-xl text-gray-200 font-light leading-relaxed mb-6">
-                E-Summit brings to you two of the most thrilling competitions designed to challenge your entrepreneurial instincts and put your skills to the test.
+                E-Summit Pune brings to you two of the most thrilling competitions designed to challenge your entrepreneurial instincts and put your skills to the test.
               </p>
               <p className="text-xs md:text-base italic text-gray-400 leading-relaxed font-light">
                 Whether you're someone who thrives in the spotlight or someone who loves strategizing behind the scenes, these competitions have something for everyone. They're not just contests, they're experiences that push you to think bigger, act bolder, and discover what you're truly capable of.
@@ -73,14 +161,12 @@ const Competition = () => {
             </div>
           </div>
 
-          {/* Cards Section */}
           <div className="flex flex-col gap-10 md:gap-16 max-w-5xl mx-auto">
             {competitions.map((comp) => (
               <div 
                 key={comp.id} 
-                id={comp.id} /* 2. This assigns the id directly to the card! */
+                id={comp.id} 
                 className="group bg-black/50 backdrop-blur-xl border border-[#c5a059]/10 p-8 md:p-24 hover:border-[#c5a059]/50 transition-all duration-700 pt-20 mt-[-20px]" 
-                /* Note: Added a little padding-top (pt-20) so the card doesn't hide under the navbar when the scrollspy jumps to it */
               >
                 <p className="text-[#c5a059] tracking-[0.3em] text-[8px] md:text-[10px] uppercase mb-4 font-bold">{comp.tagline}</p>
                 <h3 className="text-3xl md:text-6xl font-light tracking-[0.2em] uppercase mb-8 group-hover:text-[#c5a059] transition-colors text-white">
@@ -95,7 +181,7 @@ const Competition = () => {
                   rel="noopener noreferrer"
                   className="inline-block px-8 md:px-14 py-3 md:py-5 bg-[#c5a059] text-black font-black uppercase tracking-[0.2em] md:tracking-[0.4em] text-[9px] md:text-[11px] hover:bg-white transition-all"
                 >
-                  Enter The Arena <ExternalLink className="inline-block ml-2 w-3 h-3 md:w-4 md:h-4" />
+                  Regester now  <ExternalLink className="inline-block ml-2 w-3 h-3 md:w-4 md:h-4" />
                 </a>
               </div>
             ))}
@@ -103,7 +189,7 @@ const Competition = () => {
 
         </section>
       </main>
-    </>
+    </div>
   );
 };
 

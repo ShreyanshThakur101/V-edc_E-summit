@@ -1,10 +1,12 @@
 import { useRef, useState } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 
-export default function SpeakerCard({ number, domain, name, title, bio, imgSrc, initials, delay = 0 }) {
+
+export default function SpeakerCard({ number, domain, name, title, bio, image, initials, delay = 0 }) {
   const ref = useRef(null)
   const [hovered, setHovered] = useState(false)
 
+  // ... (Motion values logic remains exactly the same)
   const rawX = useMotionValue(0)
   const rawY = useMotionValue(0)
   const springX = useSpring(rawX, { stiffness: 180, damping: 22 })
@@ -41,7 +43,7 @@ export default function SpeakerCard({ number, domain, name, title, bio, imgSrc, 
         position: 'relative', overflow: 'hidden', cursor: 'pointer', willChange: 'transform',
       }}
     >
-      {/* Glare */}
+      {/* Glare and Bottom accent remain the same */}
       <motion.div style={{
         position: 'absolute', inset: 0, zIndex: 20, pointerEvents: 'none',
         opacity: hovered ? 1 : 0,
@@ -49,23 +51,32 @@ export default function SpeakerCard({ number, domain, name, title, bio, imgSrc, 
         transition: 'opacity 0.3s',
       }} />
 
-      {/* Bottom accent */}
       <motion.div
         style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 2, zIndex: 10,
                  background: 'linear-gradient(90deg, transparent, #c9a84c, transparent)', transformOrigin: 'center' }}
         animate={{ scaleX: hovered ? 1 : 0 }} transition={{ duration: 0.4 }}
       />
 
-      {/* Photo — clamp height so it doesn't get tiny on mobile or huge on 4K */}
+      {/* Photo Section */}
       <div style={{
         height: 'clamp(200px, 28vw, 300px)',
         background: 'linear-gradient(135deg, #0d0d1a 0%, #14101e 100%)',
         position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}>
-        {imgSrc ? (
-          <motion.img src={imgSrc} alt={name}
-            style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(20%) contrast(1.05)' }}
-            animate={{ scale: hovered ? 1.06 : 1, filter: hovered ? 'grayscale(0%) contrast(1.05)' : 'grayscale(20%) contrast(1.05)' }}
+     
+        {image ? (
+          <motion.img src={image} alt={name}
+            style={{ 
+              width: '100%', 
+              height: '100%', 
+              objectFit: 'cover', 
+              objectPosition: name.includes('GHATAK') ? 'center 40%' : 'top center',
+      filter: 'grayscale(20%) contrast(1.05)'
+            }}
+            animate={{ 
+              scale: hovered ? 1.06 : 1, 
+              filter: hovered ? 'grayscale(0%) contrast(1.05)' : 'grayscale(20%) contrast(1.05)' 
+            }}
             transition={{ duration: 0.6 }}
           />
         ) : (
@@ -91,14 +102,15 @@ export default function SpeakerCard({ number, domain, name, title, bio, imgSrc, 
           <span className="font-cinzel" style={{
             position: 'absolute', top: 10, right: 10, fontSize: '0.5rem', letterSpacing: '0.15em',
             color: '#8b6914', background: 'rgba(5,5,7,0.82)', padding: '3px 7px',
+            // FIXED: Added missing quote after 0.2) and before the comma
             border: '1px solid rgba(201,168,76,0.2)', textTransform: 'uppercase',
           }}>
             {domain}
           </span>
-        )}
+)}
       </div>
 
-      {/* Info */}
+      {/* Info Section remains same */}
       <div style={{ padding: 'clamp(0.9rem, 2.5vw, 1.25rem)', paddingBottom: 'clamp(1.2rem, 3vw, 1.75rem)', transform: 'translateZ(20px)' }}>
         <motion.h3 className="font-cinzel font-bold"
           style={{ fontSize: 'clamp(0.85rem, 1.8vw, 1rem)', marginBottom: 4, color: '#ede5d5' }}

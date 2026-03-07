@@ -23,7 +23,7 @@ export default function Footer() {
       </span>
 
       <p className="font-cinzel uppercase text-center" style={{ fontSize: 'clamp(0.5rem, 1.3vw, 0.62rem)', letterSpacing: '0.3em', color: '#6e6e88' }}>
-        Ascension to Reign &nbsp;·&nbsp; 17–25 March 2026 &nbsp;·&nbsp; VIT Pune
+        Ascension to Reign &nbsp;·&nbsp; 
       </p>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(6px, 1.5vw, 12px)', flexWrap: 'wrap' }}>
