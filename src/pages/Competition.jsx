@@ -1,6 +1,6 @@
 import React from 'react';
 import { ExternalLink } from 'lucide-react';
-import bgImage from '../assets/throne-bg.png'; 
+import bgImage from '../assets/throne-home-bg.png'; 
 import SectionNav from '../components/SectionNav';
 
 // 1. We added the specific competitions to the navigation list

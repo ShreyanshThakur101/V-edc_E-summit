@@ -42,10 +42,12 @@ const Home = () => {
         {/* HERO SECTION */}
         <section className="relative h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden">
           <div className="relative z-10">
+            {/* Change the h1 inside the Hero Section */}
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-gold-gradient font-display text-5xl md:text-[10rem] mb-4 uppercase italic tracking-tighter"
+              /* REMOVED 'italic' and ADDED 'font-bold' */
+              className="text-gold-gradient font-display font-bold text-5xl md:text-[10rem] mb-4 uppercase tracking-tighter"
             >
               E-SUMMIT
             </motion.h1>

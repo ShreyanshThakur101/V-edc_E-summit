@@ -20,7 +20,7 @@ const SPEAKERS = [
   { number:5, domain:'Technical',        name:'[Speaker Name]', title:'[Title · Organisation]', bio:'2–3 sentence bio about this speaker\'s journey and what they bring to the E-Talks stage.' },
   { number:6, domain:'Social Impact',    name:'[Speaker Name]', title:'[Title · Organisation]', bio:'2–3 sentence bio about this speaker\'s journey and what they bring to the E-Talks stage.' },
 ]
-const DOMAINS   = ['Business','Politics','Content Creation','Acting','Technical Founding','Social Impact','& Beyond']
+
 const MARQUEE_A = ['E-Talks','E-Summit Pune 26','Ascension to Reign','17–25 March','VIT Pune','VEDC']
 const MARQUEE_B = ['Business','Politics','Acting','Content Creation','Technical Founding','Social Impact']
 const WHY_ITEMS = [
@@ -136,7 +136,7 @@ export default function ETalks() {
           </motion.div>
 
           {/* Tagline */}
-          <div className="mb-6 md:mb-8 mt-2">
+          <div className="mb-10 md:mb-12 mt-2">
             <WordReveal
               text="Extraordinary individuals. Unfiltered stories. One stage. E-Talks brings together voices from every domain — those who've built, navigated, failed, and risen."
               className="font-light text-center"
@@ -144,27 +144,7 @@ export default function ETalks() {
               delay={0.04}/>
           </div>
 
-          {/* Domain pills */}
-          <motion.div style={{ display:'flex', flexWrap:'wrap', justifyContent:'center', gap:'clamp(5px,1.5vw,8px)', marginBottom:'clamp(1.5rem,4vw,2.5rem)' }}
-            initial="hidden" animate="visible"
-            variants={{ hidden:{}, visible:{ transition:{ staggerChildren:0.06, delayChildren:0.7 } } }}>
-            {DOMAINS.map(d => (
-              <motion.span key={d}
-                className="font-cinzel uppercase"
-                style={{
-                  fontSize:'clamp(0.5rem,1.4vw,0.6rem)', letterSpacing:'0.18em',
-                  padding:'clamp(4px,1vw,6px) clamp(8px,2vw,16px)',
-                  color:'rgba(201,168,76,0.65)', border:'1px solid rgba(201,168,76,0.22)',
-                  background:'rgba(201,168,76,0.04)', cursor:'default',
-                }}
-                variants={{ hidden:{ opacity:0, scale:0.8, y:10 }, visible:{ opacity:1, scale:1, y:0, transition:{ duration:0.4 } } }}
-                whileHover={{ scale:1.08, color:'#f0d080', borderColor:'rgba(201,168,76,0.6)' }}>
-                {d}
-              </motion.span>
-            ))}
-          </motion.div>
-
-          {/* CTAs */}
+          {/* CTAs - Now directly under tagline since boxes were removed */}
           <motion.div style={{ display:'flex', gap:'clamp(8px,2vw,16px)', justifyContent:'center', flexWrap:'wrap' }}
             initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }}
             transition={{ duration:0.6, delay:1.0 }}>
@@ -190,13 +170,11 @@ export default function ETalks() {
 
       {/* ══════ ABOUT ══════ */}
       <div id="about" style={{ background:'#10101a', borderBottom:'1px solid rgba(201,168,76,0.08)' }}>
-        {/* ADDED TAILWIND CONTAINER CLASSES HERE */}
         <motion.div ref={aboutRef}
           className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16"
           style={{ paddingTop:'clamp(3rem,6vw,5rem)', paddingBottom:'clamp(3rem,6vw,5rem)' }}
           initial={{ opacity:0 }} animate={aboutInView?{opacity:1}:{}} transition={{ duration:0.5 }}>
 
-          {/* Responsive: stacked on phone, side-by-side on md+ */}
           <div style={{ display:'grid', gap:'clamp(2rem,5vw,3.5rem)', gridTemplateColumns:'repeat(auto-fit, minmax(min(280px, 100%), 1fr))', alignItems:'center' }}>
             <div>
               <motion.span className="font-cinzel uppercase block mb-3" style={{ fontSize:'clamp(0.58rem,1.5vw,0.65rem)', letterSpacing:'0.35em', color:'#c9a84c' }}
@@ -227,8 +205,6 @@ export default function ETalks() {
         </motion.div>
       </div>
 
-      {/* ══ STATS ══ */}
-      {/* ADDED TAILWIND CONTAINER CLASSES HERE */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16" style={{ paddingTop:'clamp(2.5rem,5vw,3.5rem)', paddingBottom:'clamp(2.5rem,5vw,3.5rem)' }}>
         <div style={{ display:'grid', gap:'clamp(0.75rem,2vw,1.25rem)', gridTemplateColumns:'repeat(auto-fit, minmax(min(220px, 100%), 1fr))' }}>
           <StatCounter icon="🎤" display="12+" target={12} suffix="+" label="Speakers Across Domains" delay={0}/>
@@ -237,13 +213,10 @@ export default function ETalks() {
         </div>
       </div>
 
-      {/* ══ SECOND MARQUEE ══ */}
       <div style={{ padding:'10px 0', background:'rgba(201,168,76,0.01)' }}>
         <Marquee items={MARQUEE_B} speed={22} reverse/>
       </div>
 
-      {/* ══════ KEYNOTE ══════ */}
-      {/* ADDED TAILWIND CONTAINER CLASSES HERE */}
       <div id="speakers" className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16" style={{ paddingTop:'clamp(3rem,6vw,5rem)', paddingBottom:0 }}>
         <SecHead tag="∙ Opening Keynote ∙" title="The Sovereign Voice"
           body="Our keynote speaker opens E-Summit '26 with a session that sets the tone — raw, real, and unforgettable."/>
@@ -256,17 +229,14 @@ export default function ETalks() {
                        fontSize:'0.55rem', letterSpacing:'0.3em', padding:'3px 52px',
                        background:'#c9a84c', color:'#050507' }}>Keynote</span>
 
-            {/* Photo */}
             <div style={{ position:'relative', minHeight:'clamp(240px,40vw,480px)', background:'linear-gradient(135deg,#0a0a14,#181028)', display:'flex', alignItems:'center', justifyContent:'center', overflow:'hidden' }}>
               <motion.span className="font-display" style={{ fontSize:'clamp(2rem,6vw,4rem)', color:'rgba(201,168,76,0.12)', zIndex:1, position:'relative' }}
                 animate={{ scale:[1,1.05,1], opacity:[0.12,0.22,0.12] }} transition={{ duration:3, repeat:Infinity }}>✦</motion.span>
               <p className="font-cinzel uppercase" style={{ position:'absolute', bottom:'clamp(40px,8vw,70px)', fontSize:'0.52rem', letterSpacing:'0.35em', color:'rgba(201,168,76,0.2)', zIndex:1 }}>Keynote Speaker Photo</p>
-              {/* Fade to right on desktop, fade to bottom on mobile */}
               <div style={{ position:'absolute', inset:0, background:'linear-gradient(90deg,transparent 50%,rgba(22,22,31,1) 100%)' }} className="hidden md:block"/>
               <div style={{ position:'absolute', inset:0, background:'linear-gradient(180deg,transparent 50%,rgba(22,22,31,1) 100%)' }} className="md:hidden"/>
             </div>
 
-            {/* Text */}
             <div style={{ padding:'clamp(1.5rem,4vw,3rem)', display:'flex', flexDirection:'column', justifyContent:'center', borderLeft:'1px solid rgba(201,168,76,0.12)' }}>
               <p className="font-cinzel" style={{ fontSize:'0.58rem', letterSpacing:'0.4em', marginBottom:'clamp(0.8rem,2vw,1.25rem)', color:'#c9a84c' }}>⬥ Day 1 · Opening Keynote</p>
               <h3 className="font-display text-white leading-tight" style={{ fontSize:'clamp(1.3rem,3vw,2.2rem)', marginBottom:8 }}>[Speaker Name]</h3>
@@ -284,11 +254,9 @@ export default function ETalks() {
           </GlowBorder>
         </ClipReveal>
 
-        {/* Speaker grid */}
         <SecHead tag="∙ This Year's Voices ∙" title="The Speakers"
           body="From boardrooms to film sets, government offices to viral screens — every story on this stage is worth hearing."/>
 
-        {/* Grid: 1 col phone / 2 col tablet / 3 col desktop / auto-fit for large */}
         <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(min(280px,100%),1fr))', gap:'1.5px', background:'rgba(201,168,76,0.1)', border:'1px solid rgba(201,168,76,0.1)' }}>
           {SPEAKERS.map((s,i) => <SpeakerCard key={i} {...s} delay={i*0.07}/>)}
         </div>
@@ -304,9 +272,7 @@ export default function ETalks() {
         </motion.div>
       </div>
 
-      {/* ══════ WHY ATTEND ══════ */}
       <div id="why" style={{ background:'#0f0f1a', borderTop:'1px solid rgba(201,168,76,0.07)', borderBottom:'1px solid rgba(201,168,76,0.07)', padding:'clamp(3rem,6vw,5rem) 0' }}>
-        {/* ADDED TAILWIND CONTAINER CLASSES HERE */}
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
           <SecHead tag="∙ Why E-Talks ∙" title="What You'll Take Away"/>
           <motion.div ref={whyRef}
@@ -330,7 +296,6 @@ export default function ETalks() {
         </div>
       </div>
 
-      {/* ══════ CTA ══════ */}
       <section id="register" style={{ position:'relative', textAlign:'center', overflow:'hidden', padding:'clamp(4rem,8vw,7rem) clamp(1rem,4vw,2rem)', background:'#0f0f1a', borderTop:'1px solid rgba(201,168,76,0.08)' }}>
         <motion.span className="font-display pointer-events-none select-none"
           style={{ position:'absolute', left:'50%', top:'50%', transform:'translate(-50%,-50%)', fontSize:'clamp(4rem,16vw,12rem)', color:'rgba(201,168,76,0.025)', whiteSpace:'nowrap', letterSpacing:'0.1em' }}
@@ -358,7 +323,6 @@ export default function ETalks() {
         </motion.div>
       </section>
 
-      {/* ══ FINAL MARQUEE ══ */}
       <div style={{ borderTop:'1px solid rgba(201,168,76,0.06)', padding:'10px 0' }}>
         <Marquee items={[...MARQUEE_A,...MARQUEE_B]} speed={40}/>
       </div>

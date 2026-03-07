@@ -43,7 +43,6 @@
   .font-cinzel  { font-family: var(--font-cinzel, sans-serif); }
   .font-body    { font-family: var(--font-body, sans-serif); }
 
-  /* Standard Page Container */
   .page-content {
     max-width: min(1280px, 94vw);
     margin-left: auto;
@@ -52,7 +51,11 @@
     padding-right: clamp(1rem, 4vw, 2rem);
   }
 
-  /* Fixed Button System - No more @apply errors */
+  .font-display { 
+    font-family: var(--font-display, sans-serif); 
+    font-weight: 800; /* Added this for the bold effect */
+  }
+
   .btn-gold {
     display: inline-flex;
     align-items: center;
