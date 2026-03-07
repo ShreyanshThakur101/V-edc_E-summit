@@ -31,7 +31,7 @@ const VIBE_ITEMS = [
   { num:'01', head:'World-Class Comedy',       body:'Sharp wit, relatable chaos, an audience that can\'t stop laughing.' },
   { num:'02', head:'Live Music That Moves You', body:'Bands that turn a venue into a memory. You\'ll be talking about it for years.' },
   { num:'03', head:'A True Celebration',       body:'The perfect sendoff for two days of pitches, connections, and ideas.' },
-  { num:'04', head:'The Perfect Curtain Call', body:'E-Summit Pune \'26 closes on the highest note possible. Every emotion — crystallised.' },
+  { num:'04', head:'The Perfect Curtain Call', body:'E-Summit Pune \'26 closes on the highest note possible. Every emotion crystallised.' },
 ]
 const MARQUEE_A = ['Summit Showdown','Stand-up Comedy','Live Music','E-Summit Pune Pune 26','25 March','Grand Finale']
 const MARQUEE_B = ['Ascension to Reign','VIT Pune','@v_edc','The Night You Won\'t Forget']
@@ -206,7 +206,7 @@ export default function SummitShowdown() {
             <div style={{ display:'flex', flexDirection:'column', gap:'clamp(0.8rem,2vw,1.25rem)', color:'#a0988a', lineHeight:1.9, fontWeight:300, fontSize:'clamp(0.82rem,2vw,0.95rem)' }}>
               {[
                 "Summit Showdown is the grand finale of E-Summit Pune, and we've made sure it goes out with a bang. After days of pitches, talks, and ideas, it's time to let loose and celebrate the spirit of entrepreneurship.",
-                "We bring in some of the most talented comedians to get the crowd laughing and live bands to set the stage on fire. Every connection made, every idea sparked — celebrated in style.",
+                "We bring in some of the most talented comedians to get the crowd laughing and live bands to set the stage on fire. Every connection made, every idea sparked celebrated in style.",
                 "Summit Showdown is where the energy of the entire event comes together one last time, leaving everyone with memories that last long after the curtain falls.",
               ].map((p,i)=>(
                 <motion.p key={i} initial={{ opacity:0, x:40 }} animate={aboutInView?{opacity:1,x:0}:{}}
