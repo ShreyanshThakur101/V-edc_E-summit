@@ -337,7 +337,7 @@ export default function SummitShowdown() {
               Summit Showdown is included with your E-Summit Pune pass. Register now and secure your spot.
             </p>
             <div style={{ display:'flex', gap:'clamp(8px,2vw,16px)', justifyContent:'center', flexWrap:'wrap' }}>
-              <MagneticButton href="#" className="btn-fire">Get Your Pass</MagneticButton>
+              <MagneticButton href="https://learner.vierp.in/events" className="btn-fire">Get Your Pass</MagneticButton>
               <MagneticButton href="/etalks" className="btn-outline">← Explore E-Talks</MagneticButton>
             </div>
             <p className="font-cinzel uppercase" style={{ marginTop:'clamp(1.2rem,3vw,2rem)', fontSize:'0.58rem', letterSpacing:'0.3em', color:'rgba(201,168,76,0.35)' }}>

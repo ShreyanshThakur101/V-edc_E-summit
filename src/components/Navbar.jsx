@@ -106,7 +106,7 @@ export default function Navbar() {
           <li>
             {/* Desktop Register Button -> Links to ERP */}
             <motion.a
-              href="https://learner.vierp.in/"
+              href="https://learner.vierp.in/events"
               target="_blank"
               rel="noopener noreferrer"
               className="font-cinzel uppercase"
@@ -200,7 +200,7 @@ export default function Navbar() {
               
               {/* Mobile Register Button -> Links to ERP */}
               <motion.a
-                href="https://learner.vierp.in/"
+                href="https://learner.vierp.in/events"
                 target="_blank"
                 rel="noopener noreferrer"
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.28 }}

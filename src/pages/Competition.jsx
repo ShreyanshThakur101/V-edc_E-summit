@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ExternalLink } from 'lucide-react';
+import React, { useRef, useState } from 'react'; // Added useState
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'; // Added AnimatePresence
+import { ExternalLink, ChevronDown, ChevronUp } from 'lucide-react'; // Added icons
 import bgImage from '../assets/throne-home-bg.png'; 
 import SectionNav from '../components/SectionNav';
 import { Embers } from '../components/Particles';
@@ -23,18 +23,25 @@ const Competition = () => {
   const titleOp    = useTransform(scrollY, [0, 380], [1, 0]);
   const titleScale = useTransform(scrollY, [0, 400], [1, 0.92]);
 
+  // State to track which competition has "more details" open
+  const [expandedId, setExpandedId] = useState(null);
+
   const competitions = [
     { 
       id: 'pitch-perfect', 
       title: "Pitch Perfect", 
-      description: "Pitch Perfect is an exciting pitching competition that tests participants’ creativity, business thinking, and persuasive communication skills. The event takes place in multiple rounds where participants pitch product ideas, engage in brand pitch battles, and defend their arguments using real data and strong reasoning. Through rapid preparation, strategic thinking, and confident presentation, participants compete to showcase their entrepreneurial mindset and convince the jury of their ideas and arguments.",
-      tagline: "Spontaneous Innovation"
+      description: "Pitch Perfect is an exciting pitching competition that tests participants’ creativity, business thinking, and persuasive communication skills. The event takes place in multiple rounds where participants pitch product ideas, engage in brand pitch battles, and defend their arguments using real data and strong reasoning.",
+      tagline: "Spontaneous Innovation",
+      rulebookLink: "https://drive.google.com/file/d/1JrWOrun_Mx4aH0E40MVunISZMIV6vmND/view?usp=drive_link",
+      rulebookText: "pitch perfect rulebook"
     },
     { 
       id: 'boardroom', 
       title: "Boardroom", 
       description: "Step into the shoes of real corporate leaders, taking on high-stakes roles and tackling real-world business scenarios that demand sharp thinking, teamwork, and decisive action.",
-      tagline: "Corporate Strategy"
+      tagline: "Corporate Strategy",
+      rulebookLink: "https://drive.google.com/file/d/1AUYhAszaX4jjAhMBEvzfmvj6lTU6BTTW/view?usp=sharing",
+      rulebookText: "the boardroom rulebook"
     },
   ];
 
@@ -42,12 +49,11 @@ const Competition = () => {
     <div style={{ background:'#050507', minHeight:'100vh', fontFamily:'Raleway, sans-serif' }}>
       <SectionNav sections={SECTIONS} />
 
-      {/* ══════ HERO SECTION (MATCHES E-TALKS STYLE) ══════ */}
+      {/* ══════ HERO SECTION ══════ */}
       <section id="hero" ref={heroRef}
         className="relative min-h-screen grid place-items-center text-center overflow-hidden"
         style={{ padding: 'clamp(6rem, 12vw, 8rem) clamp(1rem, 5vw, 2rem) clamp(3rem, 6vw, 4rem)' }}>
 
-        {/* BG layers */}
         <motion.div className="absolute inset-0 z-0" style={{ y: bgY }}>
           <div style={{ 
             position: 'absolute', 
@@ -62,7 +68,6 @@ const Competition = () => {
             radial-gradient(ellipse 35% 55% at 50% 100%, rgba(201,168,76,0.09) 0%, transparent 55%)` }} />
         </motion.div>
 
-        {/* Shafts of Light */}
         <motion.div className="absolute inset-0 z-0 pointer-events-none" style={{ y: shaftY }}>
           {[{left:'20%',d:'0s'},{left:'40%',d:'1.5s'},{left:'60%',d:'3s',wide:true},{left:'80%',d:'4.5s'}].map((s,i)=>(
             <div key={i} className="shaft" style={{
@@ -76,10 +81,7 @@ const Competition = () => {
         
         <Embers count={28}/>
 
-        {/* Hero Content */}
         <motion.div className="relative z-10 w-full" style={{ y: titleY, opacity: titleOp, scale: titleScale, maxWidth: 'min(820px, 92vw)', margin: '0 auto' }}>
-          
-          {/* Eyebrow */}
           <motion.div className="flex items-center justify-center mb-6 md:mb-8" style={{ gap: 'clamp(8px,2vw,16px)', flexWrap: 'wrap' }}
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }}>
             <motion.div style={{ height: 1, width: 'clamp(24px,5vw,40px)', background: 'linear-gradient(90deg,transparent,rgba(201,168,76,0.5))' }}
@@ -92,7 +94,6 @@ const Competition = () => {
               initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ delay: 0.3 }}/>
           </motion.div>
 
-          {/* Main Title */}
           <div style={{ overflow: 'hidden' }}>
             <motion.h1 className="font-display font-bold leading-none mb-0 uppercase"
               style={{
@@ -107,7 +108,6 @@ const Competition = () => {
             </motion.h1>
           </div>
 
-          {/* Ornament */}
           <motion.div className="ornament" initial={{ opacity: 0, scaleX: 0.3 }} animate={{ opacity: 1, scaleX: 1 }}
             transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}>
             <div className="ornament-line-l"/>
@@ -117,7 +117,6 @@ const Competition = () => {
             <div className="ornament-line-r"/>
           </motion.div>
 
-          {/* Tagline */}
           <div className="mb-10 md:mb-12 mt-2">
             <WordReveal
               text="Push your limits. Test your instincts. Enter the arena where ideas are forged into empires."
@@ -126,16 +125,14 @@ const Competition = () => {
               delay={0.04}/>
           </div>
 
-          {/* CTAs */}
           <motion.div style={{ display: 'flex', gap: 'clamp(8px,2vw,16px)', justifyContent: 'center', flexWrap: 'wrap' }}
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.0 }}>
             <MagneticButton href="#competitions" className="btn-gold">Explore</MagneticButton>
-            <MagneticButton href="https://learner.vierp.in/" className="btn-outline">Register Now →</MagneticButton>
+            <MagneticButton href="https://learner.vierp.in/events" className="btn-outline">Register Now →</MagneticButton>
           </motion.div>
         </motion.div>
 
-        {/* Scroll cue */}
         <motion.div style={{ position: 'absolute', bottom: 'clamp(1.5rem,4vw,2rem)', left: '50%', translateX: '-50%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }}>
           <span className="font-cinzel uppercase" style={{ fontSize: '0.5rem', letterSpacing: '0.5em', color: 'rgba(201,168,76,0.3)' }}>Scroll</span>
@@ -145,18 +142,15 @@ const Competition = () => {
         </motion.div>
       </section>
 
-      {/* ══════ REST OF CONTENT (NO CHANGES) ══════ */}
+      {/* ══════ MAIN CONTENT ══════ */}
       <main className="relative z-10 pt-10 pb-20 px-4 md:px-6">
         <section className="max-w-7xl mx-auto text-center">
           
           <div id="competitions" className="pt-20">
             <div className="max-w-4xl mx-auto mb-16 md:mb-20 bg-black/40 backdrop-blur-md p-6 md:p-10 border border-[#c5a059]/10">
               <h2 className="text-2xl md:text-5xl font-bold mb-6 italic uppercase tracking-wider text-[#c5a059]">Competitions</h2>
-              <p className="text-sm md:text-xl text-gray-200 font-light leading-relaxed mb-6">
+              <p className="text-sm md:text-xl text-gray-200 font-light leading-relaxed">
                 E-Summit Pune brings to you two of the most thrilling competitions designed to challenge your entrepreneurial instincts and put your skills to the test.
-              </p>
-              <p className="text-xs md:text-base italic text-gray-400 leading-relaxed font-light">
-                Whether you're someone who thrives in the spotlight or someone who loves strategizing behind the scenes, these competitions have something for everyone. They're not just contests, they're experiences that push you to think bigger, act bolder, and discover what you're truly capable of.
               </p>
             </div>
           </div>
@@ -172,16 +166,49 @@ const Competition = () => {
                 <h3 className="text-3xl md:text-6xl font-light tracking-[0.2em] uppercase mb-8 group-hover:text-[#c5a059] transition-colors text-white">
                   {comp.title}
                 </h3>
-                <p className="text-gray-400 leading-relaxed mb-10 italic font-light text-sm md:text-xl max-w-3xl mx-auto px-2">
+                <p className="text-gray-400 leading-relaxed mb-6 italic font-light text-sm md:text-xl max-w-3xl mx-auto px-2">
                   "{comp.description}"
                 </p>
+
+                {/* More Details Toggle */}
+                <div className="mb-10">
+                  <button 
+                    onClick={() => setExpandedId(expandedId === comp.id ? null : comp.id)}
+                    className="flex items-center justify-center gap-2 mx-auto text-[#c5a059] font-cinzel text-[10px] md:text-[12px] uppercase tracking-widest hover:text-white transition-colors"
+                  >
+                    {expandedId === comp.id ? <ChevronUp size={16}/> : <ChevronDown size={16}/>}
+                    More Details
+                  </button>
+                  
+                  <AnimatePresence>
+                    {expandedId === comp.id && (
+                      <motion.div 
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden mt-6"
+                      >
+                        <p className="text-gray-300 font-light text-sm md:text-lg mb-2">View Full Guidelines:</p>
+                        <a 
+                          href={comp.rulebookLink} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-[#c5a059] underline underline-offset-4 font-display italic hover:text-white transition-all text-sm md:text-lg"
+                        >
+                          {comp.rulebookText}
+                        </a>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
                 <a 
-                  href="https://learner.vierp.in/" 
+                  href="https://learner.vierp.in/events" 
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-block px-8 md:px-14 py-3 md:py-5 bg-[#c5a059] text-black font-black uppercase tracking-[0.2em] md:tracking-[0.4em] text-[9px] md:text-[11px] hover:bg-white transition-all"
                 >
-                  Regester now  <ExternalLink className="inline-block ml-2 w-3 h-3 md:w-4 md:h-4" />
+                  Register now <ExternalLink className="inline-block ml-2 w-3 h-3 md:w-4 md:h-4" />
                 </a>
               </div>
             ))}

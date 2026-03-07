@@ -240,7 +240,7 @@ export default function ETalks() {
               <p className="font-cinzel text-[#c9a84c] text-sm">Co-Founder & Jt. MD · Quick Heal Technologies</p>
               <blockquote className="italic border-l-2 border-[#c9a84c]/40 pl-4 text-[#a0988a]">"Innovation is not just about technology..."</blockquote>
               <p className="text-[#6e6e88] text-sm">A visionary leader scaling Quick Heal into a global name.</p>
-              <MagneticButton href="#register" className="btn-gold">Register to Attend</MagneticButton>
+              <MagneticButton href="https://learner.vierp.in/events" className="btn-gold">Register to Attend</MagneticButton>
             </div>
           </GlowBorder>
         </ClipReveal>
@@ -285,7 +285,7 @@ export default function ETalks() {
               E-Talks seats fill fast. Register now to be in the audience when these stories are told live.
             </p>
             <div style={{ display:'flex', gap:'clamp(8px,2vw,16px)', justifyContent:'center', flexWrap:'wrap' }}>
-              <MagneticButton href="#" className="btn-gold">Register Now</MagneticButton>
+              <MagneticButton href="https://learner.vierp.in/events" className="btn-gold">Register Now</MagneticButton>
               <MagneticButton href="/summit-showdown" className="btn-outline">Explore Summit Showdown →</MagneticButton>
             </div>
             <p className="font-cinzel uppercase" style={{ marginTop:'clamp(1.2rem,3vw,2rem)', fontSize:'0.58rem', letterSpacing:'0.3em', color:'rgba(201,168,76,0.35)' }}>

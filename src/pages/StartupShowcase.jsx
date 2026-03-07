@@ -153,7 +153,7 @@ export default function StartupShowcase() {
               Come ready to pitch, connect, and inspire. Join an audience of investors and industry leaders looking for the next big thing.
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
-              <MagneticButton href="https://learner.vierp.in/" className="btn-gold">Apply to Showcase</MagneticButton>
+              <MagneticButton href="https://learner.vierp.in/events" className="btn-gold">Apply to Showcase</MagneticButton>
               <MagneticButton href="/etalks" className="btn-outline">Explore E-Talks →</MagneticButton>
             </div>
           </DrawBorder>
