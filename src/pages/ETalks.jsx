@@ -168,7 +168,7 @@ export default function ETalks() {
           {/* Tagline */}
           <div className="mb-10 md:mb-12 mt-2">
             <WordReveal
-              text="Extraordinary individuals. Unfiltered stories. One stage. E-Talks brings together voices from every domain — those who've built, navigated, failed, and risen."
+              text="Extraordinary individuals. Unfiltered stories. One stage. E-Talks brings together voices from every domain those who've built, navigated, failed, and risen."
               className="font-light text-center"
               style={{ color:'#a0988a', fontSize:'clamp(0.82rem,2.2vw,1rem)', lineHeight:1.85, maxWidth:'min(640px,90vw)', margin:'0 auto' }}
               delay={0.04}/>
@@ -226,7 +226,7 @@ export default function ETalks() {
 
       {/* ══════ KEYNOTE ══════ */}
       <div id="speakers" className="max-w-7xl mx-auto px-6 py-20">
-        <SecHead tag="∙ Opening Keynote ∙" title="The Sovereign Voice" body="Our keynote speaker sets the tone — raw, real, and unforgettable."/>
+        <SecHead tag="∙ Opening Keynote ∙" title="The Sovereign Voice" body="Our keynote speaker sets the tone raw, real, and unforgettable."/>
         <ClipReveal delay={0.1}>
           <GlowBorder className="relative overflow-hidden grid md:grid-cols-2">
             <span className="font-cinzel uppercase" style={{ position:'absolute', top:14, right:-36, transform:'rotate(45deg)', zIndex:10, fontSize:'0.55rem', padding:'3px 52px', background:'#c9a84c', color:'#050507' }}>Keynote</span>
