@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
-/* 1. Define your Theme FIRST (Tailwind v4 style) */
+
 @theme {
-  --font-display: "Cinzel Decorative", serif;
-  --font-cinzel: "Cinzel", serif;
+  
+  --font-display: "Raleway", sans-serif; 
+  --font-cinzel: "Raleway", sans-serif;
+  
   --font-body: "Raleway", sans-serif;
   
   --color-gold-light: #f0d080;
@@ -11,7 +13,6 @@
   --color-gold-dark: #8b6914;
   --color-fire-orange: #d4690a;
 }
-
 /* 2. Global Base Styles */
 @layer base {
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -38,11 +39,11 @@
 /* 3. Re-usable Component Classes */
 @layer components {
   /* Fix: Using the theme variables directly to avoid @apply errors */
-  .font-display { font-family: var(--font-display); }
-  .font-cinzel  { font-family: var(--font-cinzel); }
-  .font-body    { font-family: var(--font-body); }
+  .font-display { font-family: var(--font-display, sans-serif); }
+  .font-cinzel  { font-family: var(--font-cinzel, sans-serif); }
+  .font-body    { font-family: var(--font-body, sans-serif); }
 
-  /* Standard Page Container - Essential for all pages */
+  /* Standard Page Container */
   .page-content {
     max-width: min(1280px, 94vw);
     margin-left: auto;
@@ -51,9 +52,17 @@
     padding-right: clamp(1rem, 4vw, 2rem);
   }
 
-  /* The Button System - Updated to fix the red error screens */
+  /* Fixed Button System - No more @apply errors */
   .btn-gold {
-    @apply inline-flex items-center justify-center font-cinzel uppercase cursor-pointer relative overflow-hidden transition-all duration-300;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-cinzel);
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
     background: linear-gradient(135deg, var(--color-gold-light), var(--color-gold-main));
     padding: 0.85rem 2rem;
     color: #050507;
@@ -62,7 +71,15 @@
   }
 
   .btn-fire {
-    @apply inline-flex items-center justify-center font-cinzel uppercase cursor-pointer relative overflow-hidden transition-all duration-300;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-cinzel);
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
     background: linear-gradient(135deg, var(--color-gold-light), var(--color-fire-orange));
     padding: 0.85rem 2rem;
     color: #050507;
@@ -71,7 +88,14 @@
   }
 
   .btn-outline {
-    @apply inline-flex items-center justify-center font-cinzel uppercase bg-transparent cursor-pointer transition-all duration-300;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-cinzel);
+    text-transform: uppercase;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
     border: 1px solid rgba(201, 168, 76, 0.35);
     color: var(--color-gold-main);
     padding: 0.85rem 2rem;
