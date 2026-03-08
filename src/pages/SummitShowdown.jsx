@@ -234,7 +234,7 @@ export default function SummitShowdown() {
       {/* ══════ PERFORMERS ══════ */}
       <div id="performers" className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16" style={{ paddingTop:'clamp(3rem,6vw,5rem)', paddingBottom:'clamp(3rem,6vw,5rem)' }}>
         <SecHead tag="∙ The Lineup ∙" title="Tonight's Stars" amber
-          body="Headlining comedians and bands who will make the final night of E-Summit Pune '26 one for the ages."/>
+          body="The comedians and bands bringing the energy, laughter, and music to the final night of E-Summit Pune ’26 on an unforgettable note."/>
 
         {[{ label:'🎭 Stand-Up Comedy', items:COMEDIANS }, { label:'🎸 Live Music', items:BANDS }].map(({ label, items }) => (
           <div key={label} style={{ marginBottom:'clamp(2rem,5vw,3rem)' }}>
