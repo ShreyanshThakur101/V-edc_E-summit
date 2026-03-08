@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import Navbar        from '../components/Navbar'
 import Footer        from '../components/Footer'
 import { Confetti }  from '../components/Particles'
-import StatCounter   from '../components/StatCounter'
+import MetricCounter from '../components/MetricCounter'
 import PerformerCard from '../components/PerformerCard'
 import { useReveal } from '../components/useReveal'
 import { ScrambleText, WordReveal } from '../components/TextReveal'
@@ -220,9 +220,9 @@ export default function SummitShowdown() {
       {/* ══ STATS ══ */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16" style={{ paddingTop:'clamp(2.5rem,5vw,3.5rem)', paddingBottom:'clamp(2.5rem,5vw,3.5rem)' }}>
         <div style={{ display:'grid', gap:'clamp(0.75rem,2vw,1.25rem)', gridTemplateColumns:'repeat(auto-fit,minmax(min(200px,100%),1fr))' }}>
-          <StatCounter icon="" display="Stand-up"  label="Top Comedians on Stage"      delay={0}/>
-          <StatCounter icon="" display="Live Bands" label="Setting the Stage on Fire"  delay={150}/>
-          <StatCounter icon="" display="One Night"  label="Memories That Last Forever" delay={300}/>
+          <MetricCounter icon="" display="Stand-up"  label="Top Comedians on Stage"      delay={0}/>
+          <MetricCounter icon="" display="Live Bands" label="Setting the Stage on Fire"  delay={150}/>
+          <MetricCounter icon="" display="One Night"  label="Memories That Last Forever" delay={300}/>
         </div>
       </div>
 

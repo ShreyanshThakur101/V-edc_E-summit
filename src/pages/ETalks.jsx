@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import Navbar        from '../components/Navbar'
 import Footer        from '../components/Footer'
 import { Embers }    from '../components/Particles'
-import StatCounter   from '../components/StatCounter'
+import MetricCounter from '../components/MetricCounter'
 import SpeakerCard   from '../components/SpeakerCard'
 import { useReveal } from '../components/useReveal'
 import { ScrambleText, WordReveal } from '../components/TextReveal'
@@ -245,9 +245,9 @@ function SecHead({ tag, title, body, isKeynote }) {
       <div className="relative z-10 bg-black/50 backdrop-blur-xl border-y border-white/5 py-16">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
           <div style={{ display:'grid', gap:'clamp(0.75rem,2vw,1.25rem)', gridTemplateColumns:'repeat(auto-fit, minmax(min(220px, 100%), 1fr))' }}>
-            <StatCounter icon="" display="12+" target={12} suffix="+" label="Speakers Across Domains" delay={0}/>
-            <StatCounter icon="" display="2"   target={2}           label="Days on the Grand Stage"  delay={150}/>
-            <StatCounter icon="" display="5K+" target={5000} suffix="+" label="Inspired Attendees"  delay={300}/>
+            <MetricCounter icon="" display="12+" target={12} suffix="+" label="Speakers Across Domains" delay={0}/>
+            <MetricCounter icon="" display="2"   target={2}           label="Days on the Grand Stage"  delay={150}/>
+            <MetricCounter icon="" display="5K+" target={5000} suffix="+" label="Inspired Attendees"  delay={300}/>
           </div>
         </div>
       </div>

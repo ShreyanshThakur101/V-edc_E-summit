@@ -4,7 +4,7 @@ import { useReveal } from './useReveal'
 
 function easeOutExpo(t) { return t === 1 ? 1 : 1 - Math.pow(2, -10 * t) }
 
-export default function StatCounter({ icon, display, target = null, suffix = '', label, delay = 0 }) {
+export default function MetricCounter({ icon, display, target = null, suffix = '', label, delay = 0 }) {
   const [ref, inView]   = useReveal()
   const [count, setCount]     = useState(0)
   const [started, setStarted] = useState(false)
