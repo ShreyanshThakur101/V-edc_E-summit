@@ -58,14 +58,19 @@ const EVENTS = [
 
 const MARQUEE_ITEMS = ['Innovation', 'Leadership', 'Grit', 'Vision', 'Ascension', 'Excellence', 'Entrepreneurship', 'Impact'];
 
+import { Embers } from '../components/Particles';
+
+// ... (SECTIONS and EVENTS definitions)
+
 const Home = () => {
   const heroRef = useRef(null);
   const { scrollY } = useScroll();
   
-  // Parallax effects
-  const bgY = useTransform(scrollY, [0, 800], [0, 160]);
-  const contentY = useTransform(scrollY, [0, 500], [0, -40]);
-  const logoOp = useTransform(scrollY, [0, 400], [1, 0]);
+  // Parallax & Cinematic Motion
+  const bgY       = useTransform(scrollY, [0, 800], [0, 200]);
+  const contentY  = useTransform(scrollY, [0, 600], [0, -60]);
+  const contentOp = useTransform(scrollY, [0, 500], [1, 0]);
+  const glowScale = useTransform(scrollY, [0, 600], [1, 1.2]);
 
   const [aboutRef, aboutInView] = useReveal();
   const [eventsRef, eventsInView] = useReveal();
@@ -77,76 +82,149 @@ const Home = () => {
       <SectionNav sections={SECTIONS} />
       
       {/* ═ HERO SECTION ═ */}
-      <section id="hero" ref={heroRef} className="relative h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden">
+      <section id="hero" ref={heroRef} 
+        className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden"
+        style={{ padding: 'clamp(6rem, 12vw, 8rem) clamp(1rem, 5vw, 2rem) clamp(3rem, 6vw, 4rem)' }}
+      >
         
-        {/* Parallax Background */}
+        {/* Cinematic Background Layer */}
         <motion.div 
           className="absolute inset-0 z-0"
           style={{ 
             y: bgY,
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(5,5,7,1)), url(${bgImage})`,
+            backgroundImage: `linear-gradient(to bottom, rgba(5,5,7,0.1) 0%, rgba(5,5,7,0.8) 70%, rgba(5,5,7,1) 100%), url(${bgImage})`,
             backgroundSize: 'cover', 
-            backgroundPosition: 'center 20%',
+            backgroundPosition: 'center top',
           }}
         />
 
-        {/* Ambient Shafts of Light */}
-        <div className="absolute inset-0 z-0 pointer-events-none opacity-30">
+        {/* Dynamic Lighting & Particles */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <Embers count={32} />
+          
+          {/* Orbital Glow Systems */}
+          <motion.div 
+            style={{ scale: glowScale }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] h-[90vw] max-w-[900px] max-h-[900px] bg-[#c9a84c]/[0.08] rounded-full blur-[140px]" 
+          />
+
+          {/* Rotating Spotlights (Inspiration from Summit Showdown) */}
+          {[{w:'min(350px,60vw)', color:'rgba(201,168,76,0.05)', delay:'0s'}, {w:'min(280px,45vw)', color:'rgba(201,168,76,0.03)', delay:'2.5s'}].map((s,i)=>(
+            <div key={i} style={{
+              position:'absolute', bottom:0, left:'50%', transform:'translateX(-50%)',
+              width:0, height:0,
+              animation:`spotPulse 5s ease-in-out ${s.delay} infinite`,
+              borderLeft:`${s.w} solid transparent`, borderRight:`${s.w} solid transparent`,
+              borderBottom:`min(90vh, 800px) solid ${s.color}`,
+            }}/>
+          ))}
+          
+          {/* Vertical Shafts */}
           {[20, 40, 60, 80].map((left, i) => (
-            <div key={i} className="shaft" style={{ left: `${left}%`, animationDelay: `${i * 1.2}s` }} />
+            <div key={i} className="shaft" style={{ 
+              left: `${left}%`, 
+              animationDelay: `${i * 1.5}s`,
+              opacity: 0.15
+            }} />
           ))}
         </div>
 
         {/* Hero Content */}
         <motion.div 
-          style={{ y: contentY, opacity: logoOp }}
+          style={{ y: contentY, opacity: contentOp }}
           className="relative z-10 w-full max-w-5xl"
         >
-          <motion.p 
+          {/* Eyebrow Ornament */}
+          <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-[#c9a84c] tracking-[0.5em] md:tracking-[0.8em] text-[10px] md:text-[13px] uppercase mb-10 font-cinzel"
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="flex items-center justify-center gap-6 mb-10"
           >
-            Vishwakarma Institute of Technology Presents
-          </motion.p>
+            <motion.div 
+              initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ delay: 0.3 }}
+              className="h-[1px] w-12 md:w-32 bg-gradient-to-r from-transparent to-[#c9a84c]/50" 
+            />
+            <span className="text-[#c9a84c] tracking-[0.5em] text-[9px] md:text-[11px] uppercase font-cinzel font-semibold text-center whitespace-nowrap">
+              E-Cell VIT Pune Presents
+            </span>
+            <motion.div 
+              initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ delay: 0.3 }}
+              className="h-[1px] w-12 md:w-32 bg-gradient-to-l from-transparent to-[#c9a84c]/50" 
+            />
+          </motion.div>
 
+          {/* Logo with Entry Masking */}
           <motion.div
-            initial={{ scale: 0.95, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
+            initial={{ y: 60, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+            className="mb-10"
           >
             <img 
               src={summitLogo} 
               alt="E-Summit Pune 26" 
-              className="w-full max-w-[280px] md:max-w-[750px] mx-auto drop-shadow-[0_0_50px_rgba(201,168,76,0.15)] mb-12"
+              className="w-full max-w-[280px] md:max-w-[720px] lg:max-w-[880px] mx-auto drop-shadow-[0_0_80px_rgba(201,168,76,0.3)]"
             />
           </motion.div>
 
+          {/* Central Ornament (Inspiration from ETalks/Showdown) */}
+          <motion.div 
+            initial={{ opacity:0, scaleX:0.3 }} animate={{ opacity:1, scaleX:1 }}
+            transition={{ duration:0.8, delay:0.7, ease:[0.22,1,0.36,1] }}
+            className="flex items-center justify-center gap-4 mb-10"
+          >
+            <div className="h-[1px] w-32 bg-gradient-to-r from-transparent to-[#c9a84c]/30" />
+            <motion.div 
+              style={{ width: 8, height: 8, background: '#c9a84c', transform: 'rotate(45deg)' }}
+              animate={{ boxShadow: ['0 0 8px rgba(201,168,76,0.4)', '0 0 30px rgba(201,168,76,1)', '0 0 8px rgba(201,168,76,0.4)'] }}
+              transition={{ duration: 3, repeat: Infinity }}
+            />
+            <div className="h-[1px] w-32 bg-gradient-to-l from-transparent to-[#c9a84c]/30" />
+          </motion.div>
+
+          {/* Tagline Reveal */}
+          <div className="max-w-4xl mx-auto mb-14">
+            <WordReveal 
+              text="Where extraordinary individuals meet unfiltered stories. The nine-day journey of grit, vision, and the pursuit of excellence begins here."
+              className="text-[#a0988a] text-sm md:text-xl font-light tracking-wide leading-relaxed italic opacity-80"
+              delay={0.03}
+            />
+          </div>
+
+          {/* Action Hub */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-wrap justify-center gap-4 mt-8"
+            transition={{ duration: 0.8, delay: 1.2 }}
+            className="flex flex-wrap justify-center gap-6"
           >
-            <MagneticButton href="https://learner.vierp.in/events" className="btn-gold">Register Now</MagneticButton>
-            <MagneticButton href="#lineup" className="btn-outline">Explore Events →</MagneticButton>
+            <MagneticButton href="https://learner.vierp.in/events" className="btn-gold px-12 py-4">
+              Access The Kingdom
+            </MagneticButton>
+            <MagneticButton href="#lineup" className="btn-outline px-12 py-4">
+              Explore Lineup →
+            </MagneticButton>
           </motion.div>
         </motion.div>
 
-        {/* Scroll Indicator */}
+        {/* Scroll Call-to-Action */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+          transition={{ delay: 2, duration: 1.5 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
         >
-          <span className="font-cinzel text-[8px] tracking-[0.4em] uppercase text-[#c9a84c]/40">Scroll</span>
-          <motion.div 
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="w-[1px] h-10 bg-gradient-to-b from-[#c9a84c] to-transparent" 
-          />
+          <div className="flex flex-col items-center gap-3 group cursor-pointer">
+            <span className="font-cinzel text-[7px] tracking-[0.6em] uppercase text-[#c9a84c]/50 group-hover:text-[#c9a84c] transition-all">Scroll to Ascend</span>
+            <div className="relative w-[1px] h-16 bg-white/5 overflow-hidden">
+              <motion.div 
+                animate={{ y: ['-100%', '100%'] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-0 bg-gradient-to-b from-transparent via-[#c9a84c] to-transparent" 
+              />
+            </div>
+          </div>
         </motion.div>
       </section>
 
