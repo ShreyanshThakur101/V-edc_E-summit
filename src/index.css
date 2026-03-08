@@ -107,6 +107,7 @@
 
 /* 4. Animation Keyframes */
 @keyframes shaftPulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+@keyframes spotPulse { 0%, 100% { opacity: 0.3; transform: translateX(-50%) scaleX(0.9); } 50% { opacity: 1; transform: translateX(-50%) scaleX(1.1); } }
 @keyframes emberRise { 0% { transform: translateY(100vh); opacity: 0; } 100% { transform: translateY(-5vh); opacity: 0; } }
 
 /* 5. Custom Utilities */
