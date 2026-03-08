@@ -76,7 +76,7 @@ export default function Navbar() {
         {/* Desktop nav — hidden below lg */}
         <ul className="hidden lg:flex" style={{ gap: '2.5rem', listStyle: 'none', alignItems: 'center' }}>
           {links.map(({ label, to }) => {
-            const active = pathname === to || (to === '/etalks' && pathname === '/')
+            const active = pathname === to
             return (
               <li key={to}>
                 <Link to={to} style={{ textDecoration: 'none' }}>
