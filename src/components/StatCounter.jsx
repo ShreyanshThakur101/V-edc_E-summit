@@ -33,7 +33,7 @@ export default function StatCounter({ icon, display, target = null, suffix = '',
       whileHover={{ y: -4 }}
       className="card-gold-border text-center"
       style={{ padding: 'clamp(1.25rem, 3vw, 2rem)', transition: 'border-color 0.3s, transform 0.3s' }}>
-      <motion.div style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', marginBottom: 'clamp(6px, 1.5vw, 12px)' }}
+      <motion.div style={{ fontSize: 'clamp(2rem, 3vw, 3rem)', marginBottom: 'clamp(6px, 1.5vw, 12px)' }}
         animate={inView ? { scale: [0.5, 1.2, 1], opacity: [0, 1, 1] } : {}}
         transition={{ duration: 0.6, delay: delay / 1000 + 0.1 }}>
         {icon}

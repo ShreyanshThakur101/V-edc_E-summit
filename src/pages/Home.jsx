@@ -67,7 +67,14 @@ const Home = () => {
             className="page-content text-center"
           >
             <span className="section-tag">∙ The Experience ∙</span>
-            <h2 className="section-title">What is E-Summit Pune?</h2>
+            <h2 className="section-title"
+            style={{ 
+                /* Responsive sizing: Min 2rem, scales with width, Max 3.5rem */
+                fontSize: 'clamp(1rem, 5vw, 2rem)', 
+                lineHeight: '1.1',
+                marginBottom: '2rem'
+              }}
+            ><b>What is E-Summit Pune?</b></h2>
             <div className="section-body max-w-3xl mx-auto space-y-6">
               <WordReveal text="E-Summit Pune is the annual entrepreneurship festival that brings together the most passionate minds and boldest ideas." delay={0.02} />
               <p className="text-gray-400 font-light italic mt-6 leading-relaxed text-sm md:text-lg">
@@ -80,8 +87,8 @@ const Home = () => {
         <section className="py-24 bg-black/40 backdrop-blur-md relative z-10">
           <div className="page-content" ref={eventsRef}>
             <div className="text-center mb-16">
-              <span className="section-tag">∙ The Lineup ∙</span>
-              <h2 className="section-title">Enter The Arena</h2>
+            
+              <h2 className="section-title">∙ The Lineup ∙</h2>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

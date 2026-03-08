@@ -33,7 +33,7 @@ const Competition = () => {
       description: "Pitch Perfect is an exciting pitching competition that tests participants’ creativity, business thinking, and persuasive communication skills. The event takes place in multiple rounds where participants pitch product ideas, engage in brand pitch battles, and defend their arguments using real data and strong reasoning.",
       tagline: "Spontaneous Innovation",
       rulebookLink: "https://drive.google.com/file/d/1JrWOrun_Mx4aH0E40MVunISZMIV6vmND/view?usp=drive_link",
-      rulebookText: "pitch perfect rulebook"
+      rulebookText: "Pitch Perfect Rulebook"
     },
     { 
       id: 'boardroom', 
@@ -41,7 +41,7 @@ const Competition = () => {
       description: "Step into the shoes of real corporate leaders, taking on high-stakes roles and tackling real-world business scenarios that demand sharp thinking, teamwork, and decisive action.",
       tagline: "Corporate Strategy",
       rulebookLink: "https://drive.google.com/file/d/1AUYhAszaX4jjAhMBEvzfmvj6lTU6BTTW/view?usp=sharing",
-      rulebookText: "the boardroom rulebook"
+      rulebookText: "The Boardroom Rulebook"
     },
   ];
 

@@ -93,6 +93,34 @@ export default function ETalks() {
   const [whyRef,   whyInView]   = useReveal()
   const [ctaRef,   ctaInView]   = useReveal()
 
+  // Updated SecHead with conditional styling
+function SecHead({ tag, title, body, isKeynote }) {
+  const [ref, inView] = useReveal()
+  return (
+    <motion.div ref={ref} className="text-center mb-10 md:mb-14"
+      initial={{ opacity:0, y:30 }} animate={inView ? { opacity:1, y:0 } : {}}
+      transition={{ duration:0.65, ease:[0.22,1,0.36,1] }}>
+      
+      {/* TAG: Conditional size increase. 
+          If isKeynote is true, it uses a larger clamp and wider spacing. 
+      */}
+      <span 
+        className="section-tag" 
+        style={isKeynote ? { 
+          fontSize: 'clamp(0.85rem, 2vw, 1.15rem)', 
+          letterSpacing: '0.5em',
+          fontWeight: 600
+        } : {}}
+      >
+        {tag}
+      </span>
+
+      <h2 className="section-title font-display">{title}</h2>
+      {body && <p className="section-body">{body}</p>}
+    </motion.div>
+  )
+}
+
   return (
     <div style={{ background:'#050507', minHeight:'100vh', fontFamily:'Raleway, sans-serif' }}>
       <Navbar />
@@ -217,17 +245,18 @@ export default function ETalks() {
       <div className="relative z-10 bg-black/50 backdrop-blur-xl border-y border-white/5 py-16">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
           <div style={{ display:'grid', gap:'clamp(0.75rem,2vw,1.25rem)', gridTemplateColumns:'repeat(auto-fit, minmax(min(220px, 100%), 1fr))' }}>
-            <StatCounter icon="🎤" display="12+" target={12} suffix="+" label="Speakers Across Domains" delay={0}/>
-            <StatCounter icon="🏛️" display="2"   target={2}           label="Days on the Grand Stage"  delay={150}/>
-            <StatCounter icon="⚡" display="5K+" target={5000} suffix="+" label="Inspired Attendees"  delay={300}/>
+            <StatCounter icon="" display="12+" target={12} suffix="+" label="Speakers Across Domains" delay={0}/>
+            <StatCounter icon="" display="2"   target={2}           label="Days on the Grand Stage"  delay={150}/>
+            <StatCounter icon="" display="5K+" target={5000} suffix="+" label="Inspired Attendees"  delay={300}/>
           </div>
         </div>
       </div>
 
       {/* ══════ KEYNOTE ══════ */}
       <div id="speakers" className="max-w-7xl mx-auto px-6 py-20">
-        <SecHead tag="∙ Opening Keynote ∙" title="The Sovereign Voice" body="Our keynote speaker sets the tone raw, real, and unforgettable."/>
-        <ClipReveal delay={0.1}>
+        <SecHead tag="∙ Opening Keynote ∙" title="The Sovereign Voice" body="Our keynote speaker sets the tone raw, real, and unforgettable."
+        isKeynote={true}/>
+        {/* <ClipReveal delay={0.1}>
           <GlowBorder className="relative overflow-hidden grid md:grid-cols-2">
             <span className="font-cinzel uppercase" style={{ position:'absolute', top:14, right:-36, transform:'rotate(45deg)', zIndex:10, fontSize:'0.55rem', padding:'3px 52px', background:'#c9a84c', color:'#050507' }}>Keynote</span>
             <div style={{ position:'relative', minHeight:'400px', background:'linear-gradient(135deg,#0a0a14,#181028)', overflow:'hidden' }}>
@@ -243,7 +272,7 @@ export default function ETalks() {
               <MagneticButton href="https://learner.vierp.in/events" className="btn-gold">Register to Attend</MagneticButton>
             </div>
           </GlowBorder>
-        </ClipReveal>
+        </ClipReveal> */}
         
         {/* SPEAKERS GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5 border border-white/5 mt-20">

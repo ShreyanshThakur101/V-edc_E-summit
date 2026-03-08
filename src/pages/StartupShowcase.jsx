@@ -32,6 +32,34 @@ export default function StartupShowcase() {
   const [aboutRef, aboutInView] = useReveal()
   const [ctaRef, ctaInView]     = useReveal()
 
+  // Updated SecHead with conditional styling
+function SecHead({ tag, title, body, isKeynote }) {
+  const [ref, inView] = useReveal()
+  return (
+    <motion.div ref={ref} className="text-center mb-10 md:mb-14"
+      initial={{ opacity:0, y:30 }} animate={inView ? { opacity:1, y:0 } : {}}
+      transition={{ duration:0.65, ease:[0.22,1,0.36,1] }}>
+      
+      {/* TAG: Conditional size increase. 
+          If isKeynote is true, it uses a larger clamp and wider spacing. 
+      */}
+      <span 
+        className="section-tag" 
+        style={isKeynote ? { 
+          fontSize: 'clamp(0.85rem, 2vw, 1.15rem)', 
+          letterSpacing: '0.5em',
+          fontWeight: 600
+        } : {}}
+      >
+        {tag}
+      </span>
+
+      <h2 className="section-title font-display">{title}</h2>
+      {body && <p className="section-body">{body}</p>}
+    </motion.div>
+  )
+}
+
   return (
     <div style={{ background: '#050507', minHeight: '100vh', fontFamily: 'Raleway, sans-serif' }}>
       <Navbar />
@@ -93,7 +121,7 @@ export default function StartupShowcase() {
 
           <div className="mb-10">
             <WordReveal 
-              text="VEDC's Inaugural Event . Brightest young minds. Boldest ideas. The ultimate platform for the future of industry."
+              text="V-EDC's Inaugural Event . Brightest young minds. Boldest ideas. The ultimate platform for the future of industry."
               className="font-light text-center"
               style={{ color: '#a0988a', fontSize: 'clamp(1rem, 2.5vw, 1.3rem)', letterSpacing: '0.1em', lineHeight: 1.6 }}
               delay={0.05}

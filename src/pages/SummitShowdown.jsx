@@ -19,14 +19,14 @@ const BANDS = [
   { type:'Live Band',  emoji:'🎵', name:'[Band / Artist Name]', sub:'[Genre · From]',           desc:'The headlining act. Genres collide, the crowd ignites — this is what the night builds toward.' },
   { type:'Coming Soon',emoji:'🎶', name:'More to be Announced', sub:'Stay tuned',               desc:'Something that will absolutely set the stage on fire. Dropping soon on @v_edc.' },
 ]
-const SCHEDULE = [
-  {emoji:'🚪', act:'Doors Open',           desc:'Arrive early, find your spot, soak it all in.' },
-  {emoji:'🎤', act:'Opening Comedy Set',   desc:'The night kicks off. The first comedian takes the stage.' },
-  {emoji:'😂', act:'Headline Comedy',      desc:'The main act. No holds barred. The house comes down.' },
-  {emoji:'🎸', act:'Live Music — Opening', desc:'The first band takes the stage. Feel it in your chest.' },
-  {emoji:'🔥', act:'Headline Live Band',   desc:'The headliner closes Summit Showdown. This is what it\'s been building to.' },
-  {emoji:'✨', act:'Grand Finale',         desc:'E-Summit Pune \'26 takes its bow. The ascension is complete. The reign begins.' },
-]
+// const SCHEDULE = [
+//   {emoji:'🚪', act:'Doors Open',           desc:'Arrive early, find your spot, soak it all in.' },
+//   {emoji:'🎤', act:'Opening Comedy Set',   desc:'The night kicks off. The first comedian takes the stage.' },
+//   {emoji:'😂', act:'Headline Comedy',      desc:'The main act. No holds barred. The house comes down.' },
+//   {emoji:'🎸', act:'Live Music — Opening', desc:'The first band takes the stage. Feel it in your chest.' },
+//   {emoji:'🔥', act:'Headline Live Band',   desc:'The headliner closes Summit Showdown. This is what it\'s been building to.' },
+//   {emoji:'✨', act:'Grand Finale',         desc:'E-Summit Pune \'26 takes its bow. The ascension is complete. The reign begins.' },
+// ]
 const VIBE_ITEMS = [
   { num:'01', head:'World-Class Comedy',       body:'Sharp wit, relatable chaos, an audience that can\'t stop laughing.' },
   { num:'02', head:'Live Music That Moves You', body:'Bands that turn a venue into a memory. You\'ll be talking about it for years.' },
@@ -220,9 +220,9 @@ export default function SummitShowdown() {
       {/* ══ STATS ══ */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16" style={{ paddingTop:'clamp(2.5rem,5vw,3.5rem)', paddingBottom:'clamp(2.5rem,5vw,3.5rem)' }}>
         <div style={{ display:'grid', gap:'clamp(0.75rem,2vw,1.25rem)', gridTemplateColumns:'repeat(auto-fit,minmax(min(200px,100%),1fr))' }}>
-          <StatCounter icon="🎤" display="Stand-up"  label="Top Comedians on Stage"      delay={0}/>
-          <StatCounter icon="🎸" display="Live Bands" label="Setting the Stage on Fire"  delay={150}/>
-          <StatCounter icon="🌟" display="One Night"  label="Memories That Last Forever" delay={300}/>
+          <StatCounter icon="" display="Stand-up"  label="Top Comedians on Stage"      delay={0}/>
+          <StatCounter icon="" display="Live Bands" label="Setting the Stage on Fire"  delay={150}/>
+          <StatCounter icon="" display="One Night"  label="Memories That Last Forever" delay={300}/>
         </div>
       </div>
 
@@ -253,36 +253,7 @@ export default function SummitShowdown() {
       </div>
 
       {/* ══════ SCHEDULE ══════ */}
-      <div id="schedule" style={{ background:'#0f0f1a', borderTop:'1px solid rgba(201,168,76,0.07)', padding:'clamp(3rem,6vw,5rem) 0' }}>
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16" style={{ maxWidth:'min(680px, 94vw)' }}>
-          <SecHead tag="∙ The Evening ∙" title="How the Night Unfolds" amber/>
-          <motion.div ref={schedRef} style={{ display:'flex', flexDirection:'column', gap:'1.5px' }}
-            initial="hidden" animate={schedInView?'show':'hidden'}
-            variants={{ hidden:{}, show:{ transition:{ staggerChildren:0.1 } } }}>
-            {SCHEDULE.map(({ emoji, act, desc }, i) => (
-              <motion.div key={i}
-                variants={{ hidden:{ opacity:0, x:-40 }, show:{ opacity:1, x:0, transition:{ duration:0.6, ease:[0.22,1,0.36,1] } } }}
-                style={{ display:'block' }}> {/* Changed to block to remove the left column grid */}
-                <motion.div
-                  whileHover={{ borderColor:'rgba(212,105,10,0.35)', background:'#1e1e2e', x:4 }}
-                  transition={{ duration:0.2 }}
-                  style={{ display:'flex', alignItems:'center', gap:'clamp(0.7rem,2vw,1rem)', padding:'clamp(0.7rem,2vw,1rem) clamp(0.8rem,2.5vw,1.25rem)',
-                           background:'#16161f', border:'1px solid rgba(201,168,76,0.08)' }}>
-                  <motion.span style={{ fontSize:'clamp(1.2rem,3vw,1.5rem)', flexShrink:0 }}
-                    whileHover={{ scale:1.3, rotate:[0,-12,12,0] }} transition={{ duration:0.35 }}>{emoji}</motion.span>
-                  <div>
-                    <p className="font-cinzel" style={{ fontSize:'clamp(0.72rem,1.8vw,0.88rem)', marginBottom:3, color:'#e8e0d0' }}>{act}</p>
-                    <p style={{ fontSize:'clamp(0.68rem,1.5vw,0.78rem)', fontWeight:300, color:'#6e6e88' }}>{desc}</p>
-                  </div>
-                </motion.div>
-              </motion.div>
-            ))}
-          </motion.div>
-          <p className="font-cinzel uppercase text-center" style={{ marginTop:'clamp(0.8rem,2vw,1.25rem)', fontSize:'0.55rem', letterSpacing:'0.25em', color:'rgba(201,168,76,0.3)' }}>
-            ∙ Schedule subject to change ∙
-          </p>
-        </div>
-      </div>
+
 
           {/* ══════ VIBE ══════ */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16" style={{ paddingTop:'clamp(3rem,6vw,5rem)', paddingBottom:'clamp(3rem,6vw,5rem)' }}>
