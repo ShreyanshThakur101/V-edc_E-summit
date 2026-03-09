@@ -13,11 +13,11 @@ import SectionNav    from '../components/SectionNav'
 import { DrawBorder, ClipReveal, GlowBorder } from '../components/AnimatedBorder'
 
 const COMEDIANS = [
-  { type:'Coming Soon',emoji:'🎭', name:'More to be Announced', sub:'Stay tuned',               desc:'The full comedy lineup is being locked in. Follow @v_edc for the reveal.' },
+  { type:'Coming Soon',emoji:'🎭', name:'To be Announced', sub:'Stay tuned',               desc:'The full comedy lineup is being locked in. Follow @v_edc for the reveal.' },
 ]
 const BANDS = [
   { type:'Live Band',  emoji:'🎵', name:'[Band / Artist Name]', sub:'[Genre · From]',           desc:'The headlining act. Genres collide, the crowd ignites — this is what the night builds toward.' },
-  { type:'Coming Soon',emoji:'🎶', name:'More to be Announced', sub:'Stay tuned',               desc:'Something that will absolutely set the stage on fire. Dropping soon on @v_edc.' },
+  { type:'Coming Soon',emoji:'🎶', name:'To be Announced', sub:'Stay tuned',               desc:'Something that will absolutely set the stage on fire. Dropping soon on @v_edc.' },
 ]
 // const SCHEDULE = [
 //   {emoji:'🚪', act:'Doors Open',           desc:'Arrive early, find your spot, soak it all in.' },
@@ -251,39 +251,7 @@ export default function SummitShowdown() {
           </div>
         ))}
       </div>
-
-      {/* ══════ SCHEDULE ══════ */}
-
-
-          {/* ══════ VIBE ══════ */}
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16" style={{ paddingTop:'clamp(3rem,6vw,5rem)', paddingBottom:'clamp(3rem,6vw,5rem)' }}>
-        <SecHead tag="∙ What to Expect ∙" title="An Unforgettable Night" amber/>
-        <motion.div ref={vibeRef}
-          style={{ 
-            display:'grid', 
-            gap:'1.5px', 
-            background:'rgba(201,168,76,0.08)', 
-            border:'1px solid rgba(201,168,76,0.08)',
-            /* FIXED: Changed auto-fill to auto-fit to remove the 5th empty box */
-            gridTemplateColumns:'repeat(auto-fit, minmax(min(220px,100%),1fr))' 
-          }}
-          initial="hidden" animate={vibeInView?'show':'hidden'}
-          variants={{ hidden:{}, show:{ transition:{ staggerChildren:0.12 } } }}>
-          
-          {VIBE_ITEMS.map(({ num, head, body }) => (
-            <motion.div key={num}
-              variants={{ hidden:{ opacity:0, y:40, clipPath:'inset(0 0 100% 0)' }, show:{ opacity:1, y:0, clipPath:'inset(0 0 0% 0)', transition:{ duration:0.7 } } }}
-              whileHover={{ background:'#1e1e2e', y:-4 }}
-              style={{ background:'#16161f', padding:'clamp(1.2rem,3vw,2rem)', cursor:'default', transition:'background 0.3s, transform 0.3s' }}>
-              <motion.div className="font-display leading-none mb-4"
-                style={{ fontSize:'clamp(1.8rem,4vw,2.5rem)', color:'rgba(212,105,10,0.12)' }}
-                whileHover={{ color:'rgba(212,105,10,0.35)' }} transition={{ duration:0.3 }}>{num}</motion.div>
-              <h4 className="font-cinzel" style={{ fontSize:'clamp(0.78rem,1.8vw,0.88rem)', marginBottom:8, color:'#e8e0d0' }}>{head}</h4>
-              <p style={{ fontSize:'clamp(0.75rem,1.6vw,0.82rem)', lineHeight:1.75, fontWeight:300, color:'#6e6e88' }}>{body}</p>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
+     
 
       {/* ══════ CTA ══════ */}
       <section id="register" style={{

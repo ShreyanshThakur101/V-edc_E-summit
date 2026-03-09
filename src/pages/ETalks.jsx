@@ -1,22 +1,22 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import Navbar        from '../components/Navbar'
-import Footer        from '../components/Footer'
-import { Embers }    from '../components/Particles'
-import MetricCounter from '../components/MetricCounter'
-import SpeakerCard   from '../components/SpeakerCard'
-import { useReveal } from '../components/useReveal'
+import Navbar         from '../components/Navbar'
+import Footer         from '../components/Footer'
+import { Embers }     from '../components/Particles'
+import MetricCounter  from '../components/MetricCounter'
+import SpeakerCard    from '../components/SpeakerCard'
+import { useReveal }  from '../components/useReveal'
 import { ScrambleText, WordReveal } from '../components/TextReveal'
 import { MagneticButton }           from '../components/ScrollProgress'
-import Marquee       from '../components/Marquee'
-import SectionNav    from '../components/SectionNav'
+import Marquee        from '../components/Marquee'
+import SectionNav     from '../components/SectionNav'
 import { DrawBorder, ClipReveal, GlowBorder } from '../components/AnimatedBorder'
-
 
 // IMPORT SPEAKER PHOTOS
 import speaker1 from '../assets/summit_speaker1_image.png'; 
 import speaker2 from '../assets/summit_speaker2_image.png'; 
 import speaker3 from '../assets/showdown_speaker_1_image.png'; 
+import speaker4 from '../assets/summit_speaker4_image.png'; 
 
 const SPEAKERS = [
   { 
@@ -43,9 +43,14 @@ const SPEAKERS = [
     image: speaker3, 
     bio: 'Bridging the worlds of digital storytelling and performance, she brings a unique perspective on building a modern personal brand.' 
   },
-  { number: 4, domain: 'Content Creation', name: '[Speaker Name]', title: '[Title · Organisation]', bio: '2–3 sentence bio about this speaker\'s journey and what they bring to the E-Talks stage.' },
-  { number: 5, domain: 'Technical', name: '[Speaker Name]', title: '[Title · Organisation]', bio: '2–3 sentence bio about this speaker\'s journey and what they bring to the E-Talks stage.' },
-  { number: 6, domain: 'Social Impact', name: '[Speaker Name]', title: '[Title · Organisation]', bio: '2–3 sentence bio about this speaker\'s journey and what they bring to the E-Talks stage.' },
+  { 
+    number: 4, 
+    domain: 'Acting & Music', 
+    name: 'Shubhankar Saleel Kulkarni', 
+    title: 'Musician & Actor | Tale of Melodies', 
+    image: speaker4, 
+    bio: 'Blending a deep musical heritage with the art of performance, he brings the soul of "Tale of Melodies" to the stage, proving that creativity knows no boundaries.' 
+  },
 ]
 
 const MARQUEE_A = ['E-Talks','E-Summit Pune 26','Ascension to Reign','17–25 March','VIT Pune']
@@ -67,13 +72,20 @@ const SECTIONS = [
   { id:'register', label:'Register' },
 ]
 
-function SecHead({ tag, title, body }) {
+// SECTION HEADER COMPONENT with specialized Keynote styling
+function SecHead({ tag, title, body, isKeynote }) {
   const [ref, inView] = useReveal()
   return (
     <motion.div ref={ref} className="text-center mb-10 md:mb-14"
       initial={{ opacity:0, y:30 }} animate={inView ? { opacity:1, y:0 } : {}}
       transition={{ duration:0.65, ease:[0.22,1,0.36,1] }}>
-      <span className="section-tag">{tag}</span>
+      <span className="section-tag" style={isKeynote ? { 
+          fontSize: 'clamp(0.85rem, 2vw, 1.15rem)', 
+          letterSpacing: '0.5em',
+          fontWeight: 600
+        } : {}}>
+        {tag}
+      </span>
       <h2 className="section-title font-display">{title}</h2>
       {body && <p className="section-body">{body}</p>}
     </motion.div>
@@ -93,45 +105,16 @@ export default function ETalks() {
   const [whyRef,   whyInView]   = useReveal()
   const [ctaRef,   ctaInView]   = useReveal()
 
-  // Updated SecHead with conditional styling
-function SecHead({ tag, title, body, isKeynote }) {
-  const [ref, inView] = useReveal()
-  return (
-    <motion.div ref={ref} className="text-center mb-10 md:mb-14"
-      initial={{ opacity:0, y:30 }} animate={inView ? { opacity:1, y:0 } : {}}
-      transition={{ duration:0.65, ease:[0.22,1,0.36,1] }}>
-      
-      {/* TAG: Conditional size increase. 
-          If isKeynote is true, it uses a larger clamp and wider spacing. 
-      */}
-      <span 
-        className="section-tag" 
-        style={isKeynote ? { 
-          fontSize: 'clamp(0.85rem, 2vw, 1.15rem)', 
-          letterSpacing: '0.5em',
-          fontWeight: 600
-        } : {}}
-      >
-        {tag}
-      </span>
-
-      <h2 className="section-title font-display">{title}</h2>
-      {body && <p className="section-body">{body}</p>}
-    </motion.div>
-  )
-}
-
   return (
     <div style={{ background:'#050507', minHeight:'100vh', fontFamily:'Raleway, sans-serif' }}>
       <Navbar />
       <SectionNav sections={SECTIONS} />
 
-      {/* ══════ HERO ══════ */}
-       <section id="hero" ref={heroRef}
+      {/* ══════ HERO SECTION ══════ */}
+      <section id="hero" ref={heroRef}
         className="relative min-h-screen grid place-items-center text-center overflow-hidden"
         style={{ padding: 'clamp(6rem, 12vw, 8rem) clamp(1rem, 5vw, 2rem) clamp(3rem, 6vw, 4rem)' }}>
 
-        {/* BG layers */}
         <motion.div className="absolute inset-0 z-0" style={{ y:bgY }}>
           <div style={{ position:'absolute', inset:0, background:`
             radial-gradient(ellipse 70% 55% at 50% 65%, rgba(139,105,20,0.16) 0%, transparent 65%),
@@ -141,83 +124,23 @@ function SecHead({ tag, title, body, isKeynote }) {
         </motion.div>
 
         <motion.div className="absolute inset-0 z-0 pointer-events-none" style={{ y:shaftY }}>
-          {[{left:'20%',d:'0s'},{left:'40%',d:'1.5s'},{left:'60%',d:'3s',wide:true},{left:'80%',d:'4.5s'}].map((s,i)=>(
-            <div key={i} className="shaft" style={{
-              left:s.left, animationDelay:s.d, width:s.wide?'2px':'1px',
-              background:s.wide
-                ?'linear-gradient(180deg,transparent,rgba(201,168,76,0.28) 42%,rgba(201,168,76,0.38) 55%,transparent)'
-                :'linear-gradient(180deg,transparent,rgba(201,168,76,0.12) 40%,rgba(201,168,76,0.18) 55%,transparent)',
-            }}/>
+          {[20, 40, 60, 80].map((left, i) => (
+            <div key={i} className="shaft" style={{ left: `${left}%`, animationDelay: `${i * 1.5}s`, opacity: 0.15 }} />
           ))}
         </motion.div>
         <Embers count={28}/>
 
-        {/* Content */}
         <motion.div className="relative z-10 w-full" style={{ y:titleY, opacity:titleOp, scale:titleScale, maxWidth:'min(820px, 92vw)', margin:'0 auto' }}>
-
-          {/* Eyebrow */}
-          <motion.div className="flex items-center justify-center mb-6 md:mb-8" style={{ gap:'clamp(8px,2vw,16px)', flexWrap:'wrap' }}
-            initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ duration:0.7, delay:0.1 }}>
-            <motion.div style={{ height:1, width:'clamp(24px,5vw,40px)', background:'linear-gradient(90deg,transparent,rgba(201,168,76,0.5))' }}
-              initial={{ scaleX:0 }} animate={{ scaleX:1 }} transition={{ delay:0.3 }}/>
-            <span className="font-cinzel uppercase text-center"
-              style={{ fontSize:'clamp(0.55rem,1.5vw,0.65rem)', letterSpacing:'clamp(0.2em,1vw,0.5em)', color:'rgba(201,168,76,0.7)' }}>
-              E-Cell VIT Pune · 17–25 March 2026
-            </span>
-            <motion.div style={{ height:1, width:'clamp(24px,5vw,40px)', background:'linear-gradient(90deg,rgba(201,168,76,0.5),transparent)' }}
-              initial={{ scaleX:0 }} animate={{ scaleX:1 }} transition={{ delay:0.3 }}/>
-          </motion.div>
-
-          {/* Main title */}
           <div style={{ overflow:'hidden' }}>
             <motion.h1 className="font-display leading-none mb-0"
-              style={{
-                fontSize:'clamp(3rem, 14vw, 8rem)',
-                background:'linear-gradient(150deg,#fff 0%,#f0d080 40%,#c9a84c 70%,#a07828 100%)',
-                WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text',
-                filter:'drop-shadow(0 0 60px rgba(201,168,76,0.3))',
-              }}
-              initial={{ y:'100%', opacity:0 }} animate={{ y:0, opacity:1 }}
-              transition={{ duration:0.9, delay:0.2, ease:[0.22,1,0.36,1] }}>
+              style={{ fontSize:'clamp(3rem, 14vw, 8rem)', background:'linear-gradient(150deg,#fff 0%,#f0d080 40%,#c9a84c 70%,#a07828 100%)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>
               <ScrambleText text="E-TALKS" trigger delay={350}/>
             </motion.h1>
           </div>
-
-          {/* Ornament */}
-          <motion.div className="ornament" initial={{ opacity:0, scaleX:0.3 }} animate={{ opacity:1, scaleX:1 }}
-            transition={{ duration:0.8, delay:0.6, ease:[0.22,1,0.36,1] }}>
-            <div className="ornament-line-l"/>
-            <motion.div style={{ width:7, height:7, background:'#c9a84c', transform:'rotate(45deg)' }}
-              animate={{ boxShadow:['0 0 6px rgba(201,168,76,0.4)','0 0 24px rgba(201,168,76,1)','0 0 6px rgba(201,168,76,0.4)'] }}
-              transition={{ duration:2.5, repeat:Infinity }}/>
-            <div className="ornament-line-r"/>
-          </motion.div>
-
-          {/* Tagline */}
-          <div className="mb-10 md:mb-12 mt-2">
-            <WordReveal
-              text="Extraordinary individuals. Unfiltered stories. One stage. E-Talks brings together voices from every domain those who've built, navigated, failed, and risen."
-              className="font-light text-center"
-              style={{ color:'#a0988a', fontSize:'clamp(0.82rem,2.2vw,1rem)', lineHeight:1.85, maxWidth:'min(640px,90vw)', margin:'0 auto' }}
-              delay={0.04}/>
+          <div className="mb-10 mt-2">
+            <WordReveal text="Extraordinary individuals. Unfiltered stories. One stage. Ascension Begins." className="font-light text-center" style={{ color:'#a0988a', fontSize:'clamp(0.82rem, 2.2vw, 1rem)' }} />
           </div>
-
-          {/* CTAs - Now directly under tagline since boxes were removed */}
-          <motion.div style={{ display:'flex', gap:'clamp(8px,2vw,16px)', justifyContent:'center', flexWrap:'wrap' }}
-            initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }}
-            transition={{ duration:0.6, delay:1.0 }}>
-            <MagneticButton href="#speakers" className="btn-gold">Meet the Speakers</MagneticButton>
-            <MagneticButton href="/summit-showdown" className="btn-outline">Summit Showdown →</MagneticButton>
-          </motion.div>
-        </motion.div>
-
-        {/* Scroll cue */}
-        <motion.div style={{ position:'absolute', bottom:'clamp(1.5rem,4vw,2rem)', left:'50%', translateX:'-50%', display:'flex', flexDirection:'column', alignItems:'center', gap:8 }}
-          initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:1.5 }}>
-          <span className="font-cinzel uppercase" style={{ fontSize:'0.5rem', letterSpacing:'0.5em', color:'rgba(201,168,76,0.3)' }}>Scroll</span>
-          <motion.div style={{ width:1, height:'clamp(28px,5vw,44px)', background:'linear-gradient(180deg,rgba(201,168,76,0.5),transparent)', originY:0 }}
-            animate={{ scaleY:[0,1,1,0], opacity:[0,1,1,0] }}
-            transition={{ duration:2.2, repeat:Infinity, ease:'easeInOut', times:[0,0.3,0.7,1] }}/>
+          <MagneticButton href="#speakers" className="btn-gold">Meet the Speakers</MagneticButton>
         </motion.div>
       </section>
 
@@ -245,37 +168,26 @@ function SecHead({ tag, title, body, isKeynote }) {
       <div className="relative z-10 bg-black/50 backdrop-blur-xl border-y border-white/5 py-16">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
           <div style={{ display:'grid', gap:'clamp(0.75rem,2vw,1.25rem)', gridTemplateColumns:'repeat(auto-fit, minmax(min(220px, 100%), 1fr))' }}>
-            <MetricCounter icon="" display="12+" target={12} suffix="+" label="Speakers Across Domains" delay={0}/>
-            <MetricCounter icon="" display="2"   target={2}           label="Days on the Grand Stage"  delay={150}/>
-            <MetricCounter icon="" display="5K+" target={5000} suffix="+" label="Inspired Attendees"  delay={300}/>
+            <MetricCounter display="12+" target={12} suffix="+" label="Speakers Across Domains" delay={0}/>
+            <MetricCounter display="2"   target={2}           label="Days on the Grand Stage"  delay={150}/>
+            <MetricCounter display="5K+" target={5000} suffix="+" label="Inspired Attendees"  delay={300}/>
           </div>
         </div>
       </div>
 
-      {/* ══════ KEYNOTE ══════ */}
+      {/* ══════ KEYNOTE SECTION ══════ */}
       <div id="speakers" className="max-w-7xl mx-auto px-6 py-20">
-        <SecHead tag="∙ Opening Keynote ∙" title="The Sovereign Voice" body="Our keynote speaker sets the tone raw, real, and unforgettable."
-        isKeynote={true}/>
-        {/* <ClipReveal delay={0.1}>
-          <GlowBorder className="relative overflow-hidden grid md:grid-cols-2">
-            <span className="font-cinzel uppercase" style={{ position:'absolute', top:14, right:-36, transform:'rotate(45deg)', zIndex:10, fontSize:'0.55rem', padding:'3px 52px', background:'#c9a84c', color:'#050507' }}>Keynote</span>
-            <div style={{ position:'relative', minHeight:'400px', background:'linear-gradient(135deg,#0a0a14,#181028)', overflow:'hidden' }}>
-              <motion.img src={speaker1} alt="Dr. Sanjay Katkar" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center' }} />
-              <div style={{ position:'absolute', inset:0, background:'linear-gradient(90deg,transparent 60%,rgba(22,22,31,1) 100%)' }} />
-            </div>
-            <div className="p-8 flex flex-col justify-center space-y-4 border-l border-white/10">
-              <p className="font-cinzel text-[#c9a84c] text-xs">⬥ Day 1 · Opening Keynote</p>
-              <h3 className="font-display text-white text-3xl">Dr. Sanjay Katkar</h3>
-              <p className="font-cinzel text-[#c9a84c] text-sm">Co-Founder & Jt. MD · Quick Heal Technologies</p>
-              <blockquote className="italic border-l-2 border-[#c9a84c]/40 pl-4 text-[#a0988a]">"Innovation is not just about technology..."</blockquote>
-              <p className="text-[#6e6e88] text-sm">A visionary leader scaling Quick Heal into a global name.</p>
-              <MagneticButton href="https://learner.vierp.in/events" className="btn-gold">Register to Attend</MagneticButton>
-            </div>
-          </GlowBorder>
-        </ClipReveal> */}
+        <SecHead 
+          tag="∙ Opening Keynote ∙" 
+          title="The Sovereign Voice" 
+          body="Our keynote speaker sets the tone raw, real, and unforgettable."
+          isKeynote={true}
+        />
         
-        {/* SPEAKERS GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5 border border-white/5 mt-20">
+        
+        
+        {/* SINGLE ROW SPEAKER GRID */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/5 border border-white/5">
           {SPEAKERS.map((s,i) => <SpeakerCard key={i} {...s} delay={i*0.07}/>)}
         </div>
       </div>
@@ -308,7 +220,6 @@ function SecHead({ tag, title, body, isKeynote }) {
           initial={{ opacity:0, y:40 }} animate={ctaInView?{opacity:1,y:0}:{}}
           transition={{ duration:0.7, ease:[0.22,1,0.36,1] }}>
           <DrawBorder style={{ padding:'clamp(1.5rem,4vw,3rem)', background:'rgba(201,168,76,0.02)' }}>
-            
             <h2 className="section-title font-display mb-4">Claim Your Seat</h2>
             <p className="section-body mb-8 md:mb-10">
               E-Talks seats fill fast. Register now to be in the audience when these stories are told live.
@@ -324,7 +235,6 @@ function SecHead({ tag, title, body, isKeynote }) {
         </motion.div>
       </section>
 
-      {/* ══ FINAL MARQUEE ══ */}
       <div style={{ borderTop:'1px solid rgba(201,168,76,0.06)', padding:'10px 0' }}>
         <Marquee items={[...MARQUEE_A,...MARQUEE_B]} speed={40}/>
       </div>

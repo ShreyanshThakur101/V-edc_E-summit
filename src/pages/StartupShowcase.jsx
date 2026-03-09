@@ -169,23 +169,6 @@ function SecHead({ tag, title, body, isKeynote }) {
 
       {/* ══════ FINAL CALL TO ACTION ══════ */}
       <section id="register" className="py-32 relative overflow-hidden text-center bg-[#050507]">
-        <motion.div ref={ctaRef} className="max-w-3xl mx-auto px-6 relative z-10" 
-          initial={{ opacity: 0, y: 20 }} 
-          animate={ctaInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}>
-          
-          <DrawBorder style={{ padding: '4rem 2rem', background: 'rgba(201,168,76,0.02)' }}>
-            <span className="section-tag">∙ Be Part of the Reign ∙</span>
-            <h2 className="font-display text-4xl md:text-6xl mb-6">Claim Your Stage</h2>
-            <p className="section-body mb-10 text-[#a0988a]">
-              Come ready to pitch, connect, and inspire. Join an audience of investors and industry leaders looking for the next big thing.
-            </p>
-            <div className="flex gap-4 justify-center flex-wrap">
-              <MagneticButton href="https://learner.vierp.in/events" className="btn-gold">Apply to Showcase</MagneticButton>
-              <MagneticButton href="/etalks" className="btn-outline">Explore E-Talks →</MagneticButton>
-            </div>
-          </DrawBorder>
-        </motion.div>
 
         {/* Massive Background Scramble */}
         <motion.span className="font-display absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[15rem] text-white/5 pointer-events-none select-none"
