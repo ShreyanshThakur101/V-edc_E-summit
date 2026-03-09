@@ -199,9 +199,9 @@ const Home = () => {
             transition={{ duration: 0.8, delay: 1.2 }}
             className="flex flex-wrap justify-center gap-6"
           >
-            <MagneticButton href="https://learner.vierp.in/events" className="btn-gold px-12 py-4">
+            {/* <MagneticButton href="https://learner.vierp.in/events" className="btn-gold px-12 py-4">
               Access The Kingdom
-            </MagneticButton>
+            </MagneticButton> */}
             <MagneticButton href="#lineup" className="btn-outline px-12 py-4">
               Explore Lineup →
             </MagneticButton>
@@ -353,11 +353,11 @@ const Home = () => {
 
             <div className="space-y-12">
               {[
-                { date: "March 17", name: "Startup Showcase", time: "10:00 AM" },
-                { date: "March 18", name: "Pitch Perfect", time: "11:30 AM" },
-                { date: "March 20-21", name: "The Boardroom", time: "09:00 AM" },
-                { date: "March 23", name: "E-Talks", time: "05:00 PM" },
-                { date: "March 24", name: "Summit Showdown", time: "04:30 PM" }
+                { date: "March 17", name: "Startup Showcase" },
+                { date: "March 18", name: "Pitch Perfect" },
+                { date: "March 20-21", name: "The Boardroom" },
+                { date: "March 23", name: "E-Talks" },
+                { date: "March 24", name: "Summit Showdown" }
               ].map((item, i) => (
                 <motion.div 
                   key={i}
@@ -399,7 +399,7 @@ const Home = () => {
               </p>
               
               <div className="flex flex-wrap justify-center gap-6">
-                <MagneticButton href="https://learner.vierp.in/events" className="btn-gold">Claim Your Pass</MagneticButton>
+                <MagneticButton href="https://learner.vierp.in/events" className="btn-gold">Regester now ! </MagneticButton>
                 <MagneticButton href="/etalks" className="btn-outline">About E-Talks</MagneticButton>
               </div>
 
