@@ -1,13 +1,13 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import Navbar        from '../components/Navbar'
-import Footer        from '../components/Footer'
-import { Embers }    from '../components/Particles'
-import { useReveal } from '../components/useReveal'
+import Navbar         from '../components/Navbar'
+import Footer         from '../components/Footer'
+import { Embers }     from '../components/Particles'
+import { useReveal }  from '../components/useReveal'
 import { ScrambleText, WordReveal } from '../components/TextReveal'
 import { MagneticButton }           from '../components/ScrollProgress'
-import Marquee       from '../components/Marquee'
-import SectionNav    from '../components/SectionNav'
+import Marquee        from '../components/Marquee'
+import SectionNav     from '../components/SectionNav'
 import { DrawBorder } from '../components/AnimatedBorder'
 
 const MARQUEE_TEXT = ['Startup Showcase', 'Innovation', 'Pitches', 'V-EDC', 'VIT Pune', 'Future Founders']
@@ -21,10 +21,10 @@ const SECTIONS = [
 export default function StartupShowcase() {
   const heroRef = useRef(null)
   
-  // ══════ ANIMATION LOGIC (Mirroring ETalks) ══════
+  // ══════ ANIMATION LOGIC ══════
   const { scrollY } = useScroll()
   const bgY       = useTransform(scrollY, [0, 700], [0, 140])
-  const shaftY    = useTransform(scrollY, [0, 700], [0, 70])
+  // REMOVED: shaftY to eliminate the grid effect
   const titleY    = useTransform(scrollY, [0, 500], [0, -50])
   const titleOp   = useTransform(scrollY, [0, 380], [1, 0])
   const titleScale= useTransform(scrollY, [0, 400], [1, 0.92])
@@ -32,33 +32,27 @@ export default function StartupShowcase() {
   const [aboutRef, aboutInView] = useReveal()
   const [ctaRef, ctaInView]     = useReveal()
 
-  // Updated SecHead with conditional styling
-function SecHead({ tag, title, body, isKeynote }) {
-  const [ref, inView] = useReveal()
-  return (
-    <motion.div ref={ref} className="text-center mb-10 md:mb-14"
-      initial={{ opacity:0, y:30 }} animate={inView ? { opacity:1, y:0 } : {}}
-      transition={{ duration:0.65, ease:[0.22,1,0.36,1] }}>
-      
-      {/* TAG: Conditional size increase. 
-          If isKeynote is true, it uses a larger clamp and wider spacing. 
-      */}
-      <span 
-        className="section-tag" 
-        style={isKeynote ? { 
-          fontSize: 'clamp(0.85rem, 2vw, 1.15rem)', 
-          letterSpacing: '0.5em',
-          fontWeight: 600
-        } : {}}
-      >
-        {tag}
-      </span>
-
-      <h2 className="section-title font-display">{title}</h2>
-      {body && <p className="section-body">{body}</p>}
-    </motion.div>
-  )
-}
+  function SecHead({ tag, title, body, isKeynote }) {
+    const [ref, inView] = useReveal()
+    return (
+      <motion.div ref={ref} className="text-center mb-10 md:mb-14"
+        initial={{ opacity:0, y:30 }} animate={inView ? { opacity:1, y:0 } : {}}
+        transition={{ duration:0.65, ease:[0.22,1,0.36,1] }}>
+        <span 
+          className="section-tag" 
+          style={isKeynote ? { 
+            fontSize: 'clamp(0.85rem, 2vw, 1.15rem)', 
+            letterSpacing: '0.5em',
+            fontWeight: 600
+          } : {}}
+        >
+          {tag}
+        </span>
+        <h2 className="section-title font-display">{title}</h2>
+        {body && <p className="section-body">{body}</p>}
+      </motion.div>
+    )
+  }
 
   return (
     <div style={{ background: '#050507', minHeight: '100vh', fontFamily: 'Raleway, sans-serif' }}>
@@ -78,21 +72,11 @@ function SecHead({ tag, title, body, isKeynote }) {
             linear-gradient(170deg, #050507 0%, #07070e 100%)` }} />
         </motion.div>
 
-        {/* Light Shafts Animation */}
-        <motion.div className="absolute inset-0 z-0 pointer-events-none" style={{ y: shaftY }}>
-          {[{left:'30%',d:'0s'},{left:'50%',d:'2s',wide:true},{left:'70%',d:'4s'}].map((s,i)=>(
-            <div key={i} className="shaft" style={{
-              left:s.left, animationDelay:s.d, width:s.wide?'2px':'1px',
-              background:s.wide
-                ?'linear-gradient(180deg,transparent,rgba(201,168,76,0.28) 42%,rgba(201,168,76,0.38) 55%,transparent)'
-                :'linear-gradient(180deg,transparent,rgba(201,168,76,0.12) 40%,rgba(201,168,76,0.18) 55%,transparent)',
-            }}/>
-          ))}
-        </motion.div>
+        {/* REMOVED: Light Shafts Animation block mapping */}
 
         <Embers count={28} />
 
-        {/* Content with Scroll Transformations */}
+        {/* Content */}
         <motion.div className="relative z-10 w-full" 
           style={{ y: titleY, opacity: titleOp, scale: titleScale, maxWidth: 'min(820px, 92vw)', margin: '0 auto' }}>
           
@@ -121,7 +105,7 @@ function SecHead({ tag, title, body, isKeynote }) {
 
           <div className="mb-10">
             <WordReveal 
-              text="V-EDC's Inaugural Event . Brightest young minds. Boldest ideas. The ultimate platform for the future of industry."
+              text="V-EDC's Inaugural Event. Brightest young minds. Boldest ideas. The ultimate platform for the future of industry."
               className="font-light text-center"
               style={{ color: '#a0988a', fontSize: 'clamp(1rem, 2.5vw, 1.3rem)', letterSpacing: '0.1em', lineHeight: 1.6 }}
               delay={0.05}
@@ -131,7 +115,7 @@ function SecHead({ tag, title, body, isKeynote }) {
           <MagneticButton href="#about" className="btn-gold">Discover the Platform</MagneticButton>
         </motion.div>
 
-        {/* Scroll cue (Mirroring ETalks) */}
+        {/* Scroll cue */}
         <motion.div style={{ position:'absolute', bottom:'2rem', left:'50%', translateX:'-50%', display:'flex', flexDirection:'column', alignItems:'center', gap:8 }}
           initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:1.5 }}>
           <span className="font-cinzel uppercase" style={{ fontSize:'0.5rem', letterSpacing:'0.5em', color:'rgba(201,168,76,0.3)' }}>Scroll</span>
@@ -147,7 +131,6 @@ function SecHead({ tag, title, body, isKeynote }) {
       <div id="about" className="bg-[#0f0f1a] border-b border-white/5">
         <motion.div ref={aboutRef} 
           className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16" 
-          style={{ py: 'clamp(5rem, 10vw, 8rem)' }}
           initial={{ opacity: 0, y: 30 }} 
           animate={aboutInView ? { opacity: 1, y: 0 } : {}} 
           transition={{ duration: 0.8 }}>
@@ -169,13 +152,20 @@ function SecHead({ tag, title, body, isKeynote }) {
 
       {/* ══════ FINAL CALL TO ACTION ══════ */}
       <section id="register" className="py-32 relative overflow-hidden text-center bg-[#050507]">
-
-        {/* Massive Background Scramble */}
         <motion.span className="font-display absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[15rem] text-white/5 pointer-events-none select-none"
           animate={{ scale: [1, 1.05, 1], opacity: [0.03, 0.06, 0.03] }} 
           transition={{ duration: 8, repeat: Infinity }}>
           STARTUP
         </motion.span>
+
+        <motion.div ref={ctaRef} className="relative z-10 max-w-xl mx-auto"
+          initial={{ opacity: 0, y: 40 }} animate={ctaInView ? { opacity: 1, y: 0 } : {}}>
+          <DrawBorder className="p-12 bg-[#c9a84c]/5">
+            <h2 className="font-display text-4xl text-white mb-6">Take the Stage</h2>
+            <p className="text-[#a0988a] mb-10">Register your startup today to be part of the most anticipated showcase of E-Summit Pune '26.</p>
+            <MagneticButton href="https://learner.vierp.in/events" className="btn-gold">Register Startup</MagneticButton>
+          </DrawBorder>
+        </motion.div>
       </section>
 
       <Footer />

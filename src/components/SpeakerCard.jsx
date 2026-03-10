@@ -1,12 +1,13 @@
 import { useRef, useState } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 
-
-export default function SpeakerCard({ number, domain, name, title, bio, image, initials, delay = 0 }) {
+export default function SpeakerCard({ 
+  number, domain, name, title, bio, image, initials, delay = 0, 
+  imageScale = 1 // New prop: defaults to 1 (100%)
+}) {
   const ref = useRef(null)
   const [hovered, setHovered] = useState(false)
 
-  // ... (Motion values logic remains exactly the same)
   const rawX = useMotionValue(0)
   const rawY = useMotionValue(0)
   const springX = useSpring(rawX, { stiffness: 180, damping: 22 })
@@ -43,7 +44,6 @@ export default function SpeakerCard({ number, domain, name, title, bio, image, i
         position: 'relative', overflow: 'hidden', cursor: 'pointer', willChange: 'transform',
       }}
     >
-      {/* Glare and Bottom accent remain the same */}
       <motion.div style={{
         position: 'absolute', inset: 0, zIndex: 20, pointerEvents: 'none',
         opacity: hovered ? 1 : 0,
@@ -57,7 +57,6 @@ export default function SpeakerCard({ number, domain, name, title, bio, image, i
         animate={{ scaleX: hovered ? 1 : 0 }} transition={{ duration: 0.4 }}
       />
 
-      {/* Photo Section */}
       <div style={{
         height: 'clamp(200px, 28vw, 300px)',
         background: 'linear-gradient(135deg, #0d0d1a 0%, #14101e 100%)',
@@ -71,10 +70,12 @@ export default function SpeakerCard({ number, domain, name, title, bio, image, i
               height: '100%', 
               objectFit: 'cover', 
               objectPosition: name.includes('GHATAK') ? 'center 40%' : 'top center',
-      filter: 'grayscale(20%) contrast(1.05)'
+              filter: 'grayscale(20%) contrast(1.05)',
+              /* Scale calculation combining base scale and hover */
+              scale: imageScale 
             }}
             animate={{ 
-              scale: hovered ? 1.06 : 1, 
+              scale: hovered ? imageScale * 1.06 : imageScale, 
               filter: hovered ? 'grayscale(0%) contrast(1.05)' : 'grayscale(20%) contrast(1.05)' 
             }}
             transition={{ duration: 0.6 }}
@@ -102,15 +103,13 @@ export default function SpeakerCard({ number, domain, name, title, bio, image, i
           <span className="font-cinzel" style={{
             position: 'absolute', top: 10, right: 10, fontSize: '0.5rem', letterSpacing: '0.15em',
             color: '#8b6914', background: 'rgba(5,5,7,0.82)', padding: '3px 7px',
-            // FIXED: Added missing quote after 0.2) and before the comma
             border: '1px solid rgba(201,168,76,0.2)', textTransform: 'uppercase',
           }}>
             {domain}
           </span>
-)}
+        )}
       </div>
 
-      {/* Info Section remains same */}
       <div style={{ padding: 'clamp(0.9rem, 2.5vw, 1.25rem)', paddingBottom: 'clamp(1.2rem, 3vw, 1.75rem)', transform: 'translateZ(20px)' }}>
         <motion.h3 className="font-cinzel font-bold"
           style={{ fontSize: 'clamp(0.85rem, 1.8vw, 1rem)', marginBottom: 4, color: '#ede5d5' }}

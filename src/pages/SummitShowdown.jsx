@@ -1,32 +1,25 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import Navbar        from '../components/Navbar'
-import Footer        from '../components/Footer'
-import { Confetti }  from '../components/Particles'
+import Navbar         from '../components/Navbar'
+import Footer         from '../components/Footer'
+import { Confetti }   from '../components/Particles'
 import MetricCounter from '../components/MetricCounter'
 import PerformerCard from '../components/PerformerCard'
 import { useReveal } from '../components/useReveal'
 import { ScrambleText, WordReveal } from '../components/TextReveal'
 import { MagneticButton }           from '../components/ScrollProgress'
-import Marquee       from '../components/Marquee'
-import SectionNav    from '../components/SectionNav'
+import Marquee        from '../components/Marquee'
+import SectionNav     from '../components/SectionNav'
 import { DrawBorder, ClipReveal, GlowBorder } from '../components/AnimatedBorder'
 
 const COMEDIANS = [
-  { type:'Coming Soon',emoji:'🎭', name:'To be Announced', sub:'Stay tuned',               desc:'The full comedy lineup is being locked in. Follow @v_edc for the reveal.' },
+  { type:'Coming Soon',emoji:'🎭', name:'To be Announced', sub:'Stay tuned', desc:'The full comedy lineup is being locked in. Follow @v_edc for the reveal.' },
 ]
 const BANDS = [
-  { type:'Live Band',  emoji:'🎵', name:'[Band / Artist Name]', sub:'[Genre · From]',           desc:'The headlining act. Genres collide, the crowd ignites — this is what the night builds toward.' },
-  { type:'Coming Soon',emoji:'🎶', name:'To be Announced', sub:'Stay tuned',               desc:'Something that will absolutely set the stage on fire. Dropping soon on @v_edc.' },
+  { type:'Live Band',  emoji:'🎵', name:'[Band / Artist Name]', sub:'[Genre · From]', desc:'The headlining act. Genres collide, the crowd ignites — this is what the night builds toward.' },
+  { type:'Coming Soon',emoji:'🎶', name:'To be Announced', sub:'Stay tuned', desc:'Something that will absolutely set the stage on fire. Dropping soon on @v_edc.' },
 ]
-// const SCHEDULE = [
-//   {emoji:'🚪', act:'Doors Open',           desc:'Arrive early, find your spot, soak it all in.' },
-//   {emoji:'🎤', act:'Opening Comedy Set',   desc:'The night kicks off. The first comedian takes the stage.' },
-//   {emoji:'😂', act:'Headline Comedy',      desc:'The main act. No holds barred. The house comes down.' },
-//   {emoji:'🎸', act:'Live Music — Opening', desc:'The first band takes the stage. Feel it in your chest.' },
-//   {emoji:'🔥', act:'Headline Live Band',   desc:'The headliner closes Summit Showdown. This is what it\'s been building to.' },
-//   {emoji:'✨', act:'Grand Finale',         desc:'E-Summit Pune \'26 takes its bow. The ascension is complete. The reign begins.' },
-// ]
+
 const VIBE_ITEMS = [
   { num:'01', head:'World-Class Comedy',       body:'Sharp wit, relatable chaos, an audience that can\'t stop laughing.' },
   { num:'02', head:'Live Music That Moves You', body:'Bands that turn a venue into a memory. You\'ll be talking about it for years.' },
@@ -43,30 +36,34 @@ const SECTIONS = [
   { id:'register',   label:'Register'   },
 ]
 
-function SecHead({ tag, title, body, amber=false }) {
+// Updated SecHead with larger sizing logic
+function SecHead({ tag, title, body, amber=false, isKeynote=false }) {
   const [ref, inView] = useReveal()
   return (
     <motion.div ref={ref} className="text-center mb-10 md:mb-14"
       initial={{ opacity:0, y:30 }} animate={inView?{opacity:1,y:0}:{}}
       transition={{ duration:0.65, ease:[0.22,1,0.36,1] }}>
       <span className="font-cinzel uppercase block mb-3"
-        style={{ fontSize:'clamp(0.58rem,1.5vw,0.65rem)', letterSpacing:'0.38em', color:amber?'#d4690a':'#c9a84c' }}>{tag}</span>
-      <h2 className="section-title font-display">{title}</h2>
-      {body && <p className="section-body">{body}</p>}
+        style={{ 
+          fontSize: isKeynote ? 'clamp(0.85rem, 2vw, 1.15rem)' : 'clamp(0.58rem,1.5vw,0.65rem)', 
+          letterSpacing: isKeynote ? '0.5em' : '0.38em', 
+          color:amber?'#d4690a':'#c9a84c' 
+        }}>{tag}</span>
+      <h2 className="section-title font-display" style={{ fontSize:'clamp(2rem, 5vw, 3.5rem)' }}>{title}</h2>
+      {body && <p className="section-body" style={{ maxWidth: '600px', margin: '1rem auto' }}>{body}</p>}
     </motion.div>
   )
 }
 
 export default function SummitShowdown() {
   const { scrollY } = useScroll()
-  const bgY       = useTransform(scrollY, [0,700], [0,140])
-  const shaftY    = useTransform(scrollY, [0,700], [0,70])
-  const titleY    = useTransform(scrollY, [0,500], [0,-50])
-  const titleOp   = useTransform(scrollY, [0,380], [1,0])
-  const titleScale= useTransform(scrollY, [0,400], [1,0.92])
+  const bgY        = useTransform(scrollY, [0,700], [0,140])
+  // REMOVED: shaftY logic to eliminate the grid
+  const titleY     = useTransform(scrollY, [0,500], [0,-50])
+  const titleOp    = useTransform(scrollY, [0,380], [1,0])
+  const titleScale = useTransform(scrollY, [0,400], [1,0.92])
 
   const [aboutRef, aboutInView] = useReveal()
-  const [schedRef, schedInView] = useReveal()
   const [vibeRef,  vibeInView]  = useReveal()
   const [ctaRef,   ctaInView]   = useReveal()
 
@@ -75,7 +72,7 @@ export default function SummitShowdown() {
       <Navbar/>
       <SectionNav sections={SECTIONS}/>
 
-      {/* ══════ HERO ══════ */}
+      {/* ══════ HERO SECTION ══════ */}
       <section id="hero"
         className="relative min-h-screen grid place-items-center text-center overflow-hidden"
         style={{ padding:'clamp(6rem,12vw,8rem) clamp(1rem,5vw,2rem) clamp(3rem,6vw,4rem)' }}>
@@ -89,7 +86,7 @@ export default function SummitShowdown() {
             linear-gradient(175deg, #050507 0%, #09070a 50%, #0d0808 100%)` }}/>
         </motion.div>
 
-        {/* Spotlights */}
+        {/* Spotlights for Performance Vibe */}
         {[{w:'min(300px,50vw)',color:'rgba(212,105,10,0.04)',delay:'0s'},{w:'min(220px,36vw)',color:'rgba(201,168,76,0.035)',delay:'2s'}].map((s,i)=>(
           <div key={i} style={{
             position:'absolute', bottom:0, left:'50%', transform:'translateX(-50%)',
@@ -100,30 +97,17 @@ export default function SummitShowdown() {
           }}/>
         ))}
 
-        {/* Shafts */}
-        <motion.div className="absolute inset-0 z-0 pointer-events-none" style={{ y:shaftY }}>
-          {[{left:'30%',d:'0s'},{left:'50%',d:'2s',wide:true},{left:'70%',d:'4s'}].map((s,i)=>(
-            <div key={i} className="shaft" style={{
-              left:s.left, animationDelay:s.d, width:s.wide?'2px':'1px',
-              background:s.wide
-                ?'linear-gradient(180deg,transparent,rgba(201,168,76,0.25) 40%,rgba(201,168,76,0.35) 55%,transparent)'
-                :'linear-gradient(180deg,transparent,rgba(139,26,26,0.2) 40%,rgba(139,26,26,0.28) 55%,transparent)',
-            }}/>
-          ))}
-        </motion.div>
-
         <Confetti count={40}/>
 
         {/* Content */}
         <motion.div className="relative z-10 w-full" style={{ y:titleY, opacity:titleOp, scale:titleScale, maxWidth:'min(820px,92vw)', margin:'0 auto' }}>
-
           <motion.div className="flex items-center justify-center mb-6 md:mb-8" style={{ gap:'clamp(8px,2vw,16px)', flexWrap:'wrap' }}
             initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ duration:0.7, delay:0.1 }}>
             <motion.div style={{ height:1, width:'clamp(24px,5vw,40px)', background:'linear-gradient(90deg,transparent,rgba(212,105,10,0.5))' }}
               initial={{ scaleX:0 }} animate={{ scaleX:1 }} transition={{ delay:0.3 }}/>
             <span className="font-cinzel uppercase text-center"
               style={{ fontSize:'clamp(0.55rem,1.5vw,0.65rem)', letterSpacing:'clamp(0.2em,1vw,0.45em)', color:'rgba(212,105,10,0.75)' }}>
-               E-Cell VIT Pune · 17–25 March 2026
+               E-Cell VIT Pune · 25 March 2026
             </span>
             <motion.div style={{ height:1, width:'clamp(24px,5vw,40px)', background:'linear-gradient(90deg,rgba(212,105,10,0.5),transparent)' }}
               initial={{ scaleX:0 }} animate={{ scaleX:1 }} transition={{ delay:0.3 }}/>
@@ -169,7 +153,6 @@ export default function SummitShowdown() {
           </motion.div>
         </motion.div>
 
-        {/* Scroll cue */}
         <motion.div style={{ position:'absolute', bottom:'clamp(1.5rem,4vw,2rem)', left:'50%', translateX:'-50%', display:'flex', flexDirection:'column', alignItems:'center', gap:8 }}
           initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:1.5 }}>
           <span className="font-cinzel uppercase" style={{ fontSize:'0.5rem', letterSpacing:'0.5em', color:'rgba(212,105,10,0.3)' }}>Scroll</span>
@@ -207,7 +190,6 @@ export default function SummitShowdown() {
               {[
                 "Summit Showdown is the grand finale of E-Summit Pune, and we've made sure it goes out with a bang. After days of pitches, talks, and ideas, it's time to let loose and celebrate the spirit of entrepreneurship.",
                 "We bring in some of the most talented comedians to get the crowd laughing and live bands to set the stage on fire. Every connection made, every idea sparked celebrated in style.",
-                "Summit Showdown is where the energy of the entire event comes together one last time, leaving everyone with memories that last long after the curtain falls.",
               ].map((p,i)=>(
                 <motion.p key={i} initial={{ opacity:0, x:40 }} animate={aboutInView?{opacity:1,x:0}:{}}
                   transition={{ delay:0.08*i, duration:0.65, ease:[0.22,1,0.36,1] }}>{p}</motion.p>
@@ -218,23 +200,18 @@ export default function SummitShowdown() {
       </div>
 
       {/* ══ STATS ══ */}
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16" style={{ paddingTop:'clamp(2.5rem,5vw,3.5rem)', paddingBottom:'clamp(2.5rem,5vw,3.5rem)' }}>
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 py-20">
         <div style={{ display:'grid', gap:'clamp(0.75rem,2vw,1.25rem)', gridTemplateColumns:'repeat(auto-fit,minmax(min(200px,100%),1fr))' }}>
-          <MetricCounter icon="" display="Stand-up"  label="Top Comedians on Stage"      delay={0}/>
-          <MetricCounter icon="" display="Live Bands" label="Setting the Stage on Fire"  delay={150}/>
-          <MetricCounter icon="" display="One Night"  label="Memories That Last Forever" delay={300}/>
+          <MetricCounter display="Stand-up"  label="Top Comedians on Stage"      delay={0}/>
+          <MetricCounter display="Live Bands" label="Setting the Stage on Fire"  delay={150}/>
+          <MetricCounter display="One Night"  label="Memories That Last Forever" delay={300}/>
         </div>
-      </div>
-
-      {/* ══ SECOND MARQUEE ══ */}
-      <div style={{ padding:'10px 0' }}>
-        <Marquee items={MARQUEE_B} speed={24} reverse separator="⬥"/>
       </div>
 
       {/* ══════ PERFORMERS ══════ */}
       <div id="performers" className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16" style={{ paddingTop:'clamp(3rem,6vw,5rem)', paddingBottom:'clamp(3rem,6vw,5rem)' }}>
         <SecHead tag="∙ The Lineup ∙" title="Tonight's Stars" amber
-          body="The comedians and bands bringing the energy, laughter, and music to the final night of E-Summit Pune ’26 on an unforgettable note."/>
+          body="The comedians and bands bringing the energy, laughter, and music to the final night of E-Summit Pune ’26."/>
 
         {[{ label:'🎭 Stand-Up Comedy', items:COMEDIANS }, { label:'🎸 Live Music', items:BANDS }].map(({ label, items }) => (
           <div key={label} style={{ marginBottom:'clamp(2rem,5vw,3rem)' }}>
@@ -251,7 +228,6 @@ export default function SummitShowdown() {
           </div>
         ))}
       </div>
-     
 
       {/* ══════ CTA ══════ */}
       <section id="register" style={{
@@ -260,36 +236,24 @@ export default function SummitShowdown() {
         background:'linear-gradient(175deg,#050507 0%,#0d0808 50%,#050507 100%)',
         borderTop:'1px solid rgba(139,26,26,0.2)',
       }}>
-        <div style={{ position:'absolute', inset:0, pointerEvents:'none', background:'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(139,26,26,0.1), transparent)' }}/>
-        <motion.span style={{ position:'absolute', left:'50%', top:'50%', transform:'translate(-50%,-50%)', fontSize:'clamp(4rem,16vw,12rem)', opacity:0.02, pointerEvents:'none', userSelect:'none' }}
-          animate={{ scale:[1,1.03,1] }} transition={{ duration:6, repeat:Infinity }}>🎸</motion.span>
-
         <motion.div ref={ctaRef} style={{ position:'relative', zIndex:10, maxWidth:'min(560px,90vw)', margin:'0 auto' }}
           initial={{ opacity:0, y:40 }} animate={ctaInView?{opacity:1,y:0}:{}}
           transition={{ duration:0.7, ease:[0.22,1,0.36,1] }}>
           <DrawBorder color="rgba(139,26,26,0.5)" style={{ padding:'clamp(1.5rem,4vw,3rem)', background:'rgba(139,26,26,0.03)' }}>
-            <span className="font-cinzel uppercase block mb-3" style={{ fontSize:'clamp(0.58rem,1.5vw,0.65rem)', letterSpacing:'0.38em', color:'#d4690a' }}>
-              
-            </span>
-            <h2 className="section-title font-display mb-4"> - Don't Miss the Finale - </h2>
+            <h2 className="section-title font-display mb-4">Don't Miss the Finale</h2>
             <p className="section-body" style={{ marginBottom:'clamp(1.5rem,4vw,2.5rem)' }}>
-              Summit Showdown is included with your E-Summit Pune pass. Register now and secure your spot.
+              Summit Showdown is the definitive end to your E-Summit journey. Secure your spot now.
             </p>
             <div style={{ display:'flex', gap:'clamp(8px,2vw,16px)', justifyContent:'center', flexWrap:'wrap' }}>
               <MagneticButton href="https://learner.vierp.in/events" className="btn-fire">Get Your Pass</MagneticButton>
               <MagneticButton href="/etalks" className="btn-outline">← Explore E-Talks</MagneticButton>
             </div>
             <p className="font-cinzel uppercase" style={{ marginTop:'clamp(1.2rem,3vw,2rem)', fontSize:'0.58rem', letterSpacing:'0.3em', color:'rgba(201,168,76,0.35)' }}>
-              25 MARCH 2026 · @v_edc · VIT PUNE 
+              25 MARCH 2026 · VIT PUNE
             </p>
           </DrawBorder>
         </motion.div>
       </section>
-
-      {/* ══ FINAL MARQUEE ══ */}
-      <div style={{ borderTop:'1px solid rgba(201,168,76,0.06)', padding:'10px 0' }}>
-        <Marquee items={[...MARQUEE_A,...MARQUEE_B]} speed={38} separator="⬥"/>
-      </div>
 
       <Footer/>
     </div>

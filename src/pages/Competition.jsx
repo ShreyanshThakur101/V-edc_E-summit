@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react'; // Added useState
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'; // Added AnimatePresence
-import { ExternalLink, ChevronDown, ChevronUp } from 'lucide-react'; // Added icons
+import React, { useRef, useState } from 'react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { ExternalLink, ChevronDown, ChevronUp } from 'lucide-react';
 import bgImage from '../assets/throne-home-bg.png'; 
 import SectionNav from '../components/SectionNav';
 import { Embers } from '../components/Particles';
@@ -18,12 +18,11 @@ const Competition = () => {
   const heroRef = useRef(null);
   const { scrollY } = useScroll();
   const bgY        = useTransform(scrollY, [0, 700], [0, 140]);
-  const shaftY     = useTransform(scrollY, [0, 700], [0, 70]);
+  // REMOVED: shaftY logic to eliminate the grid effect
   const titleY     = useTransform(scrollY, [0, 500], [0, -50]);
   const titleOp    = useTransform(scrollY, [0, 380], [1, 0]);
   const titleScale = useTransform(scrollY, [0, 400], [1, 0.92]);
 
-  // State to track which competition has "more details" open
   const [expandedId, setExpandedId] = useState(null);
 
   const competitions = [
@@ -68,16 +67,7 @@ const Competition = () => {
             radial-gradient(ellipse 35% 55% at 50% 100%, rgba(201,168,76,0.09) 0%, transparent 55%)` }} />
         </motion.div>
 
-        <motion.div className="absolute inset-0 z-0 pointer-events-none" style={{ y: shaftY }}>
-          {[{left:'20%',d:'0s'},{left:'40%',d:'1.5s'},{left:'60%',d:'3s',wide:true},{left:'80%',d:'4.5s'}].map((s,i)=>(
-            <div key={i} className="shaft" style={{
-              left:s.left, animationDelay:s.d, width:s.wide?'2px':'1px',
-              background:s.wide
-                ?'linear-gradient(180deg,transparent,rgba(201,168,76,0.28) 42%,rgba(201,168,76,0.38) 55%,transparent)'
-                :'linear-gradient(180deg,transparent,rgba(201,168,76,0.12) 40%,rgba(201,168,76,0.18) 55%,transparent)',
-            }}/>
-          ))}
-        </motion.div>
+        {/* REMOVED: Vertical Shafts/Beams mapping block */}
         
         <Embers count={28}/>
 
@@ -145,7 +135,6 @@ const Competition = () => {
       {/* ══════ MAIN CONTENT ══════ */}
       <main className="relative z-10 pt-10 pb-20 px-4 md:px-6">
         <section className="max-w-7xl mx-auto text-center">
-          
           <div id="competitions" className="pt-20">
             <div className="max-w-4xl mx-auto mb-16 md:mb-20 bg-black/40 backdrop-blur-md p-6 md:p-10 border border-[#c5a059]/10">
               <h2 className="text-2xl md:text-5xl font-bold mb-6 italic uppercase tracking-wider text-[#c5a059]">Competitions</h2>
@@ -170,7 +159,6 @@ const Competition = () => {
                   "{comp.description}"
                 </p>
 
-                {/* More Details Toggle */}
                 <div className="mb-10">
                   <button 
                     onClick={() => setExpandedId(expandedId === comp.id ? null : comp.id)}
@@ -213,7 +201,6 @@ const Competition = () => {
               </div>
             ))}
           </div>
-
         </section>
       </main>
     </div>

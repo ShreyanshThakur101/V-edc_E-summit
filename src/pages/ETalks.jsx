@@ -10,7 +10,7 @@ import { ScrambleText, WordReveal } from '../components/TextReveal'
 import { MagneticButton }           from '../components/ScrollProgress'
 import Marquee        from '../components/Marquee'
 import SectionNav     from '../components/SectionNav'
-import { DrawBorder, ClipReveal, GlowBorder } from '../components/AnimatedBorder'
+import { DrawBorder } from '../components/AnimatedBorder'
 
 // IMPORT SPEAKER PHOTOS
 import speaker1 from '../assets/summit_speaker1_image.png'; 
@@ -49,7 +49,9 @@ const SPEAKERS = [
     name: 'Shubhankar Saleel Kulkarni', 
     title: 'Musician & Actor | Tale of Melodies', 
     image: speaker4, 
-    bio: 'Blending a deep musical heritage with the art of performance, he brings the soul of "Tale of Melodies" to the stage, proving that creativity knows no boundaries.' 
+    bio: 'Blending a deep musical heritage with the art of performance, he brings the soul of "Tale of Melodies" to the stage, proving that creativity knows no boundaries.',
+    /* 10% Size Increase for this specific photo */
+    imageScale: 1.1 
   },
 ]
 
@@ -72,7 +74,6 @@ const SECTIONS = [
   { id:'register', label:'Register' },
 ]
 
-// SECTION HEADER COMPONENT with specialized Keynote styling
 function SecHead({ tag, title, body, isKeynote }) {
   const [ref, inView] = useReveal()
   return (
@@ -96,7 +97,6 @@ export default function ETalks() {
   const heroRef = useRef(null)
   const { scrollY } = useScroll()
   const bgY       = useTransform(scrollY, [0,700], [0,140])
-  const shaftY    = useTransform(scrollY, [0,700], [0,70])
   const titleY    = useTransform(scrollY, [0,500], [0,-50])
   const titleOp   = useTransform(scrollY, [0,380], [1,0])
   const titleScale= useTransform(scrollY, [0,400], [1,0.92])
@@ -123,11 +123,6 @@ export default function ETalks() {
             linear-gradient(170deg, #050507 0%, #07070e 55%, #0a0a10 100%)` }} />
         </motion.div>
 
-        <motion.div className="absolute inset-0 z-0 pointer-events-none" style={{ y:shaftY }}>
-          {[20, 40, 60, 80].map((left, i) => (
-            <div key={i} className="shaft" style={{ left: `${left}%`, animationDelay: `${i * 1.5}s`, opacity: 0.15 }} />
-          ))}
-        </motion.div>
         <Embers count={28}/>
 
         <motion.div className="relative z-10 w-full" style={{ y:titleY, opacity:titleOp, scale:titleScale, maxWidth:'min(820px, 92vw)', margin:'0 auto' }}>
@@ -175,7 +170,7 @@ export default function ETalks() {
         </div>
       </div>
 
-      {/* ══════ KEYNOTE SECTION ══════ */}
+      {/* ══════ KEYNOTE & SPEAKER GRID ══════ */}
       <div id="speakers" className="max-w-7xl mx-auto px-6 py-20">
         <SecHead 
           tag="∙ Opening Keynote ∙" 
@@ -184,11 +179,18 @@ export default function ETalks() {
           isKeynote={true}
         />
         
-        
-        
-        {/* SINGLE ROW SPEAKER GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/5 border border-white/5">
-          {SPEAKERS.map((s,i) => <SpeakerCard key={i} {...s} delay={i*0.07}/>)}
+        {/* SINGLE ROW GRID: Ensures all 4 speakers stay side-by-side on desktop */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/5 border border-white/5 mt-20">
+          {SPEAKERS.map((s, i) => (
+            <div key={i}>
+              <SpeakerCard 
+                {...s} 
+                delay={i * 0.07} 
+                /* Zoom photo by 10% for Speaker 4 (Shubhankar) */
+                imageScale={s.number === 4 ? 1.1 : 1} 
+              />
+            </div>
+          ))}
         </div>
       </div>
 
@@ -208,7 +210,7 @@ export default function ETalks() {
         </div>
       </div>
 
-      {/* ══════ REGISTER SECTION (Claim Your Seat) ══════ */}
+      {/* ══════ REGISTER SECTION ══════ */}
       <section id="register" style={{ position:'relative', textAlign:'center', overflow:'hidden', padding:'clamp(4rem,8vw,7rem) clamp(1rem,4vw,2rem)', background:'#0f0f1a', borderTop:'1px solid rgba(201,168,76,0.08)' }}>
         <motion.span className="font-display pointer-events-none select-none"
           style={{ position:'absolute', left:'50%', top:'50%', transform:'translate(-50%,-50%)', fontSize:'clamp(4rem,16vw,12rem)', color:'rgba(201,168,76,0.025)', whiteSpace:'nowrap', letterSpacing:'0.1em' }}
@@ -229,15 +231,11 @@ export default function ETalks() {
               <MagneticButton href="/summit-showdown" className="btn-outline">Explore Summit Showdown →</MagneticButton>
             </div>
             <p className="font-cinzel uppercase" style={{ marginTop:'clamp(1.2rem,3vw,2rem)', fontSize:'0.58rem', letterSpacing:'0.3em', color:'rgba(201,168,76,0.35)' }}>
-              17–25 MARCH 2026 · @v_edc · VIT PUNE 
+              17–25 MARCH 2026 · VIT PUNE 
             </p>
           </DrawBorder>
         </motion.div>
       </section>
-
-      <div style={{ borderTop:'1px solid rgba(201,168,76,0.06)', padding:'10px 0' }}>
-        <Marquee items={[...MARQUEE_A,...MARQUEE_B]} speed={40}/>
-      </div>
 
       <Footer/>
     </div>
