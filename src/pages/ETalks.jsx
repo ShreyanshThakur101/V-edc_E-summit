@@ -17,6 +17,7 @@ import speaker1 from '../assets/summit_speaker1_image.png';
 import speaker2 from '../assets/summit_speaker2_image.png'; 
 import speaker3 from '../assets/Shri. Khalid Wani_ETalks.png'; 
 import speaker4 from '../assets/summit_speaker4_image.png'; 
+import speaker5 from '../assets/madhu sudan ETalks.png';
 
 const SPEAKERS = [
   { 
@@ -36,7 +37,8 @@ const SPEAKERS = [
     bio: 'A pioneer in Indian E-sports, GHATAK transitioned from a professional player to a top-tier mentor and successful entrepreneur in the gaming industry.' 
   },
   
-{ 
+  
+  { 
     number: 3, 
     domain: 'Finance & Business', 
     name: 'Shri. Khalid Wani', 
@@ -44,16 +46,24 @@ const SPEAKERS = [
     image: speaker3, 
     bio: 'As the driving force behind One Capitall Limited, he uses decades of financial expertise to help founders scale their enterprises.' 
   },
-
   { 
     number: 4, 
-    domain: 'Acting & Music', 
     name: 'Shubhankar Saleel Kulkarni', 
+    domain: 'Acting & Music', 
     title: 'Musician & Actor | Tale of Melodies', 
     image: speaker4, 
     bio: 'Blending a deep musical heritage with the art of performance, he brings the soul of "Tale of Melodies" to the stage, proving that creativity knows no boundaries.',
     /* 10% Size Increase for this specific photo */
     imageScale: 1.1 
+  },
+  
+  { 
+    number: 5, 
+    domain: 'Sports Tech & Innovation', 
+    name: 'Madhu Sudan', 
+    title: 'Founder of Str8bat | Ex-Director, Mastercard', 
+    image: speaker5, 
+    bio: 'Transitioning from corporate leadership at Mastercard to revolutionizing sports tech with Str8bat, he offers unique insights into building and scaling data-driven, innovative hardware startups.' 
   },
 ]
 
@@ -182,7 +192,7 @@ export default function ETalks() {
         />
         
         {/* SINGLE ROW GRID: Ensures all 4 speakers stay side-by-side on desktop */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/5 border border-white/5 mt-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-px bg-white/5 border border-white/5 mt-20">
           {SPEAKERS.map((s, i) => (
             <div key={i}>
               <SpeakerCard 
