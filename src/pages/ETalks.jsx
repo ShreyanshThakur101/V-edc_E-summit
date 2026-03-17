@@ -15,7 +15,7 @@ import { DrawBorder } from '../components/AnimatedBorder'
 // IMPORT SPEAKER PHOTOS
 import speaker1 from '../assets/summit_speaker1_image.png'; 
 import speaker2 from '../assets/summit_speaker2_image.png'; 
-import speaker3 from '../assets/showdown_speaker_1_image.png'; 
+// import speaker3 from '../assets/showdown_speaker_1_image.png'; 
 import speaker4 from '../assets/summit_speaker4_image.png'; 
 
 const SPEAKERS = [
@@ -35,14 +35,7 @@ const SPEAKERS = [
     image: speaker2, 
     bio: 'A pioneer in Indian E-sports, GHATAK transitioned from a professional player to a top-tier mentor and successful entrepreneur in the gaming industry.' 
   },
-  { 
-    number: 3, 
-    domain: 'Acting & Content', 
-    name: 'Deesha Katkar', 
-    title: 'Actor & Content Creator', 
-    image: speaker3, 
-    bio: 'Bridging the worlds of digital storytelling and performance, she brings a unique perspective on building a modern personal brand.' 
-  },
+
   { 
     number: 4, 
     domain: 'Acting & Music', 
@@ -186,8 +179,7 @@ export default function ETalks() {
               <SpeakerCard 
                 {...s} 
                 delay={i * 0.07} 
-                /* Zoom photo by 10% for Speaker 4 (Shubhankar) */
-                imageScale={s.number === 4 ? 1.1 : 1} 
+
               />
             </div>
           ))}

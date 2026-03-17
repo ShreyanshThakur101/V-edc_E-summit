@@ -12,12 +12,48 @@ import Marquee        from '../components/Marquee'
 import SectionNav     from '../components/SectionNav'
 import { DrawBorder, ClipReveal, GlowBorder } from '../components/AnimatedBorder'
 
-const COMEDIANS = [
-  { type:'Coming Soon',emoji:'🎭', name:'To be Announced', sub:'Stay tuned', desc:'The full comedy lineup is being locked in. Follow @v_edc for the reveal.' },
+import creatorImg from '../assets/showdown_creator_image.png'; 
+
+import comedianImg from '../assets/Saurabh Bhosale_Summit Showdown.png';
+// import band1Img from '../assets/band_1.png';
+
+const CREATORS = [
+  {  
+    type: 'Acting & Content', 
+    name: 'Deesha Katkar', 
+    sub: 'Actor & Content Creator', 
+    image: creatorImg, 
+    desc: 'Bridging the worlds of digital storytelling and performance, she brings a unique perspective on building a modern personal brand.' 
+  },
 ]
+  
+const COMEDIANS = [
+  { 
+    type: 'Stand-Up Comedy',
+    name: 'Saurabh Bhosale', 
+    sub: 'Standup Comedian & Storyteller', 
+    image: comedianImg, 
+    desc: 'Bringing his unique blend of relatable storytelling and sharp observational humor to the E-Summit stage for an unforgettable night of laughter.' 
+  },
+]
+
 const BANDS = [
-  { type:'Live Band',  emoji:'🎵', name:'[Band / Artist Name]', sub:'[Genre · From]', desc:'The headlining act. Genres collide, the crowd ignites — this is what the night builds toward.' },
-  { type:'Coming Soon',emoji:'🎶', name:'To be Announced', sub:'Stay tuned', desc:'Something that will absolutely set the stage on fire. Dropping soon on @v_edc.' },
+  { 
+    type:'Live Band',  
+    emoji:'🎵', 
+    name:'[Band / Artist Name]', 
+    sub:'[Genre · From]', 
+    image: null, // Add imported variable here when ready
+    desc:'The headlining act. Genres collide, the crowd ignites — this is what the night builds toward.' 
+  },
+  { 
+    type:'Coming Soon',
+    emoji:'🎶', 
+    name:'To be Announced', 
+    sub:'Stay tuned', 
+    image: null, // Add imported variable here when ready
+    desc:'Something that will absolutely set the stage on fire. Dropping soon on @v_edc.' 
+  },
 ]
 
 const VIBE_ITEMS = [
@@ -36,7 +72,6 @@ const SECTIONS = [
   { id:'register',   label:'Register'   },
 ]
 
-// Updated SecHead with larger sizing logic
 function SecHead({ tag, title, body, amber=false, isKeynote=false }) {
   const [ref, inView] = useReveal()
   return (
@@ -58,7 +93,6 @@ function SecHead({ tag, title, body, amber=false, isKeynote=false }) {
 export default function SummitShowdown() {
   const { scrollY } = useScroll()
   const bgY        = useTransform(scrollY, [0,700], [0,140])
-  // REMOVED: shaftY logic to eliminate the grid
   const titleY     = useTransform(scrollY, [0,500], [0,-50])
   const titleOp    = useTransform(scrollY, [0,380], [1,0])
   const titleScale = useTransform(scrollY, [0,400], [1,0.92])
@@ -86,7 +120,6 @@ export default function SummitShowdown() {
             linear-gradient(175deg, #050507 0%, #09070a 50%, #0d0808 100%)` }}/>
         </motion.div>
 
-        {/* Spotlights for Performance Vibe */}
         {[{w:'min(300px,50vw)',color:'rgba(212,105,10,0.04)',delay:'0s'},{w:'min(220px,36vw)',color:'rgba(201,168,76,0.035)',delay:'2s'}].map((s,i)=>(
           <div key={i} style={{
             position:'absolute', bottom:0, left:'50%', transform:'translateX(-50%)',
@@ -99,7 +132,6 @@ export default function SummitShowdown() {
 
         <Confetti count={40}/>
 
-        {/* Content */}
         <motion.div className="relative z-10 w-full" style={{ y:titleY, opacity:titleOp, scale:titleScale, maxWidth:'min(820px,92vw)', margin:'0 auto' }}>
           <motion.div className="flex items-center justify-center mb-6 md:mb-8" style={{ gap:'clamp(8px,2vw,16px)', flexWrap:'wrap' }}
             initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ duration:0.7, delay:0.1 }}>
@@ -107,7 +139,7 @@ export default function SummitShowdown() {
               initial={{ scaleX:0 }} animate={{ scaleX:1 }} transition={{ delay:0.3 }}/>
             <span className="font-cinzel uppercase text-center"
               style={{ fontSize:'clamp(0.55rem,1.5vw,0.65rem)', letterSpacing:'clamp(0.2em,1vw,0.45em)', color:'rgba(212,105,10,0.75)' }}>
-               E-Cell VIT Pune · 25 March 2026
+              E-Cell VIT Pune · 25 March 2026
             </span>
             <motion.div style={{ height:1, width:'clamp(24px,5vw,40px)', background:'linear-gradient(90deg,rgba(212,105,10,0.5),transparent)' }}
               initial={{ scaleX:0 }} animate={{ scaleX:1 }} transition={{ delay:0.3 }}/>
@@ -162,7 +194,6 @@ export default function SummitShowdown() {
         </motion.div>
       </section>
 
-      {/* ══ MARQUEE ══ */}
       <div style={{ borderTop:'1px solid rgba(139,26,26,0.15)', borderBottom:'1px solid rgba(139,26,26,0.15)', padding:'10px 0', background:'rgba(139,26,26,0.03)' }}>
         <Marquee items={MARQUEE_A} speed={28} separator="⬥"/>
       </div>
@@ -199,7 +230,6 @@ export default function SummitShowdown() {
         </motion.div>
       </div>
 
-      {/* ══ STATS ══ */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 py-20">
         <div style={{ display:'grid', gap:'clamp(0.75rem,2vw,1.25rem)', gridTemplateColumns:'repeat(auto-fit,minmax(min(200px,100%),1fr))' }}>
           <MetricCounter display="Stand-up"  label="Top Comedians on Stage"      delay={0}/>
@@ -213,7 +243,12 @@ export default function SummitShowdown() {
         <SecHead tag="∙ The Lineup ∙" title="Tonight's Stars" amber
           body="The comedians and bands bringing the energy, laughter, and music to the final night of E-Summit Pune ’26."/>
 
-        {[{ label:'🎭 Stand-Up Comedy', items:COMEDIANS }, { label:'🎸 Live Music', items:BANDS }].map(({ label, items }) => (
+        {/* Section categories mapping */}
+        {[
+          { label:'✨ Creators', items:CREATORS },
+          { label:'🎭 Stand-Up Comedy', items:COMEDIANS }, 
+          { label:'🎸 Live Music', items:BANDS }
+        ].map(({ label, items }) => (
           <div key={label} style={{ marginBottom:'clamp(2rem,5vw,3rem)' }}>
             <motion.div style={{ display:'flex', alignItems:'center', gap:'clamp(0.8rem,2vw,1.25rem)', marginBottom:'clamp(1rem,2.5vw,1.5rem)' }}
               initial={{ opacity:0, x:-20 }} whileInView={{ opacity:1, x:0 }}
@@ -229,7 +264,6 @@ export default function SummitShowdown() {
         ))}
       </div>
 
-      {/* ══════ CTA ══════ */}
       <section id="register" style={{
         position:'relative', textAlign:'center', overflow:'hidden',
         padding:'clamp(4rem,8vw,7rem) clamp(1rem,4vw,2rem)',
