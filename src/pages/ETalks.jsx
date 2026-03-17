@@ -15,7 +15,7 @@ import { DrawBorder } from '../components/AnimatedBorder'
 // IMPORT SPEAKER PHOTOS
 import speaker1 from '../assets/summit_speaker1_image.png'; 
 import speaker2 from '../assets/summit_speaker2_image.png'; 
-// import speaker3 from '../assets/showdown_speaker_1_image.png'; 
+import speaker3 from '../assets/Shri. Khalid Wani_ETalks.png'; 
 import speaker4 from '../assets/summit_speaker4_image.png'; 
 
 const SPEAKERS = [
@@ -34,6 +34,15 @@ const SPEAKERS = [
     title: 'Founder & CEO of Trident Gaming', 
     image: speaker2, 
     bio: 'A pioneer in Indian E-sports, GHATAK transitioned from a professional player to a top-tier mentor and successful entrepreneur in the gaming industry.' 
+  },
+  
+{ 
+    number: 3, 
+    domain: 'Finance & Business', 
+    name: 'Shri. Khalid Wani', 
+    title: 'Founder & Board Member of One Capitall Limited', 
+    image: speaker3, 
+    bio: 'As the driving force behind One Capitall Limited, he uses decades of financial expertise to help founders scale their enterprises.' 
   },
 
   { 
